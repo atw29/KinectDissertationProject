@@ -24,5 +24,16 @@ namespace KinectDissertationProject
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            WindowViewModel.Add_Window(this); // Initial Window Will Always Be 0
+            WindowViewModel.Load_Kinect();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            WindowViewModel.Close_Kinect();
+        }
     }
 }
