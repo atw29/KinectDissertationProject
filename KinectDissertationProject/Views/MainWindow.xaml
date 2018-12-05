@@ -3,29 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:KinectDissertationProject"
         xmlns:v="clr-namespace:KinectDissertationProject.Views"
         xmlns:vm="clr-namespace:KinectDissertationProject.ViewModel"
+        xmlns:properties="clr-namespace:KinectDissertationProject.Properties"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized" Background="LightGray" Loaded="Window_Loaded" Closed="Window_Closed">
+        Title="MainWindow" Height="{Binding Source={x:Static properties:Settings.Default}, Path=ScreenHeight}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=ScreenWidth}" WindowState="Maximized" Background="LightGray" Loaded="Window_Loaded" Closed="Window_Closed">
     <Window.DataContext>
-        <vm:MainWindowViewModel x:Name="WindowViewModel" />
+        <vm:KinectViewModel x:Name="KinectViewModel" />
     </Window.DataContext>
+    <Window.Resources>
+        <System:Int32 x:Key="RegionRatio">2</System:Int32>
+    </Window.Resources>
     <Grid Name="Main_Grid">
         <Grid.ColumnDefinitions>
+            <!--<ColumnDefinition Width="{Binding Source={x:Static properties:Settings.Default}, Path=RegionRatio}"/>-->
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
-            <RowDefinition Height="5*" />
+            <RowDefinition Height="6*" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        <Rectangle x:Name="LHS_Region" Grid.Column="0" Grid.RowSpan="3" Fill="AliceBlue"/>
-        <Rectangle x:Name="RHS_Region" Grid.Column="2" Grid.RowSpan="3" Fill="AliceBlue"/>
-        <Rectangle x:Name="TOP_Region" Grid.Row="0" Grid.ColumnSpan="3" Fill="AliceBlue"/>
-        <Rectangle x:Name="BOT_Region" Grid.Row="2" Grid.ColumnSpan="3" Fill="AliceBlue"/>
+        <Rectangle x:Name="LHS_Region" Grid.Column="0" Grid.RowSpan="3" Opacity="0"/>
+        <Rectangle x:Name="RHS_Region" Grid.Column="2" Grid.RowSpan="3" Opacity="0"/>
+        <Rectangle x:Name="TOP_Region" Grid.Row="0" Grid.ColumnSpan="3" Opacity="0"/>
+        <Rectangle x:Name="BOT_Region" Grid.Row="2" Grid.ColumnSpan="3" Opacity="0"/>
+
+        <TextBlock x:Name="textblock" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72"
+                   Text="{Binding TextBoxText}" />
+
         <Grid x:Name="LHS_Grid" Grid.Column="0" Grid.RowSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
