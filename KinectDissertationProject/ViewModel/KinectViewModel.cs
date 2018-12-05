@@ -1,4 +1,5 @@
 ﻿using KinectDissertationProject.Models;
+using KinectDissertationProject.Models.Gestures;
 using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,34 @@ namespace KinectDissertationProject.ViewModel
 {
     class KinectViewModel
     {
+
+        #if DEBUG
+        bool debug = true;
+        #endif
+
         private KinectReader kinectReader;
         private IList<Window> windows;
+        private CoordinateMapper CoordinateMapper { get
+            {
+                return kinectReader.CoordinateMapper;
+            }
+        }
         public string TextBoxText{ get; set; }
+
+        #region Hand Positions
+
+        HandPos_TOP HandPos_TOP = new HandPos_TOP();
+        HandPos_BOT HandPos_BOT = new HandPos_BOT();
+        HandPos_LHS HandPos_LHS = new HandPos_LHS();
+        HandPos_RHS HandPos_RHS = new HandPos_RHS();
+
+        #endregion
 
         #region Event Handlers
 
         public event EventHandler<WindowEventArgs> EventOccurred;
         public event EventHandler<JointPositionEventArgs> JointPositionEventOccurred;
-
+        
         protected void RaiseEventOccurred(Window w, Operation o, IReadOnlyDictionary<string, object> _data)
         {
             EventOccurred?.Invoke(this, new WindowEventArgs
@@ -71,10 +91,11 @@ namespace KinectDissertationProject.ViewModel
         {
             Body body = e.BodyData;
 
+            Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+
             RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
 
-
-            //Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+            CheckHandPositions(body.Joints);
 
             // Raise Gesutre Occurred 
             // i.e. RaiseGesutreOccurred(activeWindow, Gesture.SwipeDown)
@@ -89,6 +110,14 @@ namespace KinectDissertationProject.ViewModel
             //    }
             //);
 
+        }
+
+        private void CheckHandPositions(IReadOnlyDictionary<JointType, Joint> joints)
+        {
+            if (HandPos_TOP.In_Position(joints[JointType.HandLeft], CoordinateMapper) == HandPosition.IN_POSITION)
+            {
+
+            }
         }
 
         private void Kinect_LostTracking(object sender, EventArgs e)
@@ -108,16 +137,7 @@ namespace KinectDissertationProject.ViewModel
         {
             windows[index].Show();
         }
-
-        public class CustomEventArgs : EventArgs
-        {
-            public Tuple<string, string> args { get; private set; }
-
-            public CustomEventArgs(string _event, string _data)
-            {
-                args = new Tuple<string, string>(_event, _data);
-            }
-        }
+        
     }
 
 
