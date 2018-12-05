@@ -28,13 +28,16 @@
             <RowDefinition Height="6*" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
+        <Canvas Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" x:Name="canvas" />
         <Rectangle x:Name="LHS_Region" Grid.Column="0" Grid.RowSpan="3" Opacity="0"/>
         <Rectangle x:Name="RHS_Region" Grid.Column="2" Grid.RowSpan="3" Opacity="0"/>
         <Rectangle x:Name="TOP_Region" Grid.Row="0" Grid.ColumnSpan="3" Opacity="0"/>
         <Rectangle x:Name="BOT_Region" Grid.Row="2" Grid.ColumnSpan="3" Opacity="0"/>
 
-        <TextBlock x:Name="textblock" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72"
+        <TextBlock x:Name="textblock" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60"
                    Text="{Binding TextBoxText}" />
+        
+        <Image Grid.Column="0" Grid.Row="0" x:Name="image" />
 
         <Grid x:Name="LHS_Grid" Grid.Column="0" Grid.RowSpan="3">
             <Grid.RowDefinitions>

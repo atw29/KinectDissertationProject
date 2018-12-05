@@ -61,6 +61,8 @@
     </ApplicationDefinition>
     <Compile Include="Models\KinectBodyHelper.cs" />
     <Compile Include="Models\KinectReader.cs" />
+    <Compile Include="Models\EventArgs.cs" />
+    <Compile Include="Models\UIExtensions.cs" />
     <Compile Include="Views\TrackedWindow.cs" />
     <Compile Include="ViewModel\KinectViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">

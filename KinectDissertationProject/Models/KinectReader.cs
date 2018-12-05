@@ -25,7 +25,7 @@ namespace KinectDissertationProject.Models
         /// </summary>
         int lostTrackingFrames = NO_LOST_FRAME_TRACK;
 
-        public CoordinateMapper coordinateMapper { get; private set; }
+        public CoordinateMapper CoordinateMapper { get; private set; }
 
         KinectSensor sensor;
 
@@ -46,7 +46,7 @@ namespace KinectDissertationProject.Models
             sensor = KinectSensor.GetDefault();
             bodyFrameReader = sensor.BodyFrameSource.OpenReader();
             bodyFrameReader.FrameArrived += BodyFrameReader_FrameArrived;
-            coordinateMapper = sensor.CoordinateMapper;
+            CoordinateMapper = sensor.CoordinateMapper;
 
             if (openSensor)
             {
@@ -151,13 +151,5 @@ namespace KinectDissertationProject.Models
         }
     }
 
-    public class BodyEventArgs : EventArgs
-    {
-        public Body BodyData { get; private set; }
-
-        public BodyEventArgs(Body bodyData)
-        {
-            BodyData = bodyData;
-        }
-    }
+   
 }

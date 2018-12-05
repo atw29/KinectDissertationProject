@@ -25,7 +25,8 @@ namespace KinectDissertationProject.Models
             return isLeft ? body.HandLeftState : body.HandRightState;
         }
 
-        public static Point GetPointFromJoint(this Joint joint, CoordinateMapper coordinateMapper)
+        #region Joints to Colour Space
+        public static Point ToCoordinatePoint(this Joint joint, CoordinateMapper coordinateMapper)
         {
             Point point = new Point();
             CameraSpacePoint jointPosition = joint.Position;
@@ -35,6 +36,32 @@ namespace KinectDissertationProject.Models
             point.Y = float.IsInfinity(colorPoint.Y) ? 0 : colorPoint.Y;
             return point;
         }
+
+        /// <summary>
+        ///     Gets the 2D point representative dictionay from list of joints as a Dictionary of JointType to a Tuple of 2D point and Tracked State
+        /// </summary>
+        /// <param name="joints"></param>
+        /// <param name="_mode"></param>
+        /// <param name="coordinateMapper"></param>
+        /// <returns>Dictionary of JointType to Tuple. Tuple is of form (2D Point, !Not Tracked) </returns>
+        public static Dictionary<JointType, Tuple<Point, bool>> GetPointDictFromJoints(this Body body, CoordinateMapper coordinateMapper)
+        {
+            Dictionary<JointType, Tuple<Point, bool>> dict = new Dictionary<JointType, Tuple<Point, bool>>();
+
+            foreach (KeyValuePair<JointType, Joint> pair in body.Joints)
+            {
+                dict.Add(pair.Key, pair.Value.GetPointTupleFromJoint(coordinateMapper));
+            }
+
+            return dict;
+        }
+
+        private static Tuple<Point, bool> GetPointTupleFromJoint(this Joint joint, CoordinateMapper coordinateMapper)
+        {
+            return new Tuple<Point, bool>(joint.ToCoordinatePoint(coordinateMapper), joint.TrackingState != TrackingState.NotTracked);
+        }
+
+        #endregion
 
         public static void GetHandRelativePosition(this Body body, bool isLeft)
         {

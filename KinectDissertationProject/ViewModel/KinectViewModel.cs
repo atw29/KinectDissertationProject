@@ -10,25 +10,36 @@ using System.Windows;
 
 namespace KinectDissertationProject.ViewModel
 {
-    class KinectViewModel : INotifyPropertyChanged
+    class KinectViewModel
     {
         private KinectReader kinectReader;
         private IList<Window> windows;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event EventHandler<CustomEventArgs> EventOccurred;
-
-        protected void RaisePropertyChangedEvent(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected void RaiseEventOccurred(string _eventIdentifier, string _data)
-        {
-            EventOccurred?.Invoke(this, new CustomEventArgs(_eventIdentifier, _data));
-        }
-
         public string TextBoxText{ get; set; }
+
+        #region Event Handlers
+
+        public event EventHandler<WindowEventArgs> EventOccurred;
+        public event EventHandler<JointPositionEventArgs> JointPositionEventOccurred;
+
+        protected void RaiseEventOccurred(Window w, Operation o, IReadOnlyDictionary<string, object> _data)
+        {
+            EventOccurred?.Invoke(this, new WindowEventArgs
+            {
+                Window = w,
+                Operation = o,
+                Data = _data
+            });
+        }
+
+        protected void RaiseJointPositionEventOccurred(IReadOnlyDictionary<JointType, Tuple<Point, bool>> jointPointMap)
+        {
+            JointPositionEventOccurred?.Invoke(this, new JointPositionEventArgs
+            {
+                JointPosDict = jointPointMap
+            });
+        }
+
+        #endregion
 
         #region Initialisers
         public KinectViewModel()
@@ -47,7 +58,6 @@ namespace KinectDissertationProject.ViewModel
         internal void Open_Kinect()
         {
             kinectReader.Open();
-            RaisePropertyChangedEvent("open");
         }
 
         internal void Close_Kinect()
@@ -61,7 +71,23 @@ namespace KinectDissertationProject.ViewModel
         {
             Body body = e.BodyData;
 
-            RaiseEventOccurred("handmoved", body.Joints[JointType.HandLeft].GetPointFromJoint(kinectReader.coordinateMapper).ToString());
+            RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
+
+
+            //Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+
+            // Raise Gesutre Occurred 
+            // i.e. RaiseGesutreOccurred(activeWindow, Gesture.SwipeDown)
+
+            // Raise Joint Positions
+
+            //RaiseEventOccurred(
+            //    activeWindow, 
+            //    Operation.MINIMISE, 
+            //    new Dictionary<string, object> {
+            //        { "LeftHandLocation" , body.Joints[JointType.HandLeft].ToCoordinatePoint(kinectReader.CoordinateMapper).ToString()}
+            //    }
+            //);
 
         }
 
@@ -70,11 +96,6 @@ namespace KinectDissertationProject.ViewModel
             throw new NotImplementedException();
         }
 
-
-        private void _bodyFrameReader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
-        {
-            
-        }
 
         public int Add_Window(Window w)
         {
