@@ -10,9 +10,9 @@
         xmlns:properties="clr-namespace:KinectDissertationProject.Properties"
         mc:Ignorable="d"
         Title="MainWindow" Height="{Binding Source={x:Static properties:Settings.Default}, Path=ScreenHeight}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=ScreenWidth}" WindowState="Maximized" Background="LightGray" Loaded="Window_Loaded" Closed="Window_Closed">
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <vm:KinectViewModel x:Name="KinectViewModel" />
-    </Window.DataContext>
+    </Window.DataContext>-->
     <Window.Resources>
         <System:Int32 x:Key="RegionRatio">2</System:Int32>
     </Window.Resources>

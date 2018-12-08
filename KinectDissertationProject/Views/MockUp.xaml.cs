@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KinectDissertationProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace KinectDissertationProject.Views
     public partial class MockUp : Window
     {
         public static MockUp Instance { get; private set; }
+        internal KinectViewModel KinectViewModel { get; }
 
         static MockUp()
         {
@@ -30,6 +32,15 @@ namespace KinectDissertationProject.Views
         {
             InitializeComponent();
 
+            KinectViewModel = KinectViewModel.Instance;
+            DataContext = KinectViewModel;
+
+            KinectViewModel.JointPositionEventOccurred += KinectViewModel_JointPositionEventOccurred;
+        }
+
+        private void KinectViewModel_JointPositionEventOccurred(object sender, Models.JointPositionEventArgs e)
+        {
+            Console.Write(e.JointPosDict.ToString());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

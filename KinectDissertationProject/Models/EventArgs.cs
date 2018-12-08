@@ -26,6 +26,16 @@ namespace KinectDissertationProject.Models
         }
     }
 
+    public class ColourEventArgs : EventArgs
+    {
+        public ColorFrame ColourFrame { get; private set; }
+
+        public ColourEventArgs(ColorFrame colourFrame)
+        {
+            ColourFrame = colourFrame;
+        }
+    }
+
     public class JointPositionEventArgs : EventArgs
     {
         public IReadOnlyDictionary<JointType, (Point point, bool tracked, float depth)> JointPosDict { get; set; }

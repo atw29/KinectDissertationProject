@@ -7,9 +7,6 @@
         xmlns:vm="clr-namespace:KinectDissertationProject.ViewModel"
         mc:Ignorable="d"
         Title="MockUp" Height="500" Width="500">
-    <Window.DataContext>
-        <vm:KinectViewModel x:Name="KinectViewModel" />
-    </Window.DataContext>
     <FrameworkElement.Resources>
         <Style x:Key="GridItemsStyle"
            TargetType="ItemsControl">

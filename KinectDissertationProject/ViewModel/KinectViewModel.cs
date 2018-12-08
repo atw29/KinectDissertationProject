@@ -20,6 +20,13 @@ namespace KinectDissertationProject.ViewModel
         bool debug = true;
         #endif
 
+        public static KinectViewModel Instance { get; private set; }
+
+        static KinectViewModel()
+        {
+            Instance = new KinectViewModel();
+        }
+
         private KinectReader kinectReader;
         private IList<Window> windows;
         private CoordinateMapper CoordinateMapper { get
@@ -36,6 +43,9 @@ namespace KinectDissertationProject.ViewModel
         HandPos_LHS HandPos_LHS = new HandPos_LHS();
         HandPos_RHS HandPos_RHS = new HandPos_RHS();
 
+        #endregion
+
+        #region Create Windows
         internal void Create_MockUp_Window()
         {
             MockUp MockUpWindow = MockUp.Instance;
@@ -43,20 +53,34 @@ namespace KinectDissertationProject.ViewModel
             MockUpWindow.Show();
         }
 
+        internal void Create_Camera_Window()
+        {
+            Camera CameraWindow = new Camera();
+            CameraWindow.DataContext = this;
+
+            Add_Window(CameraWindow);
+            CameraWindow.Show();
+        }
+
         internal void Create_X_Ray_Window()
         {
             X_Rays X_Rays_Window = X_Rays.Instance;
+            X_Rays_Window.DataContext = this;
             Add_Window(X_Rays_Window);
             X_Rays_Window.Show();
         }
-
         #endregion
 
         #region Event Handlers
 
-        
         public event EventHandler<JointPositionEventArgs> JointPositionEventOccurred;
         public event EventHandler<WindowEventArgs> WindowEventOccurred;
+        public event EventHandler<ColourEventArgs> ColourEventOccurred;
+
+        protected void RaiseColourEvent(ColourEventArgs args)
+        {
+            ColourEventOccurred?.Invoke(this, args);
+        }
 
         protected void RaiseJointPositionEventOccurred(IReadOnlyDictionary<JointType, (Point point, bool tracked, float depth)> dict)
         {
@@ -85,6 +109,12 @@ namespace KinectDissertationProject.ViewModel
             kinectReader = new KinectReader();
             kinectReader.OnTrackedBody += Kinect_OnTrackedBody;
             kinectReader.OnLostTracking += Kinect_LostTracking;
+            kinectReader.ColourTracked += Kinect_ColourTracked;
+        }
+
+        private void Kinect_ColourTracked(object sender, ColourEventArgs e)
+        {
+            RaiseColourEvent(e);
         }
 
         internal void Open_Kinect()

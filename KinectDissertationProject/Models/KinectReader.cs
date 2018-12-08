@@ -14,6 +14,7 @@ namespace KinectDissertationProject.Models
     {
         public EventHandler<BodyEventArgs> OnTrackedBody;
         public EventHandler OnLostTracking;
+        public EventHandler<ColourEventArgs> ColourTracked;
 
         const int NO_LOST_FRAME_TRACK = -1;
         const int MAX_LOST_TRACKING_FRAME_ALLOWED = 5;
@@ -27,6 +28,7 @@ namespace KinectDissertationProject.Models
 
         public CoordinateMapper CoordinateMapper { get; private set; }
 
+        private ColorFrameReader colourFrameReader;
         KinectSensor sensor;
 
         /// <summary>
@@ -48,9 +50,23 @@ namespace KinectDissertationProject.Models
             bodyFrameReader.FrameArrived += BodyFrameReader_FrameArrived;
             CoordinateMapper = sensor.CoordinateMapper;
 
+            colourFrameReader = sensor.ColorFrameSource.OpenReader();
+            colourFrameReader.FrameArrived += ColourFrameReader_FrameArrived;
+
             if (openSensor)
             {
                 Open();
+            }
+        }
+
+        private void ColourFrameReader_FrameArrived(object sender, ColorFrameArrivedEventArgs e)
+        {
+            using (ColorFrame colorFrame = e.FrameReference.AcquireFrame())
+            {
+                if (colorFrame != null)
+                {
+                    ColourTracked?.Invoke(this, new ColourEventArgs(colorFrame));
+                }
             }
         }
 

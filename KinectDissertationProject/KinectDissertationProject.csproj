@@ -68,6 +68,9 @@
     <Compile Include="Models\KinectReader.cs" />
     <Compile Include="Models\EventArgs.cs" />
     <Compile Include="Models\UIExtensions.cs" />
+    <Compile Include="Views\Camera.xaml.cs">
+      <DependentUpon>Camera.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MockUp.xaml.cs">
       <DependentUpon>MockUp.xaml</DependentUpon>
     </Compile>
@@ -80,6 +83,10 @@
       <DependentUpon>X-Rays.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ZoomBorder.cs" />
+    <Page Include="Views\Camera.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -1,4 +1,5 @@
 ﻿using KinectDissertationProject.Models;
+using KinectDissertationProject.ViewModel;
 using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
@@ -25,18 +26,25 @@ namespace KinectDissertationProject
     {
         public int Win_Num { get; set; }
 
+        private KinectViewModel KinectViewModel;
+
         public MainWindow()
         {
+            KinectViewModel = KinectViewModel.Instance;
+
             InitializeComponent();
+
+            DataContext = KinectViewModel;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Win_Num = KinectViewModel.Add_Window(this);
 
-            //SetUpKinect();
+            SetUpKinect();
 
             KinectViewModel.Create_MockUp_Window();
+            KinectViewModel.Create_Camera_Window();
 
         }
 
@@ -44,50 +52,21 @@ namespace KinectDissertationProject
         {
             KinectViewModel.Load_Kinect();
             KinectViewModel.Open_Kinect(); // Want to Open Initially?
-            //KinectViewModel.PropertyChanged += KinectViewModel_PropertyChanged;
-            //KinectViewModel.EventOccurred += KinectViewModel_EventOccurred;
-            //KinectViewModel.EventOccurred += KinectViewModel_EventOccurred1;
+            
             KinectViewModel.JointPositionEventOccurred += KinectViewModel_JointPositionEventOccurred;
+            KinectViewModel.ColourEventOccurred += KinectViewModel_ColourEventOccurred;
+        }
+
+        private void KinectViewModel_ColourEventOccurred(object sender, ColourEventArgs e)
+        {
+            // Test 
+            Console.WriteLine("Colour Occurred");
         }
 
         private void KinectViewModel_JointPositionEventOccurred(object sender, JointPositionEventArgs e)
         {
             canvas.Children.Clear();
             DrawSkeleton(e.JointPosDict);
-        }
-
-        private void KinectViewModel_EventOccurred1(object sender, WindowEventArgs e)
-        {
-            if (e.Window == this)
-            {
-                textblock.Text = (string) e.Data["LeftHandLocation"];
-            }
-        }
-
-        //private void KinectViewModel_EventOccurred(object sender, ViewModel.KinectViewModel.CustomEventArgs e)
-        //{
-        //    switch (e.args.Item1)
-        //    {
-        //        case "handmoved":
-        //            textblock.Text = e.args.Item2;
-        //            break;
-        //    }
-        //}
-
-        private void KinectViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "open":
-                    textblock.Text = "Open";
-                    break;
-                case "test":
-                    textblock.Text = "Changeed";
-                    break;
-                default:
-                    break;
-
-            }
         }
 
         private void Window_Closed(object sender, EventArgs e)
