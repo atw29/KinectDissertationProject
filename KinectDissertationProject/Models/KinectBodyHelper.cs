@@ -14,17 +14,6 @@ namespace KinectDissertationProject.Models
         const double GESTURE_Y_OFFSET = -0.65f;
         const double GESTURE_X_OFFSET = 0.185f;
 
-        
-        public static bool IsHandLiftForward(this Body body, bool isLeft)
-        {
-            return body.Joints[isLeft ? JointType.HandLeft : JointType.HandRight].Position.Z - body.Joints[JointType.SpineBase].Position.Z < -HAND_LIFT_Z_DISTANCE;
-        }
-
-        public static HandState GetHandState(this Body body, bool isLeft)
-        {
-            return isLeft ? body.HandLeftState : body.HandRightState;
-        }
-
         public static ApplicationGesture GetApplicationGesture(this Body body)
         {
             return ApplicationGesture.NONE;
@@ -36,7 +25,7 @@ namespace KinectDissertationProject.Models
         }
 
         #region Joints to Colour Space
-        public static Point ToCoordinatePoint(this Joint joint, CoordinateMapper coordinateMapper)
+        public static (Point point, float depth) ToCoordinatePoint(this Joint joint, CoordinateMapper coordinateMapper)
         {
             Point point = new Point();
             CameraSpacePoint jointPosition = joint.Position;
@@ -44,7 +33,7 @@ namespace KinectDissertationProject.Models
 
             point.X = float.IsInfinity(colorPoint.X) ? 0 : colorPoint.X;
             point.Y = float.IsInfinity(colorPoint.Y) ? 0 : colorPoint.Y;
-            return point;
+            return (point, jointPosition.Z);
         }
 
         /// <summary>
@@ -54,9 +43,9 @@ namespace KinectDissertationProject.Models
         /// <param name="_mode"></param>
         /// <param name="coordinateMapper"></param>
         /// <returns>Dictionary of JointType to Tuple. Tuple is of form (2D Point, !Not Tracked) </returns>
-        public static Dictionary<JointType, Tuple<Point, bool>> GetPointDictFromJoints(this Body body, CoordinateMapper coordinateMapper)
+        public static Dictionary<JointType, (Point joint, bool tracked, float depth)> GetPointDictFromJoints(this Body body, CoordinateMapper coordinateMapper)
         {
-            Dictionary<JointType, Tuple<Point, bool>> dict = new Dictionary<JointType, Tuple<Point, bool>>();
+            Dictionary<JointType, (Point joint, bool tracked, float depth)> dict = new Dictionary<JointType, (Point joint, bool tracked, float depth)>();
 
             foreach (KeyValuePair<JointType, Joint> pair in body.Joints)
             {
@@ -66,12 +55,26 @@ namespace KinectDissertationProject.Models
             return dict;
         }
 
-        private static Tuple<Point, bool> GetPointTupleFromJoint(this Joint joint, CoordinateMapper coordinateMapper)
+        private static (Point point, bool tracked, float depth) GetPointTupleFromJoint(this Joint joint, CoordinateMapper coordinateMapper)
         {
-            return new Tuple<Point, bool>(joint.ToCoordinatePoint(coordinateMapper), joint.TrackingState != TrackingState.NotTracked);
+            (Point point, float depth) point = joint.ToCoordinatePoint(coordinateMapper);
+            (Point point, bool tracked, float depth) p = (point: point.point, tracked: joint.TrackingState != TrackingState.NotTracked, point.depth);
+            return p;
+            //return new Tuple<Point, bool>(joint.ToCoordinatePoint(coordinateMapper), joint.TrackingState != TrackingState.NotTracked);
         }
 
         #endregion
+
+        #region His Stuff
+        public static bool IsHandLiftForward(this Body body, bool isLeft)
+        {
+            return body.Joints[isLeft ? JointType.HandLeft : JointType.HandRight].Position.Z - body.Joints[JointType.SpineBase].Position.Z < -HAND_LIFT_Z_DISTANCE;
+        }
+
+        public static HandState GetHandState(this Body body, bool isLeft)
+        {
+            return isLeft ? body.HandLeftState : body.HandRightState;
+        }
 
         public static void GetHandRelativePosition(this Body body, bool isLeft)
         {
@@ -85,6 +88,7 @@ namespace KinectDissertationProject.Models
         {
             //return new MVector2(jointPoint.X, jointPoint.Y);
         }
+        #endregion
 
     }
 }

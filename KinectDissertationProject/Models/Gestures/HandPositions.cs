@@ -48,7 +48,7 @@ namespace KinectDissertationProject.Models.Gestures
     {
         public HandPosition In_Position(Joint hand, CoordinateMapper coordinateMapper)
         {
-            Point p = hand.ToCoordinatePoint(coordinateMapper);
+            Point p = hand.ToCoordinatePoint(coordinateMapper).point;
             return p.Y.In_Range(HandPositions.TOP_MIN, HandPositions.TOP_MAX) ? HandPosition.IN_POSITION : HandPosition.NOT_IN_POSITION;
         }
     }
@@ -57,7 +57,7 @@ namespace KinectDissertationProject.Models.Gestures
     {
         public HandPosition In_Position(Joint hand, CoordinateMapper coordinateMapper)
         {
-            Point p = hand.ToCoordinatePoint(coordinateMapper);
+            Point p = hand.ToCoordinatePoint(coordinateMapper).point;
             return p.Y.In_Range(HandPositions.BOT_MIN, HandPositions.BOT_MAX) ? HandPosition.IN_POSITION : HandPosition.NOT_IN_POSITION;
         }
     }
@@ -65,7 +65,7 @@ namespace KinectDissertationProject.Models.Gestures
     {
         public HandPosition In_Position(Joint hand, CoordinateMapper coordinateMapper)
         {
-            Point p = hand.ToCoordinatePoint(coordinateMapper);
+            Point p = hand.ToCoordinatePoint(coordinateMapper).point;
             return p.X.In_Range(HandPositions.LHS_MIN, HandPositions.LHS_MAX) ? HandPosition.IN_POSITION : HandPosition.NOT_IN_POSITION;
         }
     }
@@ -73,7 +73,7 @@ namespace KinectDissertationProject.Models.Gestures
     {
         public HandPosition In_Position(Joint hand, CoordinateMapper coordinateMapper)
         {
-            Point p = hand.ToCoordinatePoint(coordinateMapper);
+            Point p = hand.ToCoordinatePoint(coordinateMapper).point;
             return p.X.In_Range(HandPositions.RHS_MIN, HandPositions.RHS_MAX) ? HandPosition.IN_POSITION : HandPosition.NOT_IN_POSITION;
         }
     }

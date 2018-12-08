@@ -5,6 +5,7 @@ using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,15 +98,17 @@ namespace KinectDissertationProject.ViewModel
 
             Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
 
-            // Check Window Gestures - i.e. 
+            //RecordData(body);
 
             CheckApplicationGestures(body, activeWindow);
 
             CheckWindowGestures(body, activeWindow);
 
-            RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
+            #region Test stuff
 
-            CheckHandPositions(body.Joints);
+            //RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
+
+            //CheckHandPositions(body.Joints);
 
             // Raise Gesutre Occurred 
             // i.e. RaiseGesutreOccurred(activeWindow, Gesture.SwipeDown)
@@ -119,7 +122,27 @@ namespace KinectDissertationProject.ViewModel
             //        { "LeftHandLocation" , body.Joints[JointType.HandLeft].ToCoordinatePoint(kinectReader.CoordinateMapper).ToString()}
             //    }
             //);
+            #endregion
 
+        }
+
+        private void RecordData(Body body)
+        {
+            Dictionary<JointType, (Point point, bool tracked, float depth)> data = body.GetPointDictFromJoints(kinectReader.CoordinateMapper);
+
+            string path = Path.GetTempFileName().Replace(".tmp", ".csv");
+            
+            Console.Write(string.Format("********** {0} *************", path));
+
+            foreach (KeyValuePair<JointType, (Point point, bool tracked, float depth)> entry in data)
+            {
+                using (var w = new StreamWriter(path, true, Encoding.UTF8))
+                {
+                    w.WriteLine(string.Format("{0},{1},{2},{3}",entry.Key.ToString(), entry.Value.point.X, entry.Value.point.Y, entry.Value.depth ));
+
+                }
+            }
+            
         }
 
         /// <summary>
