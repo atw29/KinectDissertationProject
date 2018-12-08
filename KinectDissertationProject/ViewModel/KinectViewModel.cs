@@ -43,6 +43,13 @@ namespace KinectDissertationProject.ViewModel
             MockUpWindow.Show();
         }
 
+        internal void Create_X_Ray_Window()
+        {
+            X_Rays X_Rays_Window = X_Rays.Instance;
+            Add_Window(X_Rays_Window);
+            X_Rays_Window.Show();
+        }
+
         #endregion
 
         #region Event Handlers
@@ -51,11 +58,11 @@ namespace KinectDissertationProject.ViewModel
         public event EventHandler<JointPositionEventArgs> JointPositionEventOccurred;
         public event EventHandler<WindowEventArgs> WindowEventOccurred;
 
-        protected void RaiseJointPositionEventOccurred(IReadOnlyDictionary<JointType, Tuple<Point, bool>> jointPointMap)
+        protected void RaiseJointPositionEventOccurred(IReadOnlyDictionary<JointType, (Point point, bool tracked, float depth)> dict)
         {
             JointPositionEventOccurred?.Invoke(this, new JointPositionEventArgs
             {
-                JointPosDict = jointPointMap
+                JointPosDict = dict
             });
         }
 
@@ -87,7 +94,7 @@ namespace KinectDissertationProject.ViewModel
 
         internal void Close_Kinect()
         {
-            kinectReader.Close();
+            kinectReader?.Close();
         }
 
         #endregion
@@ -104,9 +111,9 @@ namespace KinectDissertationProject.ViewModel
 
             CheckWindowGestures(body, activeWindow);
 
+            RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
             #region Test stuff
 
-            //RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
 
             //CheckHandPositions(body.Joints);
 

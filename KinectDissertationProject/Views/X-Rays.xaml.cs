@@ -15,26 +15,20 @@ using System.Windows.Shapes;
 namespace KinectDissertationProject.Views
 {
     /// <summary>
-    /// Interaction logic for MockUp.xaml
+    /// Interaction logic for X_Rays.xaml
     /// </summary>
-    public partial class MockUp : Window
+    public partial class X_Rays : Window
     {
-        public static MockUp Instance { get; private set; }
+        public static X_Rays Instance { get; private set; }
 
-        static MockUp()
+        static X_Rays()
         {
-            Instance = new MockUp();
+            Instance = new X_Rays();
         }
 
-        private MockUp()
+        private X_Rays()
         {
             InitializeComponent();
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            KinectViewModel.Create_X_Ray_Window();
         }
     }
 }

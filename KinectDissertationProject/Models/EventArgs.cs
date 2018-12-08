@@ -28,7 +28,7 @@ namespace KinectDissertationProject.Models
 
     public class JointPositionEventArgs : EventArgs
     {
-        public IReadOnlyDictionary<JointType, Tuple<Point, bool>> JointPosDict { get; set; }
+        public IReadOnlyDictionary<JointType, (Point point, bool tracked, float depth)> JointPosDict { get; set; }
 
     }
 

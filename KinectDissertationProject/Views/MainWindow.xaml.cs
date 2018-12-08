@@ -34,7 +34,7 @@ namespace KinectDissertationProject
         {
             Win_Num = KinectViewModel.Add_Window(this);
 
-            SetUpKinect();
+            //SetUpKinect();
 
             KinectViewModel.Create_MockUp_Window();
 
@@ -95,10 +95,10 @@ namespace KinectDissertationProject
             KinectViewModel.Close_Kinect();
         }
 
-        private void DrawSkeleton(IReadOnlyDictionary<JointType, Tuple<Point, bool>> pointDict)
+        private void DrawSkeleton(IReadOnlyDictionary<JointType, (Point point, bool tracked, float depth)> pointDict)
         {
             
-            foreach (Tuple<Point, bool> point in pointDict.Values)
+            foreach ((Point point, bool tracked, float depth) point in pointDict.Values)
             {
                 canvas.DrawPoint(point);
             }
