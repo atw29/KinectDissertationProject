@@ -1,5 +1,6 @@
 ﻿using KinectDissertationProject.Models;
 using KinectDissertationProject.Models.Gestures;
+using KinectDissertationProject.Views;
 using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,13 @@ namespace KinectDissertationProject.ViewModel
         HandPos_BOT HandPos_BOT = new HandPos_BOT();
         HandPos_LHS HandPos_LHS = new HandPos_LHS();
         HandPos_RHS HandPos_RHS = new HandPos_RHS();
+
+        internal void Create_MockUp_Window()
+        {
+            MockUp MockUpWindow = MockUp.Instance;
+            Add_Window(MockUpWindow);
+            MockUpWindow.Show();
+        }
 
         #endregion
 

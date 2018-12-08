@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gestures
 {
-    class Gestures
+    interface IGesture
     {
-
+        GestureResult CheckResult(Body body);
     }
 
-    class Gesture_SwipeDown
+    class Gesture_SwipeDown : IGesture
     {
 
         IHandPosition[] handPositions;
@@ -31,7 +31,7 @@ namespace KinectDissertationProject.Models.Gestures
 
         public GestureResult CheckResult(Body body)
         {
-
+            return GestureResult.LOST_TRACK;
         }
 
     }

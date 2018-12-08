@@ -33,6 +33,15 @@ namespace KinectDissertationProject
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Win_Num = KinectViewModel.Add_Window(this);
+
+            SetUpKinect();
+
+            KinectViewModel.Create_MockUp_Window();
+
+        }
+
+        private void SetUpKinect()
+        {
             KinectViewModel.Load_Kinect();
             KinectViewModel.Open_Kinect(); // Want to Open Initially?
             //KinectViewModel.PropertyChanged += KinectViewModel_PropertyChanged;
@@ -55,15 +64,15 @@ namespace KinectDissertationProject
             }
         }
 
-        private void KinectViewModel_EventOccurred(object sender, ViewModel.KinectViewModel.CustomEventArgs e)
-        {
-            switch (e.args.Item1)
-            {
-                case "handmoved":
-                    textblock.Text = e.args.Item2;
-                    break;
-            }
-        }
+        //private void KinectViewModel_EventOccurred(object sender, ViewModel.KinectViewModel.CustomEventArgs e)
+        //{
+        //    switch (e.args.Item1)
+        //    {
+        //        case "handmoved":
+        //            textblock.Text = e.args.Item2;
+        //            break;
+        //    }
+        //}
 
         private void KinectViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
