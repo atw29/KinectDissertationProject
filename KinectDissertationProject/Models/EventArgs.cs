@@ -11,7 +11,7 @@ namespace KinectDissertationProject.Models
     class WindowEventArgs : EventArgs
     {
         public Window Window { get; set; }
-        public Operation Operation { get; set; }
+        public ApplicationGesture Operation { get; set; }
         public IReadOnlyDictionary<string, object> Data { get; set; }
 
     }
@@ -32,11 +32,20 @@ namespace KinectDissertationProject.Models
 
     }
 
-    public enum Operation
+    public enum ApplicationGesture
     {
         MINIMISE,
         MAXIMISE,
         GAIN_FOCUS,
-        LOSE_FOCUS
+        LOSE_FOCUS,
+        NONE
+    }
+
+    public enum WindowGesture
+    {
+        SCROLL_UP,
+        SCROLL_DOWN,
+        CLICK,
+        NONE
     }
 }

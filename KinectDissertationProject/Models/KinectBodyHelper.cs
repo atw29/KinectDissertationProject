@@ -25,6 +25,16 @@ namespace KinectDissertationProject.Models
             return isLeft ? body.HandLeftState : body.HandRightState;
         }
 
+        public static ApplicationGesture GetApplicationGesture(this Body body)
+        {
+            return ApplicationGesture.NONE;
+        }
+
+        public static WindowGesture GetWindowGesture(this Body body)
+        {
+            return WindowGesture.NONE;
+        }
+
         #region Joints to Colour Space
         public static Point ToCoordinatePoint(this Joint joint, CoordinateMapper coordinateMapper)
         {

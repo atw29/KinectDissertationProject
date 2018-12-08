@@ -46,18 +46,9 @@ namespace KinectDissertationProject.ViewModel
 
         #region Event Handlers
 
-        public event EventHandler<WindowEventArgs> EventOccurred;
-        public event EventHandler<JointPositionEventArgs> JointPositionEventOccurred;
         
-        protected void RaiseEventOccurred(Window w, Operation o, IReadOnlyDictionary<string, object> _data)
-        {
-            EventOccurred?.Invoke(this, new WindowEventArgs
-            {
-                Window = w,
-                Operation = o,
-                Data = _data
-            });
-        }
+        public event EventHandler<JointPositionEventArgs> JointPositionEventOccurred;
+        public event EventHandler<WindowEventArgs> WindowEventOccurred;
 
         protected void RaiseJointPositionEventOccurred(IReadOnlyDictionary<JointType, Tuple<Point, bool>> jointPointMap)
         {
@@ -67,13 +58,18 @@ namespace KinectDissertationProject.ViewModel
             });
         }
 
+        protected void RaiseWindowEvent(WindowEventArgs args)
+        {
+            WindowEventOccurred?.Invoke(this, args);
+        }
+
         #endregion
 
         #region Initialisers
         public KinectViewModel()
         {
             windows = new List<Window>();
-            TextBoxText = "Hello World";    
+            TextBoxText = "Kinect Dissertation Project";    
         }
 
         internal void Load_Kinect()
@@ -101,6 +97,12 @@ namespace KinectDissertationProject.ViewModel
 
             Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
 
+            // Check Window Gestures - i.e. 
+
+            CheckApplicationGestures(body, activeWindow);
+
+            CheckWindowGestures(body, activeWindow);
+
             RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
 
             CheckHandPositions(body.Joints);
@@ -118,6 +120,43 @@ namespace KinectDissertationProject.ViewModel
             //    }
             //);
 
+        }
+
+        /// <summary>
+        /// Application Gestures are across all windows and involve acts like minimising, switching etc.
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="activeWindow"></param>
+        private void CheckApplicationGestures(Body body, Window activeWindow)
+        {
+            switch (body.GetApplicationGesture())
+            {
+                case ApplicationGesture.MINIMISE:
+                    activeWindow.WindowState = WindowState.Minimized;
+                    break;
+                case ApplicationGesture.NONE:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Checks gestures applicable for the active window, such as scrolling, clicking etc.
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="activeWindow"></param>
+        private void CheckWindowGestures(Body body, Window activeWindow)
+        {
+            switch (body.GetWindowGesture())
+            {
+                case WindowGesture.CLICK:
+                    break;
+                case WindowGesture.NONE:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void CheckHandPositions(IReadOnlyDictionary<JointType, Joint> joints)
@@ -145,7 +184,7 @@ namespace KinectDissertationProject.ViewModel
         {
             windows[index].Show();
         }
-        
+
     }
 
 
