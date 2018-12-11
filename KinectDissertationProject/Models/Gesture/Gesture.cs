@@ -7,18 +7,24 @@ using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gestures
 {
-    class Gesture
+    abstract class GestureXYZ
     {
         #region Params
         /// <summary>
         /// The Type of Gesture we are
         /// </summary>
-        private GestureType type;
+        protected abstract GestureType type
+        {
+            get;
+        }
 
         /// <summary>
         /// The parts that make up this gesture
         /// </summary>
-        private RelativeGestureSegment[] gestureSegments;
+        protected abstract RelativeGestureSegment[] gestureSegments
+        {
+            get;
+        }
 
         /// <summary>
         /// The current gesture part that we are matching against
@@ -46,11 +52,6 @@ namespace KinectDissertationProject.Models.Gestures
         const int MAX_FRAME_COUNT = 50;
 
         #endregion
-        public Gesture(GestureType type, RelativeGestureSegment[] gestureSegments)
-        {
-            this.type = type;
-            this.gestureSegments = gestureSegments;
-        }
 
         public EventHandler<GestureEventArgs> GestureRecognised;
 
