@@ -236,7 +236,7 @@ namespace KinectDissertationProject.ViewModel
 
         private void Kinect_LostTracking(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            logger.Info("Lost Tracking");
         }
 
         public void Switch_Window(int index)

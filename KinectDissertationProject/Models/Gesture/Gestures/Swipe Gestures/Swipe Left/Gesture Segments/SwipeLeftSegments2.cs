@@ -12,7 +12,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         public override GestureResult CheckGesture(Body body)
         {
-            GestureResult gestureResult = GestureResult.FAILED;
+            
             // Hand in front of respective shoulder
             if (body.Joints[Hand].Position.Z < body.Joints[Elbow].Position.Z)
             {
@@ -25,20 +25,20 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
                     if (body.Joints[Hand].Position.X < body.Joints[Shoulder].Position.X)
                     {
                         log.Debug("{0} is to the left of {1} - Pass", Hand, Shoulder);
-                        gestureResult = GestureResult.SUCEEDED;
+                        return GestureResult.SUCEEDED;
                     }
 
                     log.Debug("{0} undetermied to left of {1}", Hand, Shoulder);
-                    gestureResult = GestureResult.PAUSED;
+                    return GestureResult.PAUSED;
                 }
 
                 log.Debug("{0} is not between Neck and Hip - FAIL", Hand);
 
-                gestureResult = GestureResult.FAILED;
+                return GestureResult.FAILED;
 
             }
             log.Debug("{0} is not in front of {1}", Hand, Elbow);
-            return gestureResult;
+            return GestureResult.FAILED;
         }
     }
 
