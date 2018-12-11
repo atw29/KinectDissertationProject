@@ -69,8 +69,16 @@
             
             <!--Patient Documents-->
             <Label Margin="0,0,10,0" Content="Patient Documents" FontWeight="Medium" FontSize="20"/>
-            <Button Margin="10,10,10,10" Content="View Patient's X-Rays" Width="250" Click="Button_Click" />
-            <Button Margin="10,10,10,10" Content="View Patient's Medical Bills" Width="250" Click="Button_Click" />
+            <Button Margin="10,10,10,10" Content="View Patient's X-Rays" Width="250" Click="Button_Click" >
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="X-Ray Has Been Verified" Click="MenuItem_Click" />
+                        <Separator />
+                        <MenuItem Header="X-Ray Has Not Been Verified" />
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+            <CheckBox x:Name="VerifiedCheckBox" Margin="10,10,10,10" Content="Details Have Been Checked" HorizontalAlignment="Center" IsEnabled="False" />
 
         </StackPanel>
         

@@ -47,5 +47,10 @@ namespace KinectDissertationProject.Views
         {
             KinectViewModel.Create_X_Ray_Window();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            VerifiedCheckBox.IsChecked = true;
+        }
     }
 }

@@ -4,15 +4,28 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KinectDissertationProject.Models.Gesture.Hands;
 using Microsoft.Kinect;
 
 namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Left.Gesture_Segments
 {
-    abstract class SwipeLeftSegment1 : SwipeLeftSegment
+
+    //static class SwipeLeftSegment1Factory
+    //{
+    //    static SwipeLeftSegment1 With(Hands.IOneHand Joint)
+    //    {
+    //        return new SwipeLeftSegment1
+    //        {
+    //            joint = Joint
+    //        };
+    //    }
+    //}
+
+    abstract class SwipeLeftSegment1 : OneHandGestureSegment
     {
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
 
-        public override GestureResult CheckGesture(Body body)
+       public override GestureResult CheckGesture(Body body)
         {
             
             // Hand in front of respective shoulder

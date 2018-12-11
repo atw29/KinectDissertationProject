@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Left.Gesture_Segments
 {
-    abstract class SwipeLeftSegment2 : SwipeLeftSegment
+    abstract class SwipeLeftSegment2 : OneHandGestureSegment
     {
         private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         public override GestureResult CheckGesture(Body body)

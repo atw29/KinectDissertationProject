@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Left.Gesture_Segments;
+using KinectDissertationProject.Models.Gesture.Hands;
 
 namespace KinectDissertationProject.Models.Gesture.Gestures
 {
@@ -21,6 +22,17 @@ namespace KinectDissertationProject.Models.Gesture.Gestures
         }
 
     }
+
+    //static class SwipeLeftGestureX
+    //{
+    //    static Gesture With(IOneHand Hand)
+    //    {
+    //        if (Hand is RightHand)
+    //        {
+
+    //        }
+    //    }
+    //}
 
     class RightHandSwipeLeftGesture : SwipeLeftGesture
     {

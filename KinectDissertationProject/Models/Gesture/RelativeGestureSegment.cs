@@ -17,4 +17,9 @@ namespace KinectDissertationProject.Models.Gesture
         /// <returns>GestureResult based on whether the gesture succeded </returns>
         public abstract GestureResult CheckGesture(Body body);
     }
+
+    interface IRelativeGestureSegment
+    {
+        GestureResult CheckGesture(Body body);
+    }
 }

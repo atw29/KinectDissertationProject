@@ -16,6 +16,7 @@ namespace KinectDissertationProject.Models.Gesture
         private IList<Gesture> gestures = new List<Gesture>();
         public GestureController()
         {
+            // AddGesture(SwipeLeftGesture.With(RightHand));
             AddGesture(new RightHandSwipeLeftGesture());
             AddGesture(new LeftHandSwipeLeftGesture());
         }
