@@ -20,6 +20,8 @@ namespace KinectDissertationProject.ViewModel
         bool debug = true;
         #endif
 
+        #region Params
+
         public static KinectViewModel Instance { get; private set; }
 
         static KinectViewModel()
@@ -28,6 +30,8 @@ namespace KinectDissertationProject.ViewModel
         }
 
         private KinectReader kinectReader;
+        private GestureController GestureController;
+
         private IList<Window> windows;
         private CoordinateMapper CoordinateMapper { get
             {
@@ -35,6 +39,9 @@ namespace KinectDissertationProject.ViewModel
             }
         }
         public string TextBoxText{ get; set; }
+
+
+        #endregion
 
         #region Hand Positions
 
@@ -46,6 +53,14 @@ namespace KinectDissertationProject.ViewModel
         #endregion
 
         #region Create Windows
+
+        public int Add_Window(Window w)
+        {
+            int loc = windows.Count();
+            windows.Add(w);
+            return loc;
+        }
+
         internal void Create_MockUp_Window()
         {
             MockUp MockUpWindow = MockUp.Instance;
@@ -74,8 +89,10 @@ namespace KinectDissertationProject.ViewModel
         #region Event Handlers
 
         public event EventHandler<JointPositionEventArgs> JointPositionEventOccurred;
-        public event EventHandler<WindowEventArgs> WindowEventOccurred;
         public event EventHandler<ColourEventArgs> ColourEventOccurred;
+
+        public event EventHandler<WindowOperationEventArgs> WindowOperationOccurred;
+        public event EventHandler<ApplicationOperationEventArgs> ApplicationOperationOccurred;
 
         protected void RaiseColourEvent(ColourEventArgs args)
         {
@@ -90,9 +107,14 @@ namespace KinectDissertationProject.ViewModel
             });
         }
 
-        protected void RaiseWindowEvent(WindowEventArgs args)
+        protected void RaiseWindowOperation(Window window, WindowOperation operation, IReadOnlyDictionary<string, object> data)
         {
-            WindowEventOccurred?.Invoke(this, args);
+            WindowOperationOccurred?.Invoke(this, new WindowOperationEventArgs(window, operation, data));
+        }
+
+        protected void RaiseApplicationOperation(Window window, ApplicationOperation operation)
+        {
+            ApplicationOperationOccurred?.Invoke(this, new ApplicationOperationEventArgs(window, operation));
         }
 
         #endregion
@@ -101,20 +123,19 @@ namespace KinectDissertationProject.ViewModel
         public KinectViewModel()
         {
             windows = new List<Window>();
+            GestureController = new GestureController();
+            
             TextBoxText = "Kinect Dissertation Project";    
         }
 
         internal void Load_Kinect()
         {
             kinectReader = new KinectReader();
+
             kinectReader.OnTrackedBody += Kinect_OnTrackedBody;
             kinectReader.OnLostTracking += Kinect_LostTracking;
-            kinectReader.ColourTracked += Kinect_ColourTracked;
-        }
 
-        private void Kinect_ColourTracked(object sender, ColourEventArgs e)
-        {
-            RaiseColourEvent(e);
+            kinectReader.ColourTracked += Kinect_ColourTracked;
         }
 
         internal void Open_Kinect()
@@ -135,14 +156,11 @@ namespace KinectDissertationProject.ViewModel
 
             Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
 
-            //RecordData(body);
+            CheckAndRaiseGesture(body, activeWindow);
 
-            CheckApplicationGestures(body, activeWindow);
-
-            CheckWindowGestures(body, activeWindow);
-
-            RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
             #region Test stuff
+            //RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
+            //RecordData(body);
 
 
             //CheckHandPositions(body.Joints);
@@ -161,6 +179,24 @@ namespace KinectDissertationProject.ViewModel
             //);
             #endregion
 
+        }
+
+        private void CheckAndRaiseGesture(Body body, Window activeWindow)
+        {
+            GestureType gesture = body.CheckGesture();
+
+            switch (gesture)
+            {
+                case GestureType.LARGE_SWIPE_DOWN:
+                    RaiseApplicationOperation(activeWindow, ApplicationOperation.MINIMISE);
+                    break;
+
+            }
+        }
+
+        private void Kinect_ColourTracked(object sender, ColourEventArgs e)
+        {
+            RaiseColourEvent(e);
         }
 
         private void RecordData(Body body)
@@ -182,44 +218,7 @@ namespace KinectDissertationProject.ViewModel
             
         }
 
-        /// <summary>
-        /// Application Gestures are across all windows and involve acts like minimising, switching etc.
-        /// </summary>
-        /// <param name="body"></param>
-        /// <param name="activeWindow"></param>
-        private void CheckApplicationGestures(Body body, Window activeWindow)
-        {
-            switch (body.GetApplicationGesture())
-            {
-                case ApplicationGesture.MINIMISE:
-                    activeWindow.WindowState = WindowState.Minimized;
-                    break;
-                case ApplicationGesture.NONE:
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Checks gestures applicable for the active window, such as scrolling, clicking etc.
-        /// </summary>
-        /// <param name="body"></param>
-        /// <param name="activeWindow"></param>
-        private void CheckWindowGestures(Body body, Window activeWindow)
-        {
-            switch (body.GetWindowGesture())
-            {
-                case WindowGesture.CLICK:
-                    break;
-                case WindowGesture.NONE:
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void CheckHandPositions(IReadOnlyDictionary<JointType, Joint> joints)
+       private void CheckHandPositions(IReadOnlyDictionary<JointType, Joint> joints)
         {
             if (HandPos_TOP.In_Position(joints[JointType.HandLeft], CoordinateMapper) == HandPosition.IN_POSITION)
             {
@@ -230,14 +229,6 @@ namespace KinectDissertationProject.ViewModel
         private void Kinect_LostTracking(object sender, EventArgs e)
         {
             throw new NotImplementedException();
-        }
-
-
-        public int Add_Window(Window w)
-        {
-            int loc = windows.Count();
-            windows.Add(w);
-            return loc;
         }
 
         public void Switch_Window(int index)

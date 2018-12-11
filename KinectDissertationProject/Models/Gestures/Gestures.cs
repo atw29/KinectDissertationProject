@@ -40,7 +40,8 @@ namespace KinectDissertationProject.Models.Gestures
     {
         SUCEEDED,
         FAILED,
-        LOST_TRACK
+        LOST_TRACK,
+        PAUSED
     }
 
 }

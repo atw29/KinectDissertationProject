@@ -14,14 +14,9 @@ namespace KinectDissertationProject.Models
         const double GESTURE_Y_OFFSET = -0.65f;
         const double GESTURE_X_OFFSET = 0.185f;
 
-        public static ApplicationGesture GetApplicationGesture(this Body body)
+        public static GestureType CheckGesture(this Body body)
         {
-            return ApplicationGesture.NONE;
-        }
-
-        public static WindowGesture GetWindowGesture(this Body body)
-        {
-            return WindowGesture.NONE;
+            return GestureType.NONE;
         }
 
         #region Joints to Colour Space

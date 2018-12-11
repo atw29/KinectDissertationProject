@@ -46,17 +46,28 @@ namespace KinectDissertationProject.Models
         public KinectReader(bool openSensor = false)
         {
             sensor = KinectSensor.GetDefault();
-            bodyFrameReader = sensor.BodyFrameSource.OpenReader();
-            bodyFrameReader.FrameArrived += BodyFrameReader_FrameArrived;
             CoordinateMapper = sensor.CoordinateMapper;
 
-            colourFrameReader = sensor.ColorFrameSource.OpenReader();
-            colourFrameReader.FrameArrived += ColourFrameReader_FrameArrived;
+            SetUpBodyFrameReader();
+
+            //SetUpColourFrameReader();
 
             if (openSensor)
             {
                 Open();
             }
+        }
+
+        private void SetUpBodyFrameReader()
+        {
+            bodyFrameReader = sensor.BodyFrameSource.OpenReader();
+            bodyFrameReader.FrameArrived += BodyFrameReader_FrameArrived;
+        }
+
+        private void SetUpColourFrameReader()
+        {
+            colourFrameReader = sensor.ColorFrameSource.OpenReader();
+            colourFrameReader.FrameArrived += ColourFrameReader_FrameArrived;
         }
 
         private void ColourFrameReader_FrameArrived(object sender, ColorFrameArrivedEventArgs e)

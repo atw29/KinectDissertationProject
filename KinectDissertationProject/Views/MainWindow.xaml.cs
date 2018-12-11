@@ -44,23 +44,15 @@ namespace KinectDissertationProject
             SetUpKinect();
 
             KinectViewModel.Create_MockUp_Window();
-            KinectViewModel.Create_Camera_Window();
 
         }
 
         private void SetUpKinect()
         {
             KinectViewModel.Load_Kinect();
-            KinectViewModel.Open_Kinect(); // Want to Open Initially?
+            KinectViewModel.Open_Kinect();
             
-            KinectViewModel.JointPositionEventOccurred += KinectViewModel_JointPositionEventOccurred;
-            KinectViewModel.ColourEventOccurred += KinectViewModel_ColourEventOccurred;
-        }
-
-        private void KinectViewModel_ColourEventOccurred(object sender, ColourEventArgs e)
-        {
-            // Test 
-            Console.WriteLine("Colour Occurred");
+            //KinectViewModel.JointPositionEventOccurred += KinectViewModel_JointPositionEventOccurred;
         }
 
         private void KinectViewModel_JointPositionEventOccurred(object sender, JointPositionEventArgs e)

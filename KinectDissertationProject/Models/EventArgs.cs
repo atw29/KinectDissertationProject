@@ -8,13 +8,51 @@ using System.Windows;
 
 namespace KinectDissertationProject.Models
 {
-    class WindowEventArgs : EventArgs
+    class WindowOperationEventArgs : EventArgs
     {
-        public Window Window { get; set; }
-        public ApplicationGesture Operation { get; set; }
-        public IReadOnlyDictionary<string, object> Data { get; set; }
+        /// <summary>
+        /// Contains the arguments for an Operation performed on a specific Window (e.g. scroll down)
+        /// </summary>
+        /// <param name="window">The Window to Act On</param>
+        /// <param name="operation">The Operation to Perform (e.g. scroll down)</param>
+        /// <param name="data">Any Extra Data required </param>
+        public WindowOperationEventArgs(Window window, WindowOperation operation, IReadOnlyDictionary<string, object> data)
+        {
+            Window = window;
+            Operation = operation;
+            Data = data;
+        }
+
+        public Window Window { get; private set; }
+        public WindowOperation Operation { get; private set; }
+        public IReadOnlyDictionary<string, object> Data { get; private set; }
 
     }
+
+    class ApplicationOperationEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Contains the information for performing a Application-level operation (e.g. switch window)
+        /// </summary>
+        /// <param name="window">The Window to base the action on (most likely to be the currently active window) </param>
+        /// <param name="operation">The operation to perfrom (e.g. switch window) </param>
+        public ApplicationOperationEventArgs(Window window, ApplicationOperation operation)
+        {
+            Window = window;
+            Operation = operation;
+        }
+
+        public Window Window { get; private set; }
+        public ApplicationOperation Operation { get; private set; }
+    }
+
+    class GestureEventArgs : EventArgs
+    {
+        public GestureType GestureType { get; set; }
+    }
+
+
+    #region Old Stuff
 
     public class BodyEventArgs : EventArgs
     {
@@ -41,21 +79,7 @@ namespace KinectDissertationProject.Models
         public IReadOnlyDictionary<JointType, (Point point, bool tracked, float depth)> JointPosDict { get; set; }
 
     }
+    #endregion
 
-    public enum ApplicationGesture
-    {
-        MINIMISE,
-        MAXIMISE,
-        GAIN_FOCUS,
-        LOSE_FOCUS,
-        NONE
-    }
 
-    public enum WindowGesture
-    {
-        SCROLL_UP,
-        SCROLL_DOWN,
-        CLICK,
-        NONE
-    }
 }

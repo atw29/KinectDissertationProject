@@ -62,10 +62,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\Gestures\Gesture.cs" />
+    <Compile Include="Models\Gestures\GestureController.cs" />
     <Compile Include="Models\Gestures\Gestures.cs" />
     <Compile Include="Models\Gestures\HandPositions.cs" />
-    <Compile Include="Models\KinectBodyHelper.cs" />
-    <Compile Include="Models\KinectReader.cs" />
+    <Compile Include="Models\Gestures\IRelativeGestureSegment.cs" />
+    <Compile Include="Models\Kinect\KinectBodyHelper.cs" />
+    <Compile Include="Models\Kinect\KinectReader.cs" />
     <Compile Include="Models\EventArgs.cs" />
     <Compile Include="Models\UIExtensions.cs" />
     <Compile Include="Views\Camera.xaml.cs">
@@ -144,5 +148,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
