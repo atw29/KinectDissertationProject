@@ -18,7 +18,7 @@ namespace KinectDissertationProject.Models.Gestures
         /// <summary>
         /// The parts that make up this gesture
         /// </summary>
-        private IRelativeGestureSegment[] gestureSegments;
+        private RelativeGestureSegment[] gestureSegments;
 
         /// <summary>
         /// The current gesture part that we are matching against
@@ -46,7 +46,7 @@ namespace KinectDissertationProject.Models.Gestures
         const int MAX_FRAME_COUNT = 50;
 
         #endregion
-        public Gesture(GestureType type, IRelativeGestureSegment[] gestureSegments)
+        public Gesture(GestureType type, RelativeGestureSegment[] gestureSegments)
         {
             this.type = type;
             this.gestureSegments = gestureSegments;

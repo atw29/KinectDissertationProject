@@ -25,7 +25,7 @@ namespace KinectDissertationProject.Models.Gestures
             }
         }
 
-        public void AddGesture(GestureType gestureType, IRelativeGestureSegment[] gestureSegments)
+        public void AddGesture(GestureType gestureType, RelativeGestureSegment[] gestureSegments)
         {
             Gesture gesture = new Gesture(gestureType, gestureSegments);
             gesture.GestureRecognised += Gesture_GestureRecognised;

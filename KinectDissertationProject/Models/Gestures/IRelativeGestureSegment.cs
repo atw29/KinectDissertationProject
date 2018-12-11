@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gestures
 {
-    abstract class IRelativeGestureSegment
+    abstract class RelativeGestureSegment
     {
         protected static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
