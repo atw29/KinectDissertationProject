@@ -10,7 +10,9 @@ namespace KinectDissertationProject.Models.Gestures
     class GestureController
     {
 
-        private IList<IGesture> gestures = new List<IGesture>();
+        public EventHandler<GestureEventArgs> GestureRecognised;
+
+        private IList<Gesture> gestures = new List<Gesture>();
         public GestureController()
         {
         }
@@ -23,10 +25,16 @@ namespace KinectDissertationProject.Models.Gestures
             }
         }
 
-        public void AddGesture(GestureType gestureType)
+        public void AddGesture(GestureType gestureType, IRelativeGestureSegment[] gestureSegments)
         {
-
+            Gesture gesture = new Gesture(gestureType, gestureSegments);
+            gesture.GestureRecognised += Gesture_GestureRecognised;
+            gestures.Add(gesture);
         }
 
+        private void Gesture_GestureRecognised(object sender, GestureEventArgs e)
+        {
+            GestureRecognised?.Invoke(this, e);
+        }
     }
 }
