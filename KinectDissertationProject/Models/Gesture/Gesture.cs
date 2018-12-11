@@ -9,6 +9,8 @@ namespace KinectDissertationProject.Models.Gesture
 {
     abstract class Gesture
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         #region Params
         /// <summary>
         /// The Type of Gesture we are
@@ -81,7 +83,7 @@ namespace KinectDissertationProject.Models.Gesture
                 {
                     if (GestureRecognised != null)
                     {
-                        GestureRecognised.Invoke(this, new GestureEventArgs { GestureType = type });
+                        RaiseGestureRecognised();
                         Reset();
                     }
                 } 
@@ -96,6 +98,12 @@ namespace KinectDissertationProject.Models.Gesture
                 pausedFrameCount = 5;
                 paused = true;
             }
+        }
+
+        private void RaiseGestureRecognised()
+        {
+            logger.Debug("{0} Recognised", type);
+            GestureRecognised.Invoke(this, new GestureEventArgs { GestureType = type });
         }
 
         public void Reset()

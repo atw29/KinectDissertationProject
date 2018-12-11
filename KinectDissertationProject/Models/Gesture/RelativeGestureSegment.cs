@@ -9,8 +9,7 @@ namespace KinectDissertationProject.Models.Gesture
 {
     abstract class RelativeGestureSegment
     {
-        protected static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-
+        
         /// <summary>
         /// Checks the gesture 
         /// </summary>

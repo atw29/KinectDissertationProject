@@ -14,7 +14,7 @@ using System.Windows;
 
 namespace KinectDissertationProject.ViewModel
 {
-    class KinectViewModel
+    class KinectViewModel : INotifyPropertyChanged
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         #if DEBUG
@@ -39,7 +39,20 @@ namespace KinectDissertationProject.ViewModel
                 return kinectReader.CoordinateMapper;
             }
         }
-        public string TextBoxText{ get; set; }
+
+        private string textBoxText;
+        public string TextBoxText
+        {
+            get
+            {
+                return textBoxText;
+            }
+            set
+            {
+                textBoxText = value;
+                RaisePropertyChanged("TextBoxText");
+            }
+        }
 
 
         #endregion
@@ -94,6 +107,12 @@ namespace KinectDissertationProject.ViewModel
 
         public event EventHandler<WindowOperationEventArgs> WindowOperationOccurred;
         public event EventHandler<ApplicationOperationEventArgs> ApplicationOperationOccurred;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string propName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+        }
 
         protected void RaiseColourEvent(ColourEventArgs args)
         {
@@ -161,32 +180,12 @@ namespace KinectDissertationProject.ViewModel
             GestureController.CheckGestures(body);
             if (debug) RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
 
-            #region Test stuff
-            //RecordData(body);
-
-
-            //CheckHandPositions(body.Joints);
-
-            // Raise Gesutre Occurred 
-            // i.e. RaiseGesutreOccurred(activeWindow, Gesture.SwipeDown)
-
-            // Raise Joint Positions
-
-            //RaiseEventOccurred(
-            //    activeWindow, 
-            //    Operation.MINIMISE, 
-            //    new Dictionary<string, object> {
-            //        { "LeftHandLocation" , body.Joints[JointType.HandLeft].ToCoordinatePoint(kinectReader.CoordinateMapper).ToString()}
-            //    }
-            //);
-            #endregion
-
         }
         
         private void GestureController_GestureRecognised(object sender, GestureEventArgs e)
         {
             Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-
+            if (debug) TextBoxText = e.GestureType.ToString();
             switch (e.GestureType)
             {
                 case GestureType.LARGE_SWIPE_DOWN:
@@ -224,14 +223,6 @@ namespace KinectDissertationProject.ViewModel
                 }
             }
             
-        }
-
-       private void CheckHandPositions(IReadOnlyDictionary<JointType, Joint> joints)
-        {
-            if (HandPos_TOP.In_Position(joints[JointType.HandLeft], CoordinateMapper) == HandPosition.IN_POSITION)
-            {
-
-            }
         }
 
         private void Kinect_LostTracking(object sender, EventArgs e)

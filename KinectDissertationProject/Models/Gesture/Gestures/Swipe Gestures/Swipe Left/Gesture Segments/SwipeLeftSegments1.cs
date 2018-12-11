@@ -18,28 +18,28 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
             // Hand in front of respective shoulder
             if (body.Joints[Hand].Position.Z < body.Joints[Elbow].Position.Z )
             {
-                log.Debug("{0} is in front of {1} - Pass", Hand, Elbow);
+                log.Trace("{0} is in front of {1} - Pass", Hand, Elbow);
                 // Hand vertically between neck and hip
                 if (body.Joints[Hand].Position.Y < body.Joints[JointType.Head].Position.Y && body.Joints[Hand].Position.Y > body.Joints[JointType.SpineBase].Position.Y)
                 {
-                    log.Debug("{0} is bewteen Neck and Hip - Pass", Hand);
+                    log.Trace("{0} is bewteen Neck and Hip - Pass", Hand);
                     // Hand is to the right of the respective shoulder
                     if (body.Joints[Hand].Position.X > body.Joints[Shoulder].Position.X)
                     {
-                        log.Debug("{0} is to the right of {1} - Pass", Hand, Shoulder);
+                        log.Trace("{0} is to the right of {1} - Pass", Hand, Shoulder);
                         return GestureResult.SUCEEDED;
                     }
 
-                    log.Debug("{0} undetermied to right of {1}", Hand, Shoulder);
+                    log.Trace("{0} undetermied to right of {1}", Hand, Shoulder);
                     return GestureResult.PAUSED;
                 }
 
-                log.Debug("{0} is not between Neck and Hip - FAIL", Hand);
+                log.Trace("{0} is not between Neck and Hip - FAIL", Hand);
 
                 return GestureResult.FAILED;
 
             }
-            log.Debug("{0} is not in front of {1}", Hand, Elbow);
+            log.Trace("{0} is not in front of {1}", Hand, Elbow);
             return GestureResult.FAILED;
         }
     }

@@ -62,7 +62,7 @@ namespace KinectDissertationProject
             switch (e.Operation)
             {
                 case ApplicationOperation.SWITCH_WINDOW:
-                    textblock.Text = "GESTURE RECOGNISED";
+                    //textblock.Text = e.Operation.ToString();
                     break;
             }
         }

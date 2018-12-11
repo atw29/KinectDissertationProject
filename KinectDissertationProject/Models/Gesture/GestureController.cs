@@ -17,7 +17,7 @@ namespace KinectDissertationProject.Models.Gesture
         public GestureController()
         {
             AddGesture(new RightHandSwipeLeftGesture());
-            //AddGesture(new LeftHandSwipeLeftGesture());
+            AddGesture(new LeftHandSwipeLeftGesture());
         }
 
         public void CheckGestures(Body body)
