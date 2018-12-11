@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KinectDissertationProject.Models.Gestures
+namespace KinectDissertationProject.Models.Gesture
 {
     abstract class RelativeGestureSegment
     {

@@ -1,16 +1,14 @@
-﻿using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Left.Gesture_Segments;
-using KinectDissertationProject.Models.Gestures;
-using KinectDissertationProject.Models.Gestures.GestureSegments.Swipe_Gesture.Swipe_Left;
-using Microsoft.Kinect;
+﻿using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Left.Gesture_Segments;
 
 namespace KinectDissertationProject.Models.Gesture.Gestures
 {
-    abstract class SwipeLeftGesture : Models.Gestures.Gesture
+    abstract class SwipeLeftGesture : Gesture
     {
         abstract protected RelativeGestureSegment[] swipeLeftSegments { get; }
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KinectDissertationProject.Models
+namespace KinectDissertationProject.Models.Kinect
 {
     /// <summary>
     /// Class Taken From Kinect V2 Mouse Control

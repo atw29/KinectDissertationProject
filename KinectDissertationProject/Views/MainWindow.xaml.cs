@@ -43,7 +43,7 @@ namespace KinectDissertationProject
 
             SetUpKinect();
 
-            KinectViewModel.Create_MockUp_Window();
+            //KinectViewModel.Create_MockUp_Window();
 
         }
 
@@ -53,8 +53,8 @@ namespace KinectDissertationProject
             KinectViewModel.Open_Kinect();
 
             KinectViewModel.ApplicationOperationOccurred += KinectViewModel_ApplicationOperationOccurred;
-            
-            //KinectViewModel.JointPositionEventOccurred += KinectViewModel_JointPositionEventOccurred;
+
+            KinectViewModel.JointPositionEventOccurred += KinectViewModel_JointPositionEventOccurred;
         }
 
         private void KinectViewModel_ApplicationOperationOccurred(object sender, ApplicationOperationEventArgs e)

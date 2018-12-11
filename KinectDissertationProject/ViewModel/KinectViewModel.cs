@@ -1,5 +1,6 @@
 ﻿using KinectDissertationProject.Models;
-using KinectDissertationProject.Models.Gestures;
+using KinectDissertationProject.Models.Gesture;
+using KinectDissertationProject.Models.Kinect;
 using KinectDissertationProject.Views;
 using Microsoft.Kinect;
 using System;
@@ -15,7 +16,7 @@ namespace KinectDissertationProject.ViewModel
 {
     class KinectViewModel
     {
-
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         #if DEBUG
         bool debug = true;
         #endif
@@ -122,6 +123,7 @@ namespace KinectDissertationProject.ViewModel
         #region Initialisers
         public KinectViewModel()
         {
+            logger.Debug("Kinect View Model Loaded");
             windows = new List<Window>();
             GestureController = new GestureController();
 
@@ -157,9 +159,9 @@ namespace KinectDissertationProject.ViewModel
             Body body = e.BodyData;
 
             GestureController.CheckGestures(body);
+            if (debug) RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
 
             #region Test stuff
-            //RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
             //RecordData(body);
 
 

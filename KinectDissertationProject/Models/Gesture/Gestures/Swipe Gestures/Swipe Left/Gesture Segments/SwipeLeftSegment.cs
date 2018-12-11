@@ -1,5 +1,4 @@
-﻿using KinectDissertationProject.Models.Gestures;
-using Microsoft.Kinect;
+﻿using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
 using System.Linq;

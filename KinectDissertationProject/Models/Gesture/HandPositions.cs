@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using KinectDissertationProject.Models.Kinect;
 using Microsoft.Kinect;
 
 /// <summary>
@@ -11,7 +12,7 @@ using Microsoft.Kinect;
 /// Can be combined to form gestures or used as localisation.
 /// </summary>
 /// 
-namespace KinectDissertationProject.Models.Gestures
+namespace KinectDissertationProject.Models.Gesture
 {
     static class HandPositions
     {

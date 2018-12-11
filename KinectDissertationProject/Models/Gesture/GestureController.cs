@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KinectDissertationProject.Models.Gestures
+namespace KinectDissertationProject.Models.Gesture
 {
     class GestureController
     {
@@ -17,7 +17,7 @@ namespace KinectDissertationProject.Models.Gestures
         public GestureController()
         {
             AddGesture(new RightHandSwipeLeftGesture());
-            AddGesture(new LeftHandSwipeLeftGesture());
+            //AddGesture(new LeftHandSwipeLeftGesture());
         }
 
         public void CheckGestures(Body body)

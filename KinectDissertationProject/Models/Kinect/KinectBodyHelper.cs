@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace KinectDissertationProject.Models
+namespace KinectDissertationProject.Models.Kinect
 {
     public static class KinectBodyHelper
     {
