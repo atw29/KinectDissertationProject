@@ -74,8 +74,10 @@
     <Compile Include="Models\Gesture\Gesture.cs" />
     <Compile Include="Models\Gesture\GestureController.cs" />
     <Compile Include="Models\Gesture\Gestures.cs" />
-    <Compile Include="Models\Gesture\GestureSegments\Swipe Gesture\Swipe Left\SwipeLeftSegment1.cs" />
-    <Compile Include="Models\Gesture\Gestures\SwipeLeftGesture.cs" />
+    <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Left\Gesture Segments\SwipeLeftSegment.cs" />
+    <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Left\Gesture Segments\SwipeLeftSegments1.cs" />
+    <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Left\Gesture Segments\SwipeLeftSegments2.cs" />
+    <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Left\SwipeLeftGestures.cs" />
     <Compile Include="Models\Gesture\HandPositions.cs" />
     <Compile Include="Models\Gesture\RelativeGestureSegment.cs" />
     <Compile Include="Models\Kinect\KinectBodyHelper.cs" />

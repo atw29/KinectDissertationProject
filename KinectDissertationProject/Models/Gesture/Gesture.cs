@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gestures
 {
-    abstract class GestureXYZ
+    abstract class Gesture
     {
         #region Params
         /// <summary>

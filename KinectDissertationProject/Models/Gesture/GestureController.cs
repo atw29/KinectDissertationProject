@@ -12,7 +12,7 @@ namespace KinectDissertationProject.Models.Gestures
 
         public EventHandler<GestureEventArgs> GestureRecognised;
 
-        private IList<GestureXYZ> gestures = new List<GestureXYZ>();
+        private IList<Gesture> gestures = new List<Gesture>();
         public GestureController()
         {
         }
@@ -27,7 +27,7 @@ namespace KinectDissertationProject.Models.Gestures
 
         public void AddGesture(GestureType gestureType, RelativeGestureSegment[] gestureSegments)
         {
-            GestureXYZ gesture = new GestureXYZ(gestureType, gestureSegments);
+            Gesture gesture = new Gesture(gestureType, gestureSegments);
             gesture.GestureRecognised += Gesture_GestureRecognised;
             gestures.Add(gesture);
         }

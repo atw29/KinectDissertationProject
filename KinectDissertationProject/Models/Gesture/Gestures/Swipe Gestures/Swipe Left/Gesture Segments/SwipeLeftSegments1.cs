@@ -4,23 +4,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Left.Gesture_Segments;
 using Microsoft.Kinect;
 
 namespace KinectDissertationProject.Models.Gestures.GestureSegments.Swipe_Gesture.Swipe_Left
 {
-    class SwipeLeftSegment1 : RelativeGestureSegment
+    abstract class SwipeLeftSegment1 : SwipeLeftSegment
     {
-        private JointType Hand;
-        private JointType Elbow;
-        private JointType Shoulder;
-
-        public SwipeLeftSegment1(JointType Hand, JointType Elbow, JointType Shoulder)
-        {
-            this.Hand = Hand;
-            this.Elbow = Elbow;
-            this.Shoulder = Shoulder;
-        }
-
+ 
         public override GestureResult CheckGesture(Body body)
         {
             GestureResult gestureResult = GestureResult.FAILED;
@@ -52,4 +43,58 @@ namespace KinectDissertationProject.Models.Gestures.GestureSegments.Swipe_Gestur
             return gestureResult;
         }
     }
+
+    class RightHandSwipeLeftSegment1 : SwipeLeftSegment1
+    {
+        protected override JointType Hand
+        {
+            get
+            {
+                return JointType.HandRight;
+            }
+        }
+
+        protected override JointType Elbow
+        {
+            get
+            {
+                return JointType.ElbowRight;
+            }
+        }
+
+        protected override JointType Shoulder
+        {
+            get
+            {
+                return JointType.ShoulderRight;
+            }
+        }
+    }
+    class LeftHandSwipeLeftSegment1 : SwipeLeftSegment1
+    {
+        protected override JointType Hand
+        {
+            get
+            {
+                return JointType.HandLeft;
+            }
+        }
+
+        protected override JointType Elbow
+        {
+            get
+            {
+                return JointType.ElbowLeft;
+            }
+        }
+
+        protected override JointType Shoulder
+        {
+            get
+            {
+                return JointType.ShoulderLeft;
+            }
+        }
+    }
+
 }
