@@ -11,8 +11,9 @@ namespace KinectDissertationProject.Models
     {
         MINIMISE,
         MAXIMISE,
-        GAIN_FOCUS,
-        LOSE_FOCUS,
+
+        SWITCH_WINDOW,
+
         NONE
     }
 
@@ -36,5 +37,13 @@ namespace KinectDissertationProject.Models
 
         SMALL_SWIPE_DOWN,
         SMALL_SWIPE_UP
+    }
+
+    enum GestureResult
+    {
+        SUCEEDED,
+        FAILED,
+        LOST_TRACK,
+        PAUSED
     }
 }

@@ -51,8 +51,20 @@ namespace KinectDissertationProject
         {
             KinectViewModel.Load_Kinect();
             KinectViewModel.Open_Kinect();
+
+            KinectViewModel.ApplicationOperationOccurred += KinectViewModel_ApplicationOperationOccurred;
             
             //KinectViewModel.JointPositionEventOccurred += KinectViewModel_JointPositionEventOccurred;
+        }
+
+        private void KinectViewModel_ApplicationOperationOccurred(object sender, ApplicationOperationEventArgs e)
+        {
+            switch (e.Operation)
+            {
+                case ApplicationOperation.SWITCH_WINDOW:
+                    textblock.Text = "GESTURE RECOGNISED";
+                    break;
+            }
         }
 
         private void KinectViewModel_JointPositionEventOccurred(object sender, JointPositionEventArgs e)

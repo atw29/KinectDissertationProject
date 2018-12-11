@@ -124,10 +124,12 @@ namespace KinectDissertationProject.ViewModel
         {
             windows = new List<Window>();
             GestureController = new GestureController();
+
+            GestureController.GestureRecognised += GestureController_GestureRecognised;
             
             TextBoxText = "Kinect Dissertation Project";    
         }
-
+        
         internal void Load_Kinect()
         {
             kinectReader = new KinectReader();
@@ -154,9 +156,7 @@ namespace KinectDissertationProject.ViewModel
         {
             Body body = e.BodyData;
 
-            Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-
-            CheckAndRaiseGesture(body, activeWindow);
+            GestureController.CheckGestures(body);
 
             #region Test stuff
             //RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
@@ -180,17 +180,23 @@ namespace KinectDissertationProject.ViewModel
             #endregion
 
         }
-
-        private void CheckAndRaiseGesture(Body body, Window activeWindow)
+        
+        private void GestureController_GestureRecognised(object sender, GestureEventArgs e)
         {
-            GestureType gesture = body.CheckGesture();
+            Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
 
-            switch (gesture)
+            switch (e.GestureType)
             {
                 case GestureType.LARGE_SWIPE_DOWN:
                     RaiseApplicationOperation(activeWindow, ApplicationOperation.MINIMISE);
                     break;
-
+                case GestureType.RIGHT_HAND_SWIPE_LEFT:
+                    RaiseApplicationOperation(activeWindow, ApplicationOperation.SWITCH_WINDOW);
+                    break;
+                case GestureType.NONE:
+                    break;
+                default:
+                    break;
             }
         }
 

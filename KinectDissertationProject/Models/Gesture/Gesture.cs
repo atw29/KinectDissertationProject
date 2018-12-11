@@ -53,7 +53,7 @@ namespace KinectDissertationProject.Models.Gestures
 
         #endregion
 
-        public EventHandler<GestureEventArgs> GestureRecognised;
+        public event EventHandler<GestureEventArgs> GestureRecognised;
 
         public void UpdateGesture(Body body)
         {
@@ -81,7 +81,7 @@ namespace KinectDissertationProject.Models.Gestures
                 {
                     if (GestureRecognised != null)
                     {
-                        GestureRecognised(this, new GestureEventArgs { GestureType = type });
+                        GestureRecognised.Invoke(this, new GestureEventArgs { GestureType = type });
                         Reset();
                     }
                 } 
@@ -98,7 +98,7 @@ namespace KinectDissertationProject.Models.Gestures
             }
         }
 
-        private void Reset()
+        public void Reset()
         {
             currentGestureSegment = 0;
             frameCount = 0;

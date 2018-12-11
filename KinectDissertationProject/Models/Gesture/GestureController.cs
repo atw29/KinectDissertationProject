@@ -1,4 +1,5 @@
-﻿using Microsoft.Kinect;
+﻿using KinectDissertationProject.Models.Gesture.Gestures;
+using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +11,25 @@ namespace KinectDissertationProject.Models.Gestures
     class GestureController
     {
 
-        public EventHandler<GestureEventArgs> GestureRecognised;
+        public event EventHandler<GestureEventArgs> GestureRecognised;
 
         private IList<Gesture> gestures = new List<Gesture>();
         public GestureController()
         {
+            AddGesture(new RightHandSwipeLeftGesture());
+            AddGesture(new LeftHandSwipeLeftGesture());
         }
 
         public void CheckGestures(Body body)
         {
-            foreach (IGesture gesture in gestures)
+            foreach (Gesture gesture in gestures)
             {
-                gesture.CheckResult(body);
+                gesture.UpdateGesture(body);
             }
         }
 
-        public void AddGesture(GestureType gestureType, RelativeGestureSegment[] gestureSegments)
+        private void AddGesture(Gesture gesture)
         {
-            Gesture gesture = new Gesture(gestureType, gestureSegments);
             gesture.GestureRecognised += Gesture_GestureRecognised;
             gestures.Add(gesture);
         }
@@ -35,6 +37,11 @@ namespace KinectDissertationProject.Models.Gestures
         private void Gesture_GestureRecognised(object sender, GestureEventArgs e)
         {
             GestureRecognised?.Invoke(this, e);
+
+            foreach (Gesture g in gestures)
+            {
+                g.Reset();
+            }
         }
     }
 }
