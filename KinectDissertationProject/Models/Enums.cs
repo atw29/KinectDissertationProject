@@ -32,6 +32,9 @@ namespace KinectDissertationProject.Models
         RIGHT_HAND_SWIPE_LEFT,
         LEFT_HAND_SWIPE_LEFT,
 
+        RIGHT_HAND_SWIPE_RIGHT,
+        LEFT_HAND_SWIPE_RIGHT,
+
         LARGE_SWIPE_DOWN,
         LARGE_SWIPE_UP,
 
@@ -39,7 +42,7 @@ namespace KinectDissertationProject.Models
         SMALL_SWIPE_UP
     }
 
-    enum GestureResult
+    public enum GestureResult
     {
         SUCEEDED,
         FAILED,

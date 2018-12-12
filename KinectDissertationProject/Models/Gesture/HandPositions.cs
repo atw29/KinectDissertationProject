@@ -30,14 +30,6 @@ namespace KinectDissertationProject.Models.Gesture
 
     }
 
-    enum Region
-    {
-        TOP,
-        BOT,
-        LHS,
-        RHS
-    }
-
     interface IHandPosition
     {
         HandPosition In_Position(Joint hand, CoordinateMapper coordinateMapper);

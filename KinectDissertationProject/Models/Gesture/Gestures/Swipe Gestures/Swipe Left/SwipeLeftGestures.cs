@@ -23,17 +23,6 @@ namespace KinectDissertationProject.Models.Gesture.Gestures
 
     }
 
-    //static class SwipeLeftGestureX
-    //{
-    //    static Gesture With(IOneHand Hand)
-    //    {
-    //        if (Hand is RightHand)
-    //        {
-
-    //        }
-    //    }
-    //}
-
     class RightHandSwipeLeftGesture : SwipeLeftGesture
     {
         private RelativeGestureSegment[] relativeGestureSegments;
@@ -52,7 +41,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures
             relativeGestureSegments[1] = new RightHandSwipeLeftSegment2();
         }
 
-        protected override GestureType type
+        protected override GestureType Type
         {
             get
             {
@@ -80,7 +69,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures
             relativeGestureSegments[1] = new LeftHandSwipeLeftSegment2();
         }
 
-        protected override GestureType type
+        protected override GestureType Type
         {
             get
             {

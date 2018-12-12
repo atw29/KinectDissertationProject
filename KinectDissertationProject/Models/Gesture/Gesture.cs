@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gesture
 {
-    abstract class Gesture
+    public abstract class Gesture
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -15,7 +15,7 @@ namespace KinectDissertationProject.Models.Gesture
         /// <summary>
         /// The Type of Gesture we are
         /// </summary>
-        protected abstract GestureType type
+        protected abstract GestureType Type
         {
             get;
         }
@@ -102,8 +102,8 @@ namespace KinectDissertationProject.Models.Gesture
 
         private void RaiseGestureRecognised()
         {
-            logger.Debug("{0} Recognised", type);
-            GestureRecognised.Invoke(this, new GestureEventArgs { GestureType = type });
+            logger.Debug("{0} Recognised", Type);
+            GestureRecognised.Invoke(this, new GestureEventArgs { GestureType = Type });
         }
 
         public void Reset()

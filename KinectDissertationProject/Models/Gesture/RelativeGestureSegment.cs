@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gesture
 {
-    abstract class RelativeGestureSegment
+    public abstract class RelativeGestureSegment
     {
         
         /// <summary>

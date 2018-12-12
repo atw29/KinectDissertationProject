@@ -46,7 +46,7 @@ namespace KinectDissertationProject.Models
         public ApplicationOperation Operation { get; private set; }
     }
 
-    class GestureEventArgs : EventArgs
+    public class GestureEventArgs : EventArgs
     {
         public GestureType GestureType { get; set; }
     }

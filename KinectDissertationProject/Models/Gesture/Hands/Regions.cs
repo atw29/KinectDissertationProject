@@ -37,6 +37,14 @@ namespace KinectDissertationProject.Models.Gesture.Hands
     /// </summary>
     static class BodyRegions
     {
+        /// <summary>
+        /// Gets the respective Elbow from the Hand
+        /// </summary>
+        public static JointType Elbow(this JointType hand)
+        {
+            return hand == JointType.HandRight ? JointType.ElbowRight : JointType.ElbowLeft;
+        }
+
         public static GestureResult IsIdle(this JointType IdleHand, Body body)
         {
             if (IdleHand == JointType.HandRight)
@@ -90,6 +98,13 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                     throw new ArgumentException(string.Format("Region {0} is not valid. Check the Region has its respective implementation", region.ToString()));
             }
         }
+
+        #region Z-Regions
+        public static bool InFrontOf(this JointType hand, JointType jointBehind, Body body)
+        {
+            return body.Joints[hand].Position.Z < body.Joints[jointBehind].Position.Z;
+        }
+        #endregion
 
         #region Head Regions
 

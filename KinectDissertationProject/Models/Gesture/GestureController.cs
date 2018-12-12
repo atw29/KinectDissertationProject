@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KinectDissertationProject.Models.Gesture.Hands;
+using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Right;
 
 namespace KinectDissertationProject.Models.Gesture
 {
@@ -18,12 +19,12 @@ namespace KinectDissertationProject.Models.Gesture
         private IList<Gesture> gestures = new List<Gesture>();
         public GestureController()
         {
-            RightHand RightHand = RightHand.Instance;
-            LeftHand LeftHand = LeftHand.Instance;
-
             // AddGesture(SwipeLeftGesture.With(RightHand));
             AddGesture(new RightHandSwipeLeftGesture());
             AddGesture(new LeftHandSwipeLeftGesture());
+
+            AddGesture(SwipeRightGesture.Using(JointType.HandRight));
+            AddGesture(SwipeRightGesture.Using(JointType.HandLeft));
         }
 
         public void CheckGestures(Body body)
@@ -36,8 +37,11 @@ namespace KinectDissertationProject.Models.Gesture
 
         private void AddGesture(Gesture gesture)
         {
-            gesture.GestureRecognised += Gesture_GestureRecognised;
-            gestures.Add(gesture);
+            if (!gestures.Contains(gesture))
+            {
+                gesture.GestureRecognised += Gesture_GestureRecognised;
+                gestures.Add(gesture);
+            }
         }
 
         private void Gesture_GestureRecognised(object sender, GestureEventArgs e)

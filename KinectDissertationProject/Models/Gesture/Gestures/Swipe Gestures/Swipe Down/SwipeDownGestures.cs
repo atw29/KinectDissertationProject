@@ -23,6 +23,6 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
     {
         protected override RelativeGestureSegment[] swipeDownSegments => throw new NotImplementedException();
 
-        protected override GestureType type => throw new NotImplementedException();
+        protected override GestureType Type => throw new NotImplementedException();
     }
 }
