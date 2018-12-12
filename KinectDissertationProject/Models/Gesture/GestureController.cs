@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KinectDissertationProject.Models.Gesture.Hands;
+using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures;
 using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Right;
+using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Up;
 
 namespace KinectDissertationProject.Models.Gesture
 {
@@ -25,6 +27,9 @@ namespace KinectDissertationProject.Models.Gesture
 
             AddGesture(SwipeRightGesture.Using(JointType.HandRight));
             AddGesture(SwipeRightGesture.Using(JointType.HandLeft));
+
+            AddGesture(SwipeUpGesture.Using(JointType.HandRight));
+            AddGesture(SwipeUpGesture.Using(JointType.HandLeft));
         }
 
         public void CheckGestures(Body body)

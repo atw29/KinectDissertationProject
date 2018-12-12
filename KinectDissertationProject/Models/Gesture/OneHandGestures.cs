@@ -33,7 +33,7 @@ namespace KinectDissertationProject.Models.Gesture
 
     }
 
-    abstract class OneHandGestureSegmentX : RelativeGestureSegment
+    public abstract class OneHandGestureSegmentX : RelativeGestureSegment
     {
         private JointType _dominantHand;
         protected JointType DominantHand

@@ -80,6 +80,8 @@
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Left\SwipeLeftGestures.cs" />
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Right\SwipeRightGestureSegments.cs" />
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Right\SwipeRightGesture.cs" />
+    <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Up\SwipeUpGesture.cs" />
+    <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Up\SwipeUpGestureSegments.cs" />
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\SwipeGesture.cs" />
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\SwipeGestureSegment.cs" />
     <Compile Include="Models\Gesture\HandPositions.cs" />

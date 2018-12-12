@@ -8,11 +8,14 @@ using Microsoft.Kinect;
 
 namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures
 {
-    abstract class SwipeGestureSegment : OneHandGestureSegmentX
+    public class SwipeGestureSegment : OneHandGestureSegmentX
     {
-        public SwipeGestureSegment(JointType hand) : base(hand) { }
+        public SwipeGestureSegment(JointType hand, Region region) : base(hand)
+        {
+            Region = region;
+        }
 
-        abstract protected Region Region { get; }
+        protected Region Region { get; private set; }
 
         /// <summary>
         /// Checks that the hand is in front of the respective elbow then checks it's in the correct Region

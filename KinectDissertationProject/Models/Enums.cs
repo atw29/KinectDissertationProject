@@ -35,6 +35,9 @@ namespace KinectDissertationProject.Models
         RIGHT_HAND_SWIPE_RIGHT,
         LEFT_HAND_SWIPE_RIGHT,
 
+        RIGHT_HAND_SWIPE_UP,
+        LEFT_HAND_SWIPE_UP,
+
         LARGE_SWIPE_DOWN,
         LARGE_SWIPE_UP,
 

@@ -8,37 +8,19 @@ using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Right
 {
-    class SwipeRightGestureSegment1 : SwipeGestureSegment
+    public static class SwipeRightGestureSegment1
     {
-        private Region region;
-        protected override Region Region
+        public static SwipeGestureSegment Using(JointType dominantHand)
         {
-            get
-            {
-                return region;
-            }
-        }
-
-        public SwipeRightGestureSegment1(JointType dominantHand) : base(dominantHand)
-        {
-            region = dominantHand == JointType.HandRight ? Region.TORSO_MIDDLE : Region.LEFT_TORSO_CLOSE;
+            return new SwipeGestureSegment(dominantHand, dominantHand == JointType.HandRight ? Region.TORSO_MIDDLE : Region.LEFT_TORSO_CLOSE);
         }
     }
 
-    class SwipeRightGestureSegment2 : SwipeGestureSegment
+    public static class SwipeRightGestureSegment2
     {
-        private Region region;
-        protected override Region Region
+        public static SwipeGestureSegment Using(JointType dominantHand)
         {
-            get
-            {
-                return region;
-            }
-        }
-
-        public SwipeRightGestureSegment2(JointType dominantHand) : base(dominantHand)
-        {
-            region = dominantHand == JointType.HandRight ? Region.RIGHT_TORSO_CLOSE : Region.TORSO_MIDDLE;
+            return new SwipeGestureSegment(dominantHand, dominantHand == JointType.HandRight ? Region.RIGHT_TORSO_CLOSE : Region.TORSO_MIDDLE);
         }
     }
 }
