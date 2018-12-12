@@ -10,26 +10,32 @@ using KinectDissertationProject.Models.Gesture.Hands;
 using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures;
 using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Right;
 using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Up;
+using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Left;
+using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Down;
 
 namespace KinectDissertationProject.Models.Gesture
 {
     class GestureController
     {
+        private readonly JointType RightHand = JointType.HandRight;
+        private readonly JointType LeftHand = JointType.HandLeft;
 
         public event EventHandler<GestureEventArgs> GestureRecognised;
 
         private IList<Gesture> gestures = new List<Gesture>();
         public GestureController()
         {
-            // AddGesture(SwipeLeftGesture.With(RightHand));
-            AddGesture(new RightHandSwipeLeftGesture());
-            AddGesture(new LeftHandSwipeLeftGesture());
+            AddGesture(SwipeLeftGesture.Using(RightHand));
+            AddGesture(SwipeLeftGesture.Using(LeftHand));
 
-            AddGesture(SwipeRightGesture.Using(JointType.HandRight));
-            AddGesture(SwipeRightGesture.Using(JointType.HandLeft));
+            AddGesture(SwipeRightGesture.Using(RightHand));
+            AddGesture(SwipeRightGesture.Using(LeftHand));
 
-            AddGesture(SwipeUpGesture.Using(JointType.HandRight));
-            AddGesture(SwipeUpGesture.Using(JointType.HandLeft));
+            AddGesture(SwipeUpGesture.Using(RightHand));
+            AddGesture(SwipeUpGesture.Using(LeftHand));
+
+            AddGesture(SwipeDownGesture.Using(RightHand));
+            AddGesture(SwipeDownGesture.Using(LeftHand));
         }
 
         public void CheckGestures(Body body)

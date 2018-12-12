@@ -45,6 +45,11 @@ namespace KinectDissertationProject.Models.Gesture.Hands
             return hand == JointType.HandRight ? JointType.ElbowRight : JointType.ElbowLeft;
         }
 
+        public static bool IsRight(this JointType hand)
+        {
+            return hand == JointType.HandRight;
+        }
+
         public static GestureResult IsIdle(this JointType IdleHand, Body body)
         {
             if (IdleHand == JointType.HandRight)

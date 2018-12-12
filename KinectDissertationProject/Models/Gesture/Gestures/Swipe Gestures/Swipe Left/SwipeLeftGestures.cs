@@ -4,77 +4,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Left.Gesture_Segments;
 using KinectDissertationProject.Models.Gesture.Hands;
+using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures;
 
-namespace KinectDissertationProject.Models.Gesture.Gestures
+namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Left
 {
-    abstract class SwipeLeftGesture : Gesture
+    public static class SwipeLeftGesture
     {
-        abstract protected RelativeGestureSegment[] swipeLeftSegments { get; }
-
-        protected override RelativeGestureSegment[] gestureSegments
+        public static SwipeGesture Using(JointType dominantHand)
         {
-            get
-            {
-                return swipeLeftSegments;
-            }
+            return new SwipeGesture(GetType(dominantHand), GetSegments(dominantHand));
         }
 
-    }
-
-    class RightHandSwipeLeftGesture : SwipeLeftGesture
-    {
-        private RelativeGestureSegment[] relativeGestureSegments;
-        protected override RelativeGestureSegment[] swipeLeftSegments
+        private static RelativeGestureSegment[] GetSegments(JointType dominantHand)
         {
-            get
-            {
-                return relativeGestureSegments;
-            }
+            RelativeGestureSegment[] relativeGestureSegments = new RelativeGestureSegment[2];
+            relativeGestureSegments[0] = SwipeLeftGestureSegment1.Using(dominantHand);
+            relativeGestureSegments[1] = SwipeLeftGestureSegment2.Using(dominantHand);
+            return relativeGestureSegments;
         }
 
-        public RightHandSwipeLeftGesture()
+        private static GestureType GetType(JointType dominantHand)
         {
-            relativeGestureSegments = new RelativeGestureSegment[2];
-            relativeGestureSegments[0] = new RightHandSwipeLeftSegment1();
-            relativeGestureSegments[1] = new RightHandSwipeLeftSegment2();
-        }
-
-        protected override GestureType Type
-        {
-            get
-            {
-                return GestureType.RIGHT_HAND_SWIPE_LEFT;
-            }
-        }
-
-    }
-
-    class LeftHandSwipeLeftGesture : SwipeLeftGesture
-    {
-        private RelativeGestureSegment[] relativeGestureSegments;
-        protected override RelativeGestureSegment[] swipeLeftSegments
-        {
-            get
-            {
-                return relativeGestureSegments;
-            }
-        }
-
-        public LeftHandSwipeLeftGesture()
-        {
-            relativeGestureSegments = new RelativeGestureSegment[2];
-            relativeGestureSegments[0] = new LeftHandSwipeLeftSegment1();
-            relativeGestureSegments[1] = new LeftHandSwipeLeftSegment2();
-        }
-
-        protected override GestureType Type
-        {
-            get
-            {
-                return GestureType.LEFT_HAND_SWIPE_LEFT;
-            }
+            return dominantHand == JointType.HandRight ? GestureType.RIGHT_HAND_SWIPE_LEFT : GestureType.LEFT_HAND_SWIPE_LEFT;
         }
     }
 }
