@@ -54,7 +54,7 @@ namespace KinectDissertationProject
 
             KinectViewModel.ApplicationOperationOccurred += KinectViewModel_ApplicationOperationOccurred;
 
-            KinectViewModel.JointPositionEventOccurred += KinectViewModel_JointPositionEventOccurred;
+            KinectViewModel.JointPositionEventOccurred += DrawSkeleton;
         }
 
         private void KinectViewModel_ApplicationOperationOccurred(object sender, ApplicationOperationEventArgs e)
@@ -67,7 +67,7 @@ namespace KinectDissertationProject
             }
         }
 
-        private void KinectViewModel_JointPositionEventOccurred(object sender, JointPositionEventArgs e)
+        private void DrawSkeleton(object sender, JointPositionEventArgs e)
         {
             canvas.Children.Clear();
             DrawSkeleton(e.JointPosDict);

@@ -10,23 +10,12 @@ using Microsoft.Kinect;
 namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Left.Gesture_Segments
 {
 
-    //static class SwipeLeftSegment1Factory
-    //{
-    //    static SwipeLeftSegment1 With(Hands.IOneHand Joint)
-    //    {
-    //        return new SwipeLeftSegment1
-    //        {
-    //            joint = Joint
-    //        };
-    //    }
-    //}
-
     abstract class SwipeLeftSegment1 : OneHandGestureSegment
     {
-        private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+       private static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
 
        public override GestureResult CheckGesture(Body body)
-        {
+       {
             
             // Hand in front of respective shoulder
             if (body.Joints[Hand].Position.Z < body.Joints[Elbow].Position.Z )

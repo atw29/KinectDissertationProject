@@ -7,9 +7,24 @@ using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gesture.Hands
 {
-    class RightHand : IOneHand
+
+    public abstract class OneHand
     {
-        public JointType Hand
+        public abstract JointType Hand { get; }
+        public abstract JointType Shoulder { get; }
+        public abstract JointType Elbow { get; }
+        public abstract JointType Hip { get; }
+    }
+
+    public class RightHand : OneHand
+    {
+        public static RightHand Instance { get; private set; }
+
+        static RightHand()
+        {
+            Instance = new RightHand();
+        }
+        public override JointType Hand
         {
             get
             {
@@ -17,7 +32,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
             }
         }
 
-        public JointType Shoulder
+        public override JointType Shoulder
         {
             get
             {
@@ -25,18 +40,31 @@ namespace KinectDissertationProject.Models.Gesture.Hands
             }
         }
 
-        public JointType Elbow
+        public override JointType Elbow
         {
             get
             {
                 return JointType.ElbowRight;
             }
         }
+        public override JointType Hip
+        {
+            get
+            {
+                return JointType.HipRight;
+            }
+        }
     }
 
-    class LeftHand : IOneHand
+    public class LeftHand : OneHand
     {
-        public JointType Hand
+        public static LeftHand Instance { get; private set; }
+        static LeftHand()
+        {
+            Instance = new LeftHand();
+        }
+
+        public override JointType Hand
         {
             get
             {
@@ -44,7 +72,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
             }
         }
 
-        public JointType Shoulder
+        public override JointType Shoulder
         {
             get
             {
@@ -52,19 +80,21 @@ namespace KinectDissertationProject.Models.Gesture.Hands
             }
         }
 
-        public JointType Elbow
+        public override JointType Elbow
         {
             get
             {
                 return JointType.ElbowLeft;
             }
         }
+
+        public override JointType Hip
+        {
+            get
+            {
+                return JointType.HipLeft;
+            }
+        }
     }
 
-    interface IOneHand
-    {
-        JointType Hand { get; }
-        JointType Shoulder { get; }
-        JointType Elbow { get; }
-    }
 }

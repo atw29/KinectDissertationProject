@@ -18,33 +18,25 @@ namespace KinectDissertationProject.Models.Gesture
 
     abstract class OneHandGestureSegmentX : RelativeGestureSegment
     {
-        abstract protected Hands.IOneHand Joint { get; }
-        protected JointType Hand
+        abstract protected JointType DominantHand { get; }
+        abstract protected JointType IdleHand { get; }
+
+        public override GestureResult CheckGesture(Body body)
         {
-            get
+            GestureResult idleResult = body.IsIdle(IdleHand);
+            if (idleResult == GestureResult.SUCEEDED)
             {
-                return Joint.Hand;
+                return PerformDominantCheck(body);
             }
+            return idleResult; // Can be PAUSED
         }
-        protected JointType Elbow
-        {
-            get
-            {
-                return Joint.Elbow;
-            }
-        }
-        protected JointType Shoulder
-        {
-            get
-            {
-                return Joint.Shoulder;
-            }
-        }
+
+        protected abstract GestureResult PerformDominantCheck(Body body);
 
     }
 
-    interface IOneHandGestureSegment : IRelativeGestureSegment
-    {
-        IOneHand Joint { get; }
-    }
+    //interface IOneHandGestureSegment : IRelativeGestureSegment
+    //{
+    //    IOneHand Joint { get; }
+    //}
 }

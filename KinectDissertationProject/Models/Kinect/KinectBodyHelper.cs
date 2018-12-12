@@ -14,11 +14,6 @@ namespace KinectDissertationProject.Models.Kinect
         const double GESTURE_Y_OFFSET = -0.65f;
         const double GESTURE_X_OFFSET = 0.185f;
 
-        public static GestureType CheckGesture(this Body body)
-        {
-            return GestureType.NONE;
-        }
-
         #region Joints to Colour Space
         public static (Point point, float depth) ToCoordinatePoint(this Joint joint, CoordinateMapper coordinateMapper)
         {
@@ -58,31 +53,6 @@ namespace KinectDissertationProject.Models.Kinect
             //return new Tuple<Point, bool>(joint.ToCoordinatePoint(coordinateMapper), joint.TrackingState != TrackingState.NotTracked);
         }
 
-        #endregion
-
-        #region His Stuff
-        public static bool IsHandLiftForward(this Body body, bool isLeft)
-        {
-            return body.Joints[isLeft ? JointType.HandLeft : JointType.HandRight].Position.Z - body.Joints[JointType.SpineBase].Position.Z < -HAND_LIFT_Z_DISTANCE;
-        }
-
-        public static HandState GetHandState(this Body body, bool isLeft)
-        {
-            return isLeft ? body.HandLeftState : body.HandRightState;
-        }
-
-        public static void GetHandRelativePosition(this Body body, bool isLeft)
-        {
-            CameraSpacePoint handPos = body.Joints[isLeft ? JointType.HandLeft : JointType.HandRight].Position;
-            CameraSpacePoint spineBase = body.Joints[JointType.SpineBase].Position;
-
-            //return handPos.ToMVector2() - spineBase.ToMVector2() + gestureOffsets[isLeft ? 0 : 1];
-        }
-
-        public static void ToMVector2(this CameraSpacePoint jointPoint)
-        {
-            //return new MVector2(jointPoint.X, jointPoint.Y);
-        }
         #endregion
 
     }

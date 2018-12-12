@@ -81,8 +81,8 @@
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Right\Gesture Segments\SwipeRightSegments1.cs" />
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Right\SwipeRightGestures.cs" />
     <Compile Include="Models\Gesture\HandPositions.cs" />
-    <Compile Include="Models\Gesture\Hands.cs" />
     <Compile Include="Models\Gesture\Hands\Hands.cs" />
+    <Compile Include="Models\Gesture\Hands\Regions.cs" />
     <Compile Include="Models\Gesture\OneHandGestureSegment.cs" />
     <Compile Include="Models\Gesture\RelativeGestureSegment.cs" />
     <Compile Include="Models\Kinect\KinectBodyHelper.cs" />

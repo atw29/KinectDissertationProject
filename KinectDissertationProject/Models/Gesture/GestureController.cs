@@ -1,10 +1,12 @@
 ﻿using KinectDissertationProject.Models.Gesture.Gestures;
+using KinectDissertationProject.Models.Gesture;
 using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KinectDissertationProject.Models.Gesture.Hands;
 
 namespace KinectDissertationProject.Models.Gesture
 {
@@ -16,6 +18,9 @@ namespace KinectDissertationProject.Models.Gesture
         private IList<Gesture> gestures = new List<Gesture>();
         public GestureController()
         {
+            RightHand RightHand = RightHand.Instance;
+            LeftHand LeftHand = LeftHand.Instance;
+
             // AddGesture(SwipeLeftGesture.With(RightHand));
             AddGesture(new RightHandSwipeLeftGesture());
             AddGesture(new LeftHandSwipeLeftGesture());
