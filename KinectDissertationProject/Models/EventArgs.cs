@@ -16,15 +16,16 @@ namespace KinectDissertationProject.Models
         /// <param name="window">The Window to Act On</param>
         /// <param name="operation">The Operation to Perform (e.g. scroll down)</param>
         /// <param name="data">Any Extra Data required </param>
-        public WindowOperationEventArgs(Window window, WindowOperation operation, IReadOnlyDictionary<string, object> data)
+        public WindowOperationEventArgs(Window window, GestureType gesture, IReadOnlyDictionary<string, object> data)
         {
+
             Window = window;
-            Operation = operation;
+            Gesture = gesture;
             Data = data;
         }
 
         public Window Window { get; private set; }
-        public WindowOperation Operation { get; private set; }
+        public GestureType Gesture { get; private set; }
         public IReadOnlyDictionary<string, object> Data { get; private set; }
 
     }

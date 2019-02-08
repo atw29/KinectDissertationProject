@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Menu_Task" Height="500" Width="500">
     <Window.Resources>
-        <Style x:Key="FocusStyle" TargetType="{x:Type Button}">
+        <Style TargetType="{x:Type Button}">
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="true">
                     <Setter Property="Background" Value="LightBlue"/>
@@ -18,14 +18,13 @@
         </Style>
     </Window.Resources>
     <Grid>
-        
-        <StackPanel Margin="10,10,10,10" VerticalAlignment="Center">
+        <StackPanel x:Name="items" Margin="10,10,10,10" VerticalAlignment="Center">
             <Label Content="Main Menu" Margin="10,10,10,10" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Center" />
-            <Button Margin="10,10,10,10" Content="Lighting Control" Width="250" Height="50" Style="{DynamicResource FocusStyle}" />
-            <Button Margin="10,10,10,10" Content="Interaction Parameters" Width="250" Height="50" FocusVisualStyle="{DynamicResource FocusStyle}"/>
-            <Button Margin="10,10,10,10" Content="Dummy Val One" Width="250" Height="50" FocusVisualStyle="{DynamicResource FocusStyle}"/>
-            <Button Margin="10,10,10,10" Content="Data Search" Width="250" Height="50" Click="Button_Click" FocusVisualStyle="{DynamicResource FocusStyle}"/>
-            <Button Margin="10,10,10,10" Content="Dummy Val Two" Width="250" Height="50" FocusVisualStyle="{DynamicResource FocusStyle}"/>
+            <Button x:Name="Lighting_Control" Margin="10,10,10,10" Content="Lighting Control" Width="250" Height="50" />
+            <Button x:Name="Interaction_Params" Margin="10,10,10,10" Content="Interaction Parameters" Width="250" Height="50" />
+            <Button x:Name="Dummy_One" Margin="10,10,10,10" Content="Dummy Val One" Width="250" Height="50" />
+            <Button x:Name="Data_Search" Margin="10,10,10,10" Content="Data Search" Width="250" Height="50" Click="Button_Click" />
+            <Button x:Name="Dummy_Two" Margin="10,10,10,10" Content="Dummy Val Two" Width="250" Height="50" />
         </StackPanel>
     </Grid>
 </Window>

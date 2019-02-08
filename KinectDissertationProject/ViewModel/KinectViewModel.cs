@@ -151,9 +151,9 @@ namespace KinectDissertationProject.ViewModel
             });
         }
 
-        protected void RaiseWindowOperation(Window window, WindowOperation operation, IReadOnlyDictionary<string, object> data)
+        protected void RaiseWindowOperation(Window window, GestureType gesture, IReadOnlyDictionary<string, object> data)
         {
-            WindowOperationOccurred?.Invoke(this, new WindowOperationEventArgs(window, operation, data));
+            WindowOperationOccurred?.Invoke(this, new WindowOperationEventArgs(window, gesture, data));
         }
 
         protected void RaiseApplicationOperation(Window window, ApplicationOperation operation)
@@ -229,9 +229,8 @@ namespace KinectDissertationProject.ViewModel
                 case GestureType.RIGHT_HAND_SWIPE_LEFT:
                     RaiseApplicationOperation(activeWindow, ApplicationOperation.SWITCH_WINDOW);
                     break;
-                case GestureType.NONE:
-                    break;
                 default:
+                    RaiseWindowOperation(activeWindow, e.GestureType, new Dictionary<string, object>());
                     break;
             }
         }
