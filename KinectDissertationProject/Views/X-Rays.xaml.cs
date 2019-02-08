@@ -19,16 +19,10 @@ namespace KinectDissertationProject.Views
     /// </summary>
     public partial class X_Rays : Window
     {
-        public static X_Rays Instance { get; private set; }
-
-        static X_Rays()
-        {
-            Instance = new X_Rays();
-        }
-
-        private X_Rays()
+        public X_Rays()
         {
             InitializeComponent();
         }
+
     }
 }

@@ -41,9 +41,9 @@ namespace KinectDissertationProject
         {
             Win_Num = KinectViewModel.Add_Window(this);
 
-            SetUpKinect();
+            //SetUpKinect();
 
-            //KinectViewModel.Create_MockUp_Window();
+            KinectViewModel.Create_MockUp_Window();
 
         }
 

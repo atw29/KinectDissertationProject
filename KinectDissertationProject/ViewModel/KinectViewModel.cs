@@ -16,12 +16,13 @@ namespace KinectDissertationProject.ViewModel
 {
     class KinectViewModel : INotifyPropertyChanged
     {
+
+        #region Params
+
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         #if DEBUG
         bool debug = true;
         #endif
-
-        #region Params
 
         public static KinectViewModel Instance { get; private set; }
 
@@ -75,9 +76,14 @@ namespace KinectDissertationProject.ViewModel
             return loc;
         }
 
+        public void Remove_Window(Window w)
+        {
+            windows.Remove(w);
+        }
+
         internal void Create_MockUp_Window()
         {
-            MockUp MockUpWindow = MockUp.Instance;
+            MockUp MockUpWindow = new MockUp();
             Add_Window(MockUpWindow);
             MockUpWindow.Show();
         }
@@ -93,11 +99,22 @@ namespace KinectDissertationProject.ViewModel
 
         internal void Create_X_Ray_Window()
         {
-            X_Rays X_Rays_Window = X_Rays.Instance;
+            X_Rays X_Rays_Window = new X_Rays();
             X_Rays_Window.DataContext = this;
             Add_Window(X_Rays_Window);
             X_Rays_Window.Show();
+
+            X_Rays_Window.Closed += Window_ClosedEvent;
+
         }
+
+        private void Window_ClosedEvent(object sender, EventArgs e)
+        {
+            Remove_Window( (Window) sender);
+        }
+
+
+
         #endregion
 
         #region Event Handlers
@@ -173,6 +190,12 @@ namespace KinectDissertationProject.ViewModel
 
         #endregion
 
+        /// <summary>
+        /// Triggers whenever the kinect gets ANY body data back.
+        /// Used to draw skeleton etc. No gesture processing should occur here
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Kinect_OnTrackedBody(object sender, BodyEventArgs e)
         {
             Body body = e.BodyData;
@@ -182,6 +205,11 @@ namespace KinectDissertationProject.ViewModel
 
         }
         
+        /// <summary>
+        /// Triggers whenever a gesture is recognsied. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GestureController_GestureRecognised(object sender, GestureEventArgs e)
         {
             Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);

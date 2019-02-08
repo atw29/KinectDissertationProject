@@ -38,6 +38,10 @@ namespace KinectDissertationProject.Models.Gesture
             AddGesture(SwipeDownGesture.Using(LeftHand));
         }
 
+        /// <summary>
+        /// Checks each Gesture.UpdateGesture() on each defined gesture.
+        /// </summary>
+        /// <param name="body">The body object </param>
         public void CheckGestures(Body body)
         {
             foreach (Gesture gesture in gestures)
