@@ -37,6 +37,27 @@ namespace KinectDissertationProject.Views.Tasks
 
         }
 
+        private void IterateItemList(Action<Button> buttonMethod)
+        {
+
+        }
+
+        private void FocusOnPreviousItem()
+        {
+            for (int i=items.Children.Capacity-1; i > -1; i--)
+            {
+                object obj = items.Children[i];
+                if (obj is Button button)
+                {
+                    if (button.IsFocused)
+                    {
+                        if (i != 0) items.Children[i - 1].Focus();
+                        break;
+                    }
+                }
+            }
+        }
+
         private void FocusOnNextItem()
         {
             for (int i=0; i<items.Children.Capacity; i++)
@@ -59,6 +80,9 @@ namespace KinectDissertationProject.Views.Tasks
             {
                 case GestureType.RIGHT_HAND_SWIPE_DOWN:
                     FocusOnNextItem();
+                    break;
+                case GestureType.RIGHT_HAND_SWIPE_UP:
+                    FocusOnPreviousItem();
                     break;
                 default:
                     break;
