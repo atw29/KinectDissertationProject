@@ -98,6 +98,9 @@
     <Compile Include="Views\MockUp.xaml.cs">
       <DependentUpon>MockUp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Tasks\Menu_Task.xaml.cs">
+      <DependentUpon>Menu_Task.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TrackedWindow.cs" />
     <Compile Include="ViewModel\KinectViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
@@ -128,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MockUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\Menu_Task.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

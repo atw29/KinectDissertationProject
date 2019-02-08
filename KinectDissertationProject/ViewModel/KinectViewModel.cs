@@ -2,6 +2,7 @@
 using KinectDissertationProject.Models.Gesture;
 using KinectDissertationProject.Models.Kinect;
 using KinectDissertationProject.Views;
+using KinectDissertationProject.Views.Tasks;
 using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
@@ -81,20 +82,26 @@ namespace KinectDissertationProject.ViewModel
             windows.Remove(w);
         }
 
+        private void Create_Window(Window w)
+        {
+            w.DataContext = this;
+            Add_Window(w);
+            w.Show();
+        }
+
         internal void Create_MockUp_Window()
         {
-            MockUp MockUpWindow = new MockUp();
-            Add_Window(MockUpWindow);
-            MockUpWindow.Show();
+            Create_Window(new MockUp());
         }
 
         internal void Create_Camera_Window()
         {
-            Camera CameraWindow = new Camera();
-            CameraWindow.DataContext = this;
+            Create_Window(new Camera());
+        }
 
-            Add_Window(CameraWindow);
-            CameraWindow.Show();
+        internal void Create_Menu_Task_Window()
+        {
+            Create_Window(new Menu_Task());
         }
 
         internal void Create_X_Ray_Window()
