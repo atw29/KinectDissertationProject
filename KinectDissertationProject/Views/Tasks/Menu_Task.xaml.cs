@@ -89,11 +89,13 @@ namespace KinectDissertationProject.Views.Tasks
             IsMainMenu = true;
             BackButton.IsEnabled = false;
             label.Content = "Main Menu";
+
             Item1.Content = "Lighting Control";
             Item2.Content = "Interaction Parameters";
             Item3.Content = "Option 3";
             Item4.Content = "Data Search";
             Item5.Content = "Option 5";
+
             if (!ViewModel.IsMI) Item1.Focus();
         }
 
@@ -102,11 +104,13 @@ namespace KinectDissertationProject.Views.Tasks
             IsMainMenu = false;
             BackButton.IsEnabled = true;
             label.Content = "Patient Data";
+
             Item1.Content = "Patient Information";
             Item2.Content = "Operation List";
             Item3.Content = "Organ Information";
             Item4.Content = "X-Ray 1";
             Item5.Content = "X-Ray 2";
+
             if (!ViewModel.IsMI) Item1.Focus();
         }
 
@@ -114,18 +118,21 @@ namespace KinectDissertationProject.Views.Tasks
         {
             SetMainMenu();
         }
-
-        private void Item3_Click(object sender, RoutedEventArgs e)
+        private void Item1_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!IsMainMenu)
+            {
+                ViewModel.Create_MockUp_Window();
+            } else
+            {
+                ViewModel.Create_Lighting_Window();
+            }
         }
-
         private void Item2_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
-        private void Item1_Click(object sender, RoutedEventArgs e)
+        private void Item3_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -135,12 +142,18 @@ namespace KinectDissertationProject.Views.Tasks
             if (IsMainMenu)
             {
                 SetDataMenu();
+            } else
+            {
+                ViewModel.Create_X_Ray_Window();
             }
         }
 
         private void Item5_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!IsMainMenu)
+            {
+                ViewModel.Create_X_Ray_Window();
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

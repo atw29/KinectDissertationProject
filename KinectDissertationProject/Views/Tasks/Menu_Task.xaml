@@ -22,12 +22,12 @@
         <DockPanel LastChildFill="True">
             <Button x:Name="BackButton" Click="BackButton_Click" DockPanel.Dock="Top" Margin="5,5,0,0" FontFamily="Marlett" FontSize="20" Content="3" Width="40" HorizontalAlignment="Left" IsEnabled="False"/>
             <StackPanel x:Name="items" Margin="10,0,10,10" VerticalAlignment="Center">
-                <Label x:Name="label" Content="Main Menu" Margin="10,0,10,10" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Center" />
-                <Button x:Name="Item1" Margin="10,10,10,10" Content="Lighting Control" Width="250" Height="50" Click="Item1_Click" />
-                <Button x:Name="Item2" Margin="10,10,10,10" Content="Interaction Parameters" Width="250" Height="50" Click="Item2_Click"/>
-                <Button x:Name="Item3" Margin="10,10,10,10" Content="Dummy Val One" Width="250" Height="50" Click="Item3_Click" />
-                <Button x:Name="Item4" Margin="10,10,10,10" Content="Data Search" Width="250" Height="50" Click="Item4_Click" />
-                <Button x:Name="Item5" Margin="10,10,10,10" Content="Dummy Val Two" Width="250" Height="50" Click="Item5_Click"/>
+                <Label x:Name="label" Content="Label Template" Margin="10,0,10,10" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Center" />
+                <Button x:Name="Item1" Margin="10,10,10,10" Width="250" Height="50" Click="Item1_Click" />
+                <Button x:Name="Item2" Margin="10,10,10,10" Width="250" Height="50" Click="Item2_Click"/>
+                <Button x:Name="Item3" Margin="10,10,10,10" Width="250" Height="50" Click="Item3_Click" />
+                <Button x:Name="Item4" Margin="10,10,10,10" Width="250" Height="50" Click="Item4_Click" />
+                <Button x:Name="Item5" Margin="10,10,10,10" Width="250" Height="50" Click="Item5_Click"/>
             </StackPanel>
         </DockPanel>
     </Grid>

@@ -20,13 +20,7 @@ namespace KinectDissertationProject.Views
     /// </summary>
     public partial class MockUp : Window
     {
-        //public static MockUp Instance { get; private set; }
         internal KinectViewModel KinectViewModel { get; }
-
-        //static MockUp()
-        //{
-        //    Instance = new MockUp();
-        //}
 
         public MockUp()
         {

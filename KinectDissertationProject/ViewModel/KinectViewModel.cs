@@ -20,7 +20,7 @@ namespace KinectDissertationProject.ViewModel
 
         #region Params
 
-        public bool IsMI = false;
+        public bool IsMI = true;
 
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         #if DEBUG
@@ -89,6 +89,8 @@ namespace KinectDissertationProject.ViewModel
             w.DataContext = this;
             Add_Window(w);
             w.Show();
+
+            w.Closed += Window_ClosedEvent;
         }
 
         internal void Create_MockUp_Window()
@@ -106,23 +108,20 @@ namespace KinectDissertationProject.ViewModel
             Create_Window(new Menu_Task());
         }
 
+        internal void Create_Lighting_Window()
+        {
+            Create_Window(new LightingControl());
+        }
+
         internal void Create_X_Ray_Window()
         {
-            X_Rays X_Rays_Window = new X_Rays();
-            X_Rays_Window.DataContext = this;
-            Add_Window(X_Rays_Window);
-            X_Rays_Window.Show();
-
-            X_Rays_Window.Closed += Window_ClosedEvent;
-
+            Create_Window(new X_Rays());
         }
 
         private void Window_ClosedEvent(object sender, EventArgs e)
         {
             Remove_Window( (Window) sender);
         }
-
-
 
         #endregion
 

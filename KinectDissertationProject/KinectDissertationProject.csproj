@@ -101,14 +101,13 @@
     <Compile Include="Views\MockUp.xaml.cs">
       <DependentUpon>MockUp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Tasks\LightingControl.xaml.cs">
+      <DependentUpon>LightingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tasks\Menu_Task.xaml.cs">
       <DependentUpon>Menu_Task.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TrackedWindow.cs" />
     <Compile Include="ViewModel\KinectViewModel.cs" />
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\X-Rays.xaml.cs">
       <DependentUpon>X-Rays.xaml</DependentUpon>
     </Compile>
@@ -133,11 +132,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\MainView.xaml">
+    <Page Include="Views\MockUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MockUp.xaml">
+    <Page Include="Views\Tasks\LightingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
