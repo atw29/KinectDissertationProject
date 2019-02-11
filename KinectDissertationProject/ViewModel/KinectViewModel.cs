@@ -197,6 +197,25 @@ namespace KinectDissertationProject.ViewModel
 
         #endregion
 
+        #region Tasks
+
+        public void Create_Task_One()
+        {
+            Create_Menu_Task_Window();
+        }
+
+        public void Create_Task_Two()
+        {
+            Create_Menu_Task_Window();
+        }
+
+        public void Create_Task_Three()
+        {
+
+        }
+
+        #endregion
+
         /// <summary>
         /// Triggers whenever the kinect gets ANY body data back.
         /// Used to draw skeleton etc. No gesture processing should occur here
