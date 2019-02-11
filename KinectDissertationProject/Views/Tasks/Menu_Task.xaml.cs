@@ -21,9 +21,9 @@ namespace KinectDissertationProject.Views.Tasks
     /// </summary>
     public partial class Menu_Task : Window
     {
-        private List<Button> buttonList;
-
         internal KinectViewModel ViewModel { get; }
+
+        private bool IsMainMenu;
 
         public Menu_Task()
         {
@@ -34,11 +34,6 @@ namespace KinectDissertationProject.Views.Tasks
             Loaded += Menu_Task_Loaded;
 
             ViewModel.WindowOperationOccurred += Menu_Task_GestureEventOccurred;
-
-        }
-
-        private void IterateItemList(Action<Button> buttonMethod)
-        {
 
         }
 
@@ -89,22 +84,71 @@ namespace KinectDissertationProject.Views.Tasks
             }
         }
 
-        private void Menu_Task_Loaded(object sender, RoutedEventArgs e)
+        private void SetMainMenu()
         {
-            //buttonList = new List<Button>()
-            //{
-            //    Lighting_Control,
-            //    Interaction_Params,
-            //    Dummy_One,
-            //    Data_Search,
-            //    Dummy_Two
-            //};
-            Lighting_Control.Focus();
+            IsMainMenu = true;
+            BackButton.IsEnabled = false;
+            label.Content = "Main Menu";
+            Item1.Content = "Lighting Control";
+            Item2.Content = "Interaction Parameters";
+            Item3.Content = "Option 3";
+            Item4.Content = "Data Search";
+            Item5.Content = "Option 5";
+            if (!ViewModel.IsMI) Item1.Focus();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void SetDataMenu()
         {
-            
+            IsMainMenu = false;
+            BackButton.IsEnabled = true;
+            label.Content = "Patient Data";
+            Item1.Content = "Patient Information";
+            Item2.Content = "Operation List";
+            Item3.Content = "Organ Information";
+            Item4.Content = "X-Ray 1";
+            Item5.Content = "X-Ray 2";
+            if (!ViewModel.IsMI) Item1.Focus();
+        }
+
+        private void Menu_Task_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetMainMenu();
+        }
+
+        private void Item3_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Item2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Item1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Item4_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsMainMenu)
+            {
+                SetDataMenu();
+            }
+        }
+
+        private void Item5_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsMainMenu)
+            {
+                SetMainMenu();
+            }
         }
     }
 }

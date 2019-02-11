@@ -20,6 +20,8 @@ namespace KinectDissertationProject.ViewModel
 
         #region Params
 
+        public bool IsMI = false;
+
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         #if DEBUG
         bool debug = true;

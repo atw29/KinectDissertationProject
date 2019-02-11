@@ -95,6 +95,9 @@
     <Compile Include="Views\Camera.xaml.cs">
       <DependentUpon>Camera.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\MainMenuList.xaml.cs">
+      <DependentUpon>MainMenuList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MockUp.xaml.cs">
       <DependentUpon>MockUp.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,10 @@
     </Compile>
     <Compile Include="Views\ZoomBorder.cs" />
     <Page Include="Views\Camera.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\MainMenuList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
