@@ -27,7 +27,14 @@ namespace KinectDissertationProject.Models.Gesture.Hands
         // Leg
         RIGHT_LEG_CLOSE, // Used as Idle spots usually
         LEG_MIDDLE,
-        LEFT_LEG_CLOSE // Used as Idle spots usually
+        LEFT_LEG_CLOSE, // Used as Idle spots usually
+
+        //Eblow
+        ELBOW,
+        LEFT_OF_ELBOW,
+        ABOVE_ELBOW,
+        RIGHT_OF_ELBOW,
+        BELOW_ELBOW,
     }
 
     /// <summary>
@@ -97,6 +104,19 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                     return hand.InLLCRegion(body);
                 case Region.LEG_MIDDLE:
                     return hand.InLMRegion(body);
+
+                //Elbow
+                case Region.ELBOW:
+                    return hand.InElbowRegion(body);
+                case Region.LEFT_OF_ELBOW:
+                    return hand.LeftOfElbowRegion(body);
+                case Region.ABOVE_ELBOW:
+                    throw new NotImplementedException("Not implemented above elbow region");
+                case Region.RIGHT_OF_ELBOW:
+                    return hand.RightOfElbowRegion(body);
+                case Region.BELOW_ELBOW:
+                    throw new NotImplementedException("Not implemnted below elbow region");
+
 
                 // Should Never Reach
                 default:
@@ -230,24 +250,90 @@ namespace KinectDissertationProject.Models.Gesture.Hands
             }
             return GestureResult.FAILED;
         }
+
+        #endregion
+
+        #region Elbow Regions
+
+        private static GestureResult InElbowRegion(this JointType hand, Body body)
+        {
+            if (hand.InVerticalElbowSection(body))
+            {
+                if (hand.InHorizontalElbowSection(body))
+                {
+                    return GestureResult.SUCEEDED;
+                }
+                return GestureResult.PAUSED;
+            } else if (hand.InHorizontalElbowSection(body))
+            {
+                if (hand.InVerticalElbowSection(body))
+                {
+                    return GestureResult.SUCEEDED;
+                }
+                return GestureResult.PAUSED;
+            }
+            return GestureResult.FAILED;
+        }
+        private static GestureResult LeftOfElbowRegion(this JointType hand, Body body)
+        {
+            if (hand.InVerticalElbowSection(body))
+            {
+                if (hand.LeftOfElbowSection(body))
+                {
+                    return GestureResult.SUCEEDED;
+                }
+                return GestureResult.PAUSED;
+            }
+            return GestureResult.FAILED;
+        }
+        private static GestureResult RightOfElbowRegion(this JointType hand, Body body)
+        {
+            if (hand.InVerticalElbowSection(body))
+            {
+                if (hand.RightOfElbowSection(body))
+                {
+                    return GestureResult.SUCEEDED;
+                }
+                return GestureResult.PAUSED;
+            }
+            return GestureResult.FAILED;
+        }
+
         #endregion
 
         #region Sections
 
-        public static bool InVerticalElbowRegion(this JointType hand, Body body)
+        #region Elbows
+
+        private static bool InVerticalElbowSection(this JointType hand, Body body)
         {
-            return 
-                body.Joints[hand].Position.Y - body.Joints[hand.Elbow()].Position.Y < 0.06
-                && body.Joints[hand].Position.Y - body.Joints[hand.Elbow()].Position.Y > -0.06;
+            return !hand.AboveElbowSection(body) && !hand.BelowElbowSection(body);
+        }
+        private static bool InHorizontalElbowSection(this JointType hand, Body body)
+        {
+            return !hand.LeftOfElbowSection(body) && !hand.RightOfElbowSection(body);
+        }
+        private static bool AboveElbowSection(this JointType hand, Body body)
+        {
+            return body.Joints[hand].Position.Y - body.Joints[hand.Elbow()].Position.Y > 0.06;
+        }
+        private static bool BelowElbowSection(this JointType hand, Body body)
+        {
+            return body.Joints[hand].Position.Y - body.Joints[hand.Elbow()].Position.Y < -0.06;
         }
 
-        public static bool InHorizontalElbowRegion(this JointType hand, Body body)
+        private static bool LeftOfElbowSection(this JointType hand, Body body)
         {
-            return
-                body.Joints[hand].Position.X - body.Joints[hand.Elbow()].Position.X < 0.06
-                && body.Joints[hand].Position.X - body.Joints[hand.Elbow()].Position.X > -0.1;
+            return body.Joints[hand].Position.X - body.Joints[hand.Elbow()].Position.X < -0.15;
+        }
+        private static bool RightOfElbowSection(this JointType hand, Body body)
+        {
+            return body.Joints[hand].Position.X - body.Joints[hand.Elbow()].Position.X > 0.06;
         }
 
+        #endregion
+
+        #region Sections
         /// <summary>
         /// Left of Left Shoulder
         /// </summary>
@@ -291,6 +377,8 @@ namespace KinectDissertationProject.Models.Gesture.Hands
         {
             return body.Joints[hand].Position.Y < body.Joints[JointType.SpineBase].Position.Y;
         }
+        #endregion
+
         #endregion
 
     }

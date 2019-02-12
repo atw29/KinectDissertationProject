@@ -118,7 +118,7 @@ namespace KinectDissertationProject.ViewModel
             float jointsXDiff = handJoint.Position.X - elbowJoint.Position.X;
             float jointsYDiff = handJoint.Position.Y - elbowJoint.Position.Y ;
 
-            RightJointsPositionText = $"Diff : {jointsXDiff:0.00} , {jointsYDiff:0.00}\nIn Region : x {JointType.HandRight.InHorizontalElbowRegion(body)} , y : {JointType.HandRight.InVerticalElbowRegion(body)}";
+            RightJointsPositionText = $"Diff : {jointsXDiff:0.00} , {jointsYDiff:0.00}\nIn Region ? {JointType.HandRight.InRegion(body, Region.ELBOW)}";
 
         }
         
