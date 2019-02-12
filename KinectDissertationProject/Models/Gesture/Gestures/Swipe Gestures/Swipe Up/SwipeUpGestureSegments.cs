@@ -12,14 +12,14 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
     {
         public static SwipeGestureSegment Using(JointType dominantHand)
         {
-            return new SwipeGestureSegment(dominantHand, dominantHand == JointType.HandRight ? Region.RIGHT_TORSO_CLOSE : Region.LEFT_TORSO_CLOSE);
+            return new SwipeGestureSegment(dominantHand, Region.ELBOW);
         }
     }
     public static class SwipeUpGestureSegment2
     {
         public static SwipeGestureSegment Using(JointType dominantHand)
         {
-            return new SwipeGestureSegment(dominantHand, dominantHand == JointType.HandRight ? Region.RIGHT_HEAD_CLOSE : Region.LEFT_HEAD_CLOSE);
+            return new SwipeGestureSegment(dominantHand, Region.ELBOW_ABOVE);
         }
     }
 
