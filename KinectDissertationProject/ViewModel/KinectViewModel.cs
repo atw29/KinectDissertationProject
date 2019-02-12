@@ -287,7 +287,7 @@ namespace KinectDissertationProject.ViewModel
             if (debug)
             {
                 Dictionary<JointType, (Point joint, bool tracked, float depth)> pointDict = body.GetPointDictFromJoints(kinectReader.CoordinateMapper);
-                SetRightJointsDebugText(body, pointDict);
+                //SetRightJointsDebugText(body, pointDict);
 
                 RaiseJointPositionEventOccurred(pointDict);
 

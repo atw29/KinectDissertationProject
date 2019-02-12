@@ -11,5 +11,17 @@
     <Setting Name="RegionRatio" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
+    <Setting Name="ElbowLeftTolerance" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">-0.15</Value>
+    </Setting>
+    <Setting Name="ElbowRightTolerance" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">0.06</Value>
+    </Setting>
+    <Setting Name="ElbowAboveTolerance" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">0.1</Value>
+    </Setting>
+    <Setting Name="ElbowBelowTolerance" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">-0.12</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

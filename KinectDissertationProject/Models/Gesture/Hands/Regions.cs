@@ -344,20 +344,20 @@ namespace KinectDissertationProject.Models.Gesture.Hands
         }
         private static bool AboveElbowSection(this JointType hand, Body body)
         {
-            return body.Joints[hand].Position.Y - body.Joints[hand.Elbow()].Position.Y > 0.06;
+            return body.Joints[hand].Position.Y - body.Joints[hand.Elbow()].Position.Y > Properties.Settings.Default.ElbowAboveTolerance;
         }
         private static bool BelowElbowSection(this JointType hand, Body body)
         {
-            return body.Joints[hand].Position.Y - body.Joints[hand.Elbow()].Position.Y < -0.06;
+            return body.Joints[hand].Position.Y - body.Joints[hand.Elbow()].Position.Y < Properties.Settings.Default.ElbowBelowTolerance;
         }
 
         private static bool LeftOfElbowSection(this JointType hand, Body body)
         {
-            return body.Joints[hand].Position.X - body.Joints[hand.Elbow()].Position.X < -0.15;
+            return body.Joints[hand].Position.X - body.Joints[hand.Elbow()].Position.X < Properties.Settings.Default.ElbowLeftTolerance;
         }
         private static bool RightOfElbowSection(this JointType hand, Body body)
         {
-            return body.Joints[hand].Position.X - body.Joints[hand.Elbow()].Position.X > 0.06;
+            return body.Joints[hand].Position.X - body.Joints[hand.Elbow()].Position.X > Properties.Settings.Default.ElbowRightTolerance;
         }
 
         #endregion

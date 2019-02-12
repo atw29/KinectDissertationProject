@@ -58,5 +58,41 @@ namespace KinectDissertationProject.Properties {
                 this["RegionRatio"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-0.15")]
+        public double ElbowLeftTolerance {
+            get {
+                return ((double)(this["ElbowLeftTolerance"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.06")]
+        public double ElbowRightTolerance {
+            get {
+                return ((double)(this["ElbowRightTolerance"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.1")]
+        public double ElbowAboveTolerance {
+            get {
+                return ((double)(this["ElbowAboveTolerance"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-0.12")]
+        public double ElbowBelowTolerance {
+            get {
+                return ((double)(this["ElbowBelowTolerance"]));
+            }
+        }
     }
 }
