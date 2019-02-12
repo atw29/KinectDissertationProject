@@ -240,9 +240,7 @@ namespace KinectDissertationProject.ViewModel
 
         public void Start()
         {
-            logger.Info("Setting Up Kinect");
-            SetUpKinect();
-            logger.Info("Kinect Set Up");
+            //SetUpKinect();
 
             Create_Menu_Task_Window();
 
@@ -250,8 +248,10 @@ namespace KinectDissertationProject.ViewModel
 
         private void SetUpKinect()
         {
+            logger.Info("Setting Up Kinect");
             Load_Kinect();
             Open_Kinect();
+            logger.Info("Kinect Loaded");
 
         }
 
@@ -298,7 +298,7 @@ namespace KinectDissertationProject.ViewModel
 
         /// <summary>
         /// Triggers whenever the kinect gets ANY body data back.
-        /// Used to draw skeleton etc. No gesture processing should occur here
+        /// Used to draw skeleton and give the Gesture Controller the body data. No actual gesture processing should occur here
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -316,7 +316,6 @@ namespace KinectDissertationProject.ViewModel
                 RaiseJointPositionEventOccurred(pointDict);
 
             }
-
         }
         
         /// <summary>
