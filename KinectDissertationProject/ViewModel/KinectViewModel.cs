@@ -108,17 +108,17 @@ namespace KinectDissertationProject.ViewModel
 
         private void SetRightJointsDebugText(Body body, Dictionary<JointType, (Point joint, bool tracked, float depth)> pointDict)
         {
-            Joint elbowJoint = body.Joints[JointType.ElbowRight];
+            Joint elbowJoint = body.Joints[JointType.ElbowLeft];
             SetRightElbowPosition(elbowJoint.Position.X, elbowJoint.Position.Y);
             //SetRightElbowPosition(pointDict[JointType.ElbowRight].joint.X, 0.0f);
 
-            Joint handJoint = body.Joints[JointType.HandRight];
+            Joint handJoint = body.Joints[JointType.HandLeft];
             SetRightHandPosition(handJoint.Position.X, handJoint.Position.Y);
 
             float jointsXDiff = handJoint.Position.X - elbowJoint.Position.X;
             float jointsYDiff = handJoint.Position.Y - elbowJoint.Position.Y ;
 
-            RightJointsPositionText = $"Diff : {jointsXDiff:0.00} , {jointsYDiff:0.00}\nIn Region ? {JointType.HandRight.InRegion(body, Region.ELBOW)}";
+            RightJointsPositionText = $"Diff : {jointsXDiff:0.00} , {jointsYDiff:0.00}\nIn Region ? {JointType.HandLeft.InRegion(body, Region.ELBOW)}";
 
         }
         

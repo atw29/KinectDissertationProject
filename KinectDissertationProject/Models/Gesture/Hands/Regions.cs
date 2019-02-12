@@ -124,6 +124,9 @@ namespace KinectDissertationProject.Models.Gesture.Hands
             }
         }
 
+
+        #region Regions
+
         #region Z-Regions
         public static bool InFrontOf(this JointType hand, JointType jointBehind, Body body)
         {
@@ -298,6 +301,8 @@ namespace KinectDissertationProject.Models.Gesture.Hands
             }
             return GestureResult.FAILED;
         }
+
+        #endregion
 
         #endregion
 
