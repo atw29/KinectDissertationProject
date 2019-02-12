@@ -43,7 +43,7 @@ namespace KinectDissertationProject
 
             SetUpKinect();
 
-            //KinectViewModel.Create_Menu_Task_Window();
+            KinectViewModel.Create_Menu_Task_Window();
 
         }
 

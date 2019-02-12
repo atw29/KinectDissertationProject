@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -69,18 +71,57 @@ namespace KinectDissertationProject.Views.Tasks
             }            
         }
 
+        private void ClickButton(Button button)
+        {
+            ButtonAutomationPeer peer = new ButtonAutomationPeer(button);
+            IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+            invokeProv.Invoke();
+
+        }
+
+        private void SelectCurrentItem()
+        {
+            foreach(object obj in items.Children)
+            {
+                if (obj is Button button)
+                {
+                    if (button.IsFocused)
+                    {
+                        ClickButton(button);
+                    }
+                }
+            }
+        }
+
+        private void SelectBackButton()
+        {
+            if (BackButton.IsEnabled)
+            {
+                ClickButton(BackButton);
+            }
+        }
+
         private void Menu_Task_GestureEventOccurred(object sender, WindowOperationEventArgs e)
         {
-            switch(e.Gesture)
+            if (e.Window == this)
             {
-                case GestureType.RIGHT_HAND_SWIPE_DOWN:
-                    FocusOnNextItem();
-                    break;
-                case GestureType.RIGHT_HAND_SWIPE_UP:
-                    FocusOnPreviousItem();
-                    break;
-                default:
-                    break;
+                switch(e.Gesture)
+                {
+                    case GestureType.RIGHT_HAND_SWIPE_DOWN:
+                        FocusOnNextItem();
+                        break;
+                    case GestureType.RIGHT_HAND_SWIPE_UP:
+                        FocusOnPreviousItem();
+                        break;
+                    case GestureType.RIGHT_HAND_SWIPE_RIGHT:
+                        SelectCurrentItem();
+                        break;
+                    case GestureType.RIGHT_HAND_SWIPE_LEFT:
+                        SelectBackButton();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 

@@ -29,8 +29,6 @@ namespace KinectDissertationProject.Models
     {
         NONE,
 
-        RIGHT_HAND_SWIPE_RIGHT_SMALL,
-
         RIGHT_HAND_SWIPE_LEFT,
         LEFT_HAND_SWIPE_LEFT,
 

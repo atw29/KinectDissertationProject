@@ -21,7 +21,7 @@ namespace KinectDissertationProject.ViewModel
 
         #region Params
 
-        public bool IsMI = true;
+        public bool IsMI = false;
 
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         #if DEBUG
@@ -44,6 +44,8 @@ namespace KinectDissertationProject.ViewModel
                 return kinectReader.CoordinateMapper;
             }
         }
+
+        #region UI Components
 
         private string textBoxText;
         public string TextBoxText
@@ -121,7 +123,9 @@ namespace KinectDissertationProject.ViewModel
             RightJointsPositionText = $"Diff : {jointsXDiff:0.00} , {jointsYDiff:0.00}\nIn Region ? {JointType.HandLeft.InRegion(body, Region.ELBOW)}";
 
         }
-        
+
+        #endregion
+
         #endregion
 
         #region Create Windows
@@ -308,9 +312,6 @@ namespace KinectDissertationProject.ViewModel
             {
                 case GestureType.LARGE_SWIPE_DOWN:
                     RaiseApplicationOperation(activeWindow, ApplicationOperation.MINIMISE);
-                    break;
-                case GestureType.RIGHT_HAND_SWIPE_LEFT:
-                    RaiseApplicationOperation(activeWindow, ApplicationOperation.SWITCH_WINDOW);
                     break;
                 default:
                     RaiseWindowOperation(activeWindow, e.GestureType, new Dictionary<string, object>());
