@@ -10,15 +10,11 @@
         xmlns:properties="clr-namespace:KinectDissertationProject.Properties"
         mc:Ignorable="d"
         Title="MainWindow" Height="{Binding Source={x:Static properties:Settings.Default}, Path=ScreenHeight}" Width="{Binding Source={x:Static properties:Settings.Default}, Path=ScreenWidth}" WindowState="Maximized" Background="LightGray" Loaded="Window_Loaded" Closed="Window_Closed">
-    <!--<Window.DataContext>
-        <vm:KinectViewModel x:Name="KinectViewModel" />
-    </Window.DataContext>-->
     <Window.Resources>
         <System:Int32 x:Key="RegionRatio">2</System:Int32>
     </Window.Resources>
     <Grid Name="Main_Grid">
         <Grid.ColumnDefinitions>
-            <!--<ColumnDefinition Width="{Binding Source={x:Static properties:Settings.Default}, Path=RegionRatio}"/>-->
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="2*"/>
@@ -35,8 +31,16 @@
         <Rectangle x:Name="TOP_Region" Grid.Row="0" Grid.ColumnSpan="3" Opacity="0"/>
         <Rectangle x:Name="BOT_Region" Grid.Row="2" Grid.ColumnSpan="3" Opacity="0"/>
 
-        <TextBlock x:Name="textblock" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60"
-                   Text="{Binding TextBoxText}" />
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="textblock" FontSize="60" 
+                       Text="{Binding TextBoxText}" />
+            <TextBlock x:Name="rightHandPosition" FontSize="60" 
+                       Text="{Binding RightHandPositionText}"/>
+            <TextBlock x:Name="rightElbowPosition" FontSize="60" 
+                       Text="{Binding RightElbowPositionText}"/>
+            <TextBlock x:Name="rightJointsPosition" FontSize="60" 
+                       Text="{Binding RightJointsPositionText}"/>
+        </StackPanel>
 
         <Grid x:Name="LHS_Grid" Grid.Column="0" Grid.RowSpan="3">
             <Grid.RowDefinitions>

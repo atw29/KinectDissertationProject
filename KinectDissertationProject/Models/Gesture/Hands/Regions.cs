@@ -234,6 +234,20 @@ namespace KinectDissertationProject.Models.Gesture.Hands
 
         #region Sections
 
+        public static bool InVerticalElbowRegion(this JointType hand, Body body)
+        {
+            return 
+                body.Joints[hand].Position.Y - body.Joints[hand.Elbow()].Position.Y < 0.06
+                && body.Joints[hand].Position.Y - body.Joints[hand.Elbow()].Position.Y > -0.06;
+        }
+
+        public static bool InHorizontalElbowRegion(this JointType hand, Body body)
+        {
+            return
+                body.Joints[hand].Position.X - body.Joints[hand.Elbow()].Position.X < 0.06
+                && body.Joints[hand].Position.X - body.Joints[hand.Elbow()].Position.X > -0.1;
+        }
+
         /// <summary>
         /// Left of Left Shoulder
         /// </summary>

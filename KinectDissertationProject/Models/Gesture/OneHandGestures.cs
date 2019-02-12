@@ -8,14 +8,6 @@ using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gesture
 {
-    abstract class OneHandGestureSegment : RelativeGestureSegment
-    {
-        abstract protected JointType Hand { get; }
-        abstract protected JointType Elbow { get; }
-        abstract protected JointType Shoulder { get; }
-        
-    }
-
     abstract class OneHandGesture : Gesture
     {
         public OneHandGesture(JointType DominantHand)
@@ -33,7 +25,7 @@ namespace KinectDissertationProject.Models.Gesture
 
     }
 
-    public abstract class OneHandGestureSegmentX : RelativeGestureSegment
+    public abstract class OneHandGestureSegment : RelativeGestureSegment
     {
         private JointType _dominantHand;
         protected JointType DominantHand
@@ -71,7 +63,7 @@ namespace KinectDissertationProject.Models.Gesture
             }
         }
 
-        public OneHandGestureSegmentX(JointType dominantHand)
+        public OneHandGestureSegment(JointType dominantHand)
         {
             DominantHand = dominantHand;
         }
@@ -93,8 +85,4 @@ namespace KinectDissertationProject.Models.Gesture
 
     }
 
-    //interface IOneHandGestureSegment : IRelativeGestureSegment
-    //{
-    //    IOneHand Joint { get; }
-    //}
 }

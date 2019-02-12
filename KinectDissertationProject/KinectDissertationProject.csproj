@@ -73,6 +73,7 @@
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Gesture\Gesture.cs" />
     <Compile Include="Models\Gesture\GestureController.cs" />
+    <Compile Include="Models\Gesture\Gestures\Swipe Gestures\SmallSwipes\SwipeRightSmall.cs" />
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Down\SwipeDownGestures.cs" />
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Down\SwipeDownGestureSegments.cs" />
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Left\SwipeLeftGestures.cs" />

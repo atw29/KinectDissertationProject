@@ -1,5 +1,6 @@
 ﻿using KinectDissertationProject.Models;
 using KinectDissertationProject.Models.Gesture;
+using KinectDissertationProject.Models.Gesture.Hands;
 using KinectDissertationProject.Models.Kinect;
 using KinectDissertationProject.Views;
 using KinectDissertationProject.Views.Tasks;
@@ -57,17 +58,70 @@ namespace KinectDissertationProject.ViewModel
                 RaisePropertyChanged("TextBoxText");
             }
         }
+        private string rightHandPositionText;
+        public string RightHandPositionText
+        {
+            get
+            {
+                return rightHandPositionText;
+            }
+            set
+            {
+                rightHandPositionText = value;
+                RaisePropertyChanged("RightHandPositionText");
+            }
+        }
+        private void SetRightHandPosition(double x, double y)
+        {
+            RightHandPositionText = $"Right Hand : {x:0.00} , {y:0.00}";
+        }
+        private string rightElbowPositionText;
+        public string RightElbowPositionText
+        {
+            get
+            {
+                return rightElbowPositionText;
+            }
+            set
+            {
+                rightElbowPositionText = value;
+                RaisePropertyChanged("RightElbowPositionText");
+            }
+        }
+        private void SetRightElbowPosition(double x, double y)
+        {
+            RightElbowPositionText = $"Right Elbow : {x:0.00} , {y:0.00}";
+        }
+        private string rightJointsPositionText;
+        public string RightJointsPositionText
+        {
+            get
+            {
+                return rightJointsPositionText;
+            }
+            set
+            {
+                rightJointsPositionText = value;
+                RaisePropertyChanged("RightJointsPositionText");
+            }
+        }
 
+        private void SetRightJointsDebugText(Body body, Dictionary<JointType, (Point joint, bool tracked, float depth)> pointDict)
+        {
+            Joint elbowJoint = body.Joints[JointType.ElbowRight];
+            SetRightElbowPosition(elbowJoint.Position.X, elbowJoint.Position.Y);
+            //SetRightElbowPosition(pointDict[JointType.ElbowRight].joint.X, 0.0f);
 
-        #endregion
+            Joint handJoint = body.Joints[JointType.HandRight];
+            SetRightHandPosition(handJoint.Position.X, handJoint.Position.Y);
 
-        #region Hand Positions
+            float jointsXDiff = handJoint.Position.X - elbowJoint.Position.X;
+            float jointsYDiff = handJoint.Position.Y - elbowJoint.Position.Y ;
 
-        HandPos_TOP HandPos_TOP = new HandPos_TOP();
-        HandPos_BOT HandPos_BOT = new HandPos_BOT();
-        HandPos_LHS HandPos_LHS = new HandPos_LHS();
-        HandPos_RHS HandPos_RHS = new HandPos_RHS();
+            RightJointsPositionText = $"Diff : {jointsXDiff:0.00} , {jointsYDiff:0.00}\nIn Region : x {JointType.HandRight.InHorizontalElbowRegion(body)} , y : {JointType.HandRight.InVerticalElbowRegion(body)}";
 
+        }
+        
         #endregion
 
         #region Create Windows
@@ -173,7 +227,8 @@ namespace KinectDissertationProject.ViewModel
 
             GestureController.GestureRecognised += GestureController_GestureRecognised;
             
-            TextBoxText = "Kinect Dissertation Project";    
+            TextBoxText = "Kinect Dissertation Project";
+            
         }
         
         internal void Load_Kinect()
@@ -228,7 +283,15 @@ namespace KinectDissertationProject.ViewModel
             Body body = e.BodyData;
 
             GestureController.CheckGestures(body);
-            if (debug) RaiseJointPositionEventOccurred(body.GetPointDictFromJoints(kinectReader.CoordinateMapper));
+
+            if (debug)
+            {
+                Dictionary<JointType, (Point joint, bool tracked, float depth)> pointDict = body.GetPointDictFromJoints(kinectReader.CoordinateMapper);
+                SetRightJointsDebugText(body, pointDict);
+
+                RaiseJointPositionEventOccurred(pointDict);
+
+            }
 
         }
         

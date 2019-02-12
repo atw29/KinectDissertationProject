@@ -8,7 +8,7 @@ using Microsoft.Kinect;
 
 namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures
 {
-    public class SwipeGestureSegment : OneHandGestureSegmentX
+    public class SwipeGestureSegment : OneHandGestureSegment
     {
         public SwipeGestureSegment(JointType hand, Region region) : base(hand)
         {
