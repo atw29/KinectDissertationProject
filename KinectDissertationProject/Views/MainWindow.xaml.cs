@@ -41,16 +41,7 @@ namespace KinectDissertationProject
         {
             Win_Num = KinectViewModel.Add_Window(this);
 
-            SetUpKinect();
-
-            KinectViewModel.Create_Menu_Task_Window();
-
-        }
-
-        private void SetUpKinect()
-        {
-            KinectViewModel.Load_Kinect();
-            KinectViewModel.Open_Kinect();
+            KinectViewModel.Start();
 
             KinectViewModel.ApplicationOperationOccurred += KinectViewModel_ApplicationOperationOccurred;
 

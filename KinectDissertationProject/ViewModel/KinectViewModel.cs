@@ -33,6 +33,7 @@ namespace KinectDissertationProject.ViewModel
         static KinectViewModel()
         {
             Instance = new KinectViewModel();
+
         }
 
         private KinectReader kinectReader;
@@ -226,15 +227,34 @@ namespace KinectDissertationProject.ViewModel
         public KinectViewModel()
         {
             logger.Debug("Kinect View Model Loaded");
+
             windows = new List<Window>();
             GestureController = new GestureController();
 
             GestureController.GestureRecognised += GestureController_GestureRecognised;
             
             TextBoxText = "Kinect Dissertation Project";
-            
+
+
         }
-        
+
+        public void Start()
+        {
+            logger.Info("Setting Up Kinect");
+            SetUpKinect();
+            logger.Info("Kinect Set Up");
+
+            Create_Menu_Task_Window();
+
+        }
+
+        private void SetUpKinect()
+        {
+            Load_Kinect();
+            Open_Kinect();
+
+        }
+
         internal void Load_Kinect()
         {
             kinectReader = new KinectReader();
