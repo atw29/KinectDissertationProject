@@ -22,7 +22,7 @@ namespace KinectDissertationProject.Views.Tasks
     {
         public LightingControl()
         {
-            //ViewModel = KinectViewModel.Instance;
+            ViewModel = KinectViewModel.Instance;
 
             InitializeComponent();
         }
