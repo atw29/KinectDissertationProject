@@ -9,28 +9,27 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures
 {
     public class SwipeGesture : Gesture
     {
-        private RelativeGestureSegment[] RelativeGestureSegments;
-        protected override RelativeGestureSegment[] gestureSegments
-        {
-            get
-            {
-                return RelativeGestureSegments;
-            }
-        }
+        //private RelativeGestureSegment[] RelativeGestureSegments;
+        //protected override RelativeGestureSegment[] gestureSegments
+        //{
+        //    get
+        //    {
+        //        return RelativeGestureSegments;
+        //    }
+        //}
 
-        private GestureType type;
-        protected override GestureType Type
-        {
-            get
-            {
-                return type;
-            }
-        }
+        //private GestureType type;
+        //protected override GestureType Type
+        //{
+        //    get
+        //    {
+        //        return type;
+        //    }
+        //}
 
-        public SwipeGesture(GestureType _type, RelativeGestureSegment[] relativeGestureSegments)
+        public SwipeGesture(GestureType _type, RelativeGestureSegment[] relativeGestureSegments) : base(_type, relativeGestureSegments)
         {
-            type = _type;
-            RelativeGestureSegments = relativeGestureSegments;
+            
         }
         
 

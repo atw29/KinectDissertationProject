@@ -15,7 +15,7 @@ namespace KinectDissertationProject.Models.Gesture
         /// <summary>
         /// The Type of Gesture we are
         /// </summary>
-        protected abstract GestureType Type
+        protected GestureType Type
         {
             get;
         }
@@ -23,7 +23,7 @@ namespace KinectDissertationProject.Models.Gesture
         /// <summary>
         /// The parts that make up this gesture
         /// </summary>
-        protected abstract RelativeGestureSegment[] gestureSegments
+        protected RelativeGestureSegment[] gestureSegments
         {
             get;
         }
@@ -53,7 +53,13 @@ namespace KinectDissertationProject.Models.Gesture
         /// </summary>
         const int MAX_FRAME_COUNT = 50;
 
+
         #endregion
+        protected Gesture(GestureType type, RelativeGestureSegment[] gestureSegments)
+        {
+            Type = type;
+            this.gestureSegments = gestureSegments;
+        }
 
         public event EventHandler<GestureEventArgs> GestureRecognised;
 

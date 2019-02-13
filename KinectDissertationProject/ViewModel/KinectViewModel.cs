@@ -21,7 +21,7 @@ namespace KinectDissertationProject.ViewModel
 
         #region Params
 
-        public bool IsMI = true;
+        public bool IsMI = false;
 
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         #if DEBUG
@@ -240,7 +240,7 @@ namespace KinectDissertationProject.ViewModel
 
         public void Start()
         {
-            //SetUpKinect();
+            SetUpKinect();
 
             Create_Menu_Task_Window();
 
