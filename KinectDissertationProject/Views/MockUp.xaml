@@ -66,7 +66,19 @@
             <TextBlock Margin="10,0,0,0" x:Name="textBlock" TextAlignment="Justify" HorizontalAlignment="Left" Width="435" TextWrapping="Wrap" VerticalAlignment="Top" Height="Auto" FontStyle="Italic">
                 <Run Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam neque arcu, sodales laoreet enim pharetra quis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In at quam dignissim, feugiat orci tristique, scelerisque sem. Donec nulla mauris, venenatis id sodales eget, auctor vitae nisl. Quisque blandit mollis quam a cursus. Vestibulum commodo scelerisque tortor. Nulla condimentum, arcu nec rutrum molestie, ex ipsum ornare dolor, at vehicula massa massa hendrerit nisi. Aenean mauris velit, accumsan quis pharetra id, tempus et nisi."/><LineBreak/><Run/><LineBreak/><Run Text="Nam dui justo, vehicula nec ornare et, malesuada eu risus. Sed placerat sem at diam convallis, vel pulvinar nibh ornare. Mauris mi sem, dapibus et efficitur aliquam, congue sit amet justo. Etiam orci diam, interdum a scelerisque at, vestibulum facilisis velit. Suspendisse vel ipsum dictum, luctus dui quis, porttitor sem. Fusce tempus odio a felis iaculis euismod. Aenean malesuada lectus eget ante rutrum, vitae efficitur odio molestie. Etiam non laoreet justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam quis pretium dui. Integer felis diam, molestie eu eleifend at, semper eu diam. Sed in felis sit amet sem fringilla vestibulum. Integer erat leo, volutpat vel iaculis a, facilisis vel dolor. Curabitur in lorem lectus."/>
             </TextBlock>
+
             
+            <Label Margin="0,0,10,0" Content="Personal Options" FontWeight="Medium" FontSize="20"/>
+            <Button Margin="10" Width="250" Content="Option One" />
+            <Button Margin="10" Width="250" Content="Option Two" />
+            <Button Margin="10" Width="250" Content="Option Three" />
+            <Button Margin="10" Width="250" Content="Option Four" />
+
+            <Label Margin="0,0,10,0" Content="Other Records" FontWeight="Medium" FontSize="20"/>
+            <TextBlock Margin="10,0,0,0" x:Name="textBlockB" TextAlignment="Justify" HorizontalAlignment="Left" Width="435" TextWrapping="Wrap" VerticalAlignment="Top" Height="Auto" FontStyle="Italic">
+                <Run Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam neque arcu, sodales laoreet enim pharetra quis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In at quam dignissim, feugiat orci tristique, scelerisque sem. "/>
+            </TextBlock>
+
             <!--Patient Documents-->
             <Label Margin="0,0,10,0" Content="Patient Documents" FontWeight="Medium" FontSize="20"/>
             <Button Margin="10,10,10,10" Content="View Patient's X-Rays" Width="250" Click="Button_Click" >

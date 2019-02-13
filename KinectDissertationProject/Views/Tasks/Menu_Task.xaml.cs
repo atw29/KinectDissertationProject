@@ -39,36 +39,32 @@ namespace KinectDissertationProject.Views.Tasks
 
         }
 
-        private void FocusOnPreviousItem()
+        private int GetFocussedItem()
         {
-            for (int i=items.Children.Capacity-1; i > -1; i--)
+            for (int i = 0; i < items.Children.Capacity; i++)
             {
                 object obj = items.Children[i];
                 if (obj is Button button)
                 {
                     if (button.IsFocused)
                     {
-                        if (i != 0) items.Children[i - 1].Focus();
-                        break;
+                        return i;
                     }
                 }
             }
+            throw new IndexOutOfRangeException("No Focussed Item Found");
+        }
+
+        private void FocusOnPreviousItem()
+        {
+            int i = GetFocussedItem();
+            if (i != 0) items.Children[i - 1].Focus();
         }
 
         private void FocusOnNextItem()
         {
-            for (int i=0; i<items.Children.Capacity; i++)
-            {
-                object obj = items.Children[i];
-                if (obj is Button button)
-                {
-                    if (button.IsFocused)
-                    {
-                        if (i != items.Children.Capacity - 1) items.Children[i + 1].Focus();
-                        break;
-                    }
-                }
-            }            
+            int focussedItem = GetFocussedItem();
+            if(focussedItem != items.Children.Capacity - 1) items.Children[focussedItem + 1].Focus();
         }
 
         private void ClickButton(Button button)
