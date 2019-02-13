@@ -17,14 +17,6 @@ namespace KinectDissertationProject.Models
         NONE
     }
 
-    public enum WindowOperation
-    {
-        SCROLL_UP,
-        SCROLL_DOWN,
-        CLICK,
-        NONE
-    }
-
     public enum GestureType
     {
         NONE,

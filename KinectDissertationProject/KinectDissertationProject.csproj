@@ -87,6 +87,7 @@
     <Compile Include="Models\Gesture\Hands\Regions.cs" />
     <Compile Include="Models\Gesture\OneHandGestures.cs" />
     <Compile Include="Models\Gesture\RelativeGestureSegment.cs" />
+    <Compile Include="Models\Gesture\TwoHandGesture.cs" />
     <Compile Include="Models\Kinect\KinectBodyHelper.cs" />
     <Compile Include="Models\Kinect\KinectReader.cs" />
     <Compile Include="Models\EventArgs.cs" />

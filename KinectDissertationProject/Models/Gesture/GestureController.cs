@@ -36,6 +36,8 @@ namespace KinectDissertationProject.Models.Gesture
 
             AddGesture(SwipeDownGesture.UsingOneHand(RightHand));
             AddGesture(SwipeDownGesture.UsingOneHand(LeftHand));
+
+            AddGesture(SwipeDownGesture.UsingTwoHands());
         }
 
         /// <summary>
