@@ -1,24 +1,19 @@
 ﻿using KinectDissertationProject.Models.Gesture.Hands;
 using Microsoft.Kinect;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Down
 {
- 
+
     public static class SwipeDownGesture
     {
-        public static SwipeGesture Using(JointType dominantHand)
+        public static OneHandGesture UsingOneHand(JointType dominantHand)
         {
-            return new SwipeGesture(GetType(dominantHand), GetSegments(dominantHand));
+            return new OneHandGesture(dominantHand, GetType(dominantHand), GetSegments(dominantHand));
         }
 
-        private static RelativeGestureSegment[] GetSegments(JointType dominantHand)
+        private static OneHandGestureSegment[] GetSegments(JointType dominantHand)
         {
-            RelativeGestureSegment[] relativeGestureSegments = new RelativeGestureSegment[2];
+            OneHandGestureSegment[] relativeGestureSegments = new OneHandGestureSegment[2];
             relativeGestureSegments[0] = SwipeDownGestureSegment1.Using(dominantHand);
             relativeGestureSegments[1] = SwipeDownGestureSegment2.Using(dominantHand);
             return relativeGestureSegments;

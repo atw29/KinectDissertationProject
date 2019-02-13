@@ -25,17 +25,17 @@ namespace KinectDissertationProject.Models.Gesture
         private IList<Gesture> gestures = new List<Gesture>();
         public GestureController()
         {
-            AddGesture(SwipeLeftGesture.Using(RightHand));
-            AddGesture(SwipeLeftGesture.Using(LeftHand));
+            AddGesture(SwipeLeftGesture.UsingOneHand(RightHand));
+            AddGesture(SwipeLeftGesture.UsingOneHand(LeftHand));
 
-            AddGesture(SwipeRightGesture.Using(RightHand));
-            AddGesture(SwipeRightGesture.Using(LeftHand));
+            AddGesture(SwipeRightGesture.UsingOneHand(RightHand));
+            AddGesture(SwipeRightGesture.UsingOneHand(LeftHand));
 
-            AddGesture(SwipeUpGesture.Using(RightHand));
-            AddGesture(SwipeUpGesture.Using(LeftHand));
+            AddGesture(SwipeUpGesture.UsingOneHand(RightHand));
+            AddGesture(SwipeUpGesture.UsingOneHand(LeftHand));
 
-            AddGesture(SwipeDownGesture.Using(RightHand));
-            AddGesture(SwipeDownGesture.Using(LeftHand));
+            AddGesture(SwipeDownGesture.UsingOneHand(RightHand));
+            AddGesture(SwipeDownGesture.UsingOneHand(LeftHand));
         }
 
         /// <summary>

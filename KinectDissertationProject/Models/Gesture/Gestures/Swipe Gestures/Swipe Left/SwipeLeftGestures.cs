@@ -11,14 +11,14 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
 {
     public static class SwipeLeftGesture
     {
-        public static SwipeGesture Using(JointType dominantHand)
+        public static OneHandGesture UsingOneHand(JointType dominantHand)
         {
-            return new SwipeGesture(GetType(dominantHand), GetSegments(dominantHand));
+            return new OneHandGesture(dominantHand, GetType(dominantHand), GetSegments(dominantHand));
         }
 
-        private static RelativeGestureSegment[] GetSegments(JointType dominantHand)
+        private static OneHandGestureSegment[] GetSegments(JointType dominantHand)
         {
-            RelativeGestureSegment[] relativeGestureSegments = new RelativeGestureSegment[2];
+            OneHandGestureSegment[] relativeGestureSegments = new OneHandGestureSegment[2];
             relativeGestureSegments[0] = SwipeLeftGestureSegment1.Using(dominantHand);
             relativeGestureSegments[1] = SwipeLeftGestureSegment2.Using(dominantHand);
             return relativeGestureSegments;

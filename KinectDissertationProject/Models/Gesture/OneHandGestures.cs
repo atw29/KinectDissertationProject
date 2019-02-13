@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace KinectDissertationProject.Models.Gesture
 {
-    //public abstract class OneHandGesture : Gesture
-    //{
-    //    public OneHandGesture(JointType DominantHand) : base()
-    //    {
-    //        CheckHandValid(DominantHand);
-    //    }
+    public class OneHandGesture : Gesture
+    {
+        public OneHandGesture(JointType DominantHand, GestureType type, OneHandGestureSegment[] relativeGestureSegments) : base(type, relativeGestureSegments)
+        {
+            CheckHandValid(DominantHand);
+        }
 
-    //    private void CheckHandValid(JointType hand)
-    //    {
-    //        if (hand != JointType.HandLeft && hand != JointType.HandRight)
-    //        {
-    //            throw new ArgumentException(string.Format("Dominant Hand must be either HandRight or HandLeft. Currently it is {0}", hand));
-    //        }
-    //    }
-    //}
+        private void CheckHandValid(JointType hand)
+        {
+            if (hand != JointType.HandLeft && hand != JointType.HandRight)
+            {
+                throw new ArgumentException(string.Format("Dominant Hand must be either HandRight or HandLeft. Currently it is {0}", hand));
+            }
+        }
+    }
 
     public abstract class OneHandGestureSegment : RelativeGestureSegment
     {

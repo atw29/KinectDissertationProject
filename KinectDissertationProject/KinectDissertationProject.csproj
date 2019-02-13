@@ -91,6 +91,7 @@
     <Compile Include="Models\Kinect\KinectBodyHelper.cs" />
     <Compile Include="Models\Kinect\KinectReader.cs" />
     <Compile Include="Models\EventArgs.cs" />
+    <Compile Include="Models\TwoHandedGesture.cs" />
     <Compile Include="Models\UIExtensions.cs" />
     <Compile Include="Views\Camera.xaml.cs">
       <DependentUpon>Camera.xaml</DependentUpon>
