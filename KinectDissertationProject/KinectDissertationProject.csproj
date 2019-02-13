@@ -82,7 +82,6 @@
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Right\SwipeRightGesture.cs" />
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Up\SwipeUpGesture.cs" />
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\Swipe Up\SwipeUpGestureSegments.cs" />
-    <Compile Include="Models\Gesture\Gestures\Swipe Gestures\SwipeGesture.cs" />
     <Compile Include="Models\Gesture\Gestures\Swipe Gestures\SwipeGestureSegment.cs" />
     <Compile Include="Models\Gesture\Hands\Hands.cs" />
     <Compile Include="Models\Gesture\Hands\Regions.cs" />
@@ -91,7 +90,6 @@
     <Compile Include="Models\Kinect\KinectBodyHelper.cs" />
     <Compile Include="Models\Kinect\KinectReader.cs" />
     <Compile Include="Models\EventArgs.cs" />
-    <Compile Include="Models\TwoHandedGesture.cs" />
     <Compile Include="Models\UIExtensions.cs" />
     <Compile Include="Views\Camera.xaml.cs">
       <DependentUpon>Camera.xaml</DependentUpon>
