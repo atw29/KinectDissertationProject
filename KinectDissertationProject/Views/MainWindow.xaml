@@ -40,6 +40,10 @@
                        Text="{Binding RightElbowPositionText}"/>
             <TextBlock x:Name="rightJointsPosition" FontSize="60" 
                        Text="{Binding RightJointsPositionText}"/>
+            <TextBlock x:Name="leftHandRegion" FontSize="40"
+                       Text="{Binding LeftHandRegionText}" />
+            <TextBlock x:Name="rightHandRegion" FontSize="40"
+                       Text="{Binding RightHandRegionText}" />
         </StackPanel>
 
         <Grid x:Name="LHS_Grid" Grid.Column="0" Grid.RowSpan="3">

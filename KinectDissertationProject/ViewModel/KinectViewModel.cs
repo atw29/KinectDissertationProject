@@ -96,6 +96,9 @@ namespace KinectDissertationProject.ViewModel
             RightElbowPositionText = $"Right Elbow : {x:0.00} , {y:0.00}";
         }
         private string rightJointsPositionText;
+        private string rightHandRegionText;
+        private string leftHandRegionText;
+
         public string RightJointsPositionText
         {
             get
@@ -107,6 +110,39 @@ namespace KinectDissertationProject.ViewModel
                 rightJointsPositionText = value;
                 RaisePropertyChanged("RightJointsPositionText");
             }
+        }
+
+        public string RightHandRegionText
+        {
+            get
+            {
+                return rightHandRegionText;
+            }
+            set
+            {
+                rightHandRegionText = value;
+                RaisePropertyChanged("RightHandRegionText");
+            }
+        }
+        public string LeftHandRegionText
+        {
+            get
+            {
+                return leftHandRegionText;
+            }
+            set
+            {
+                leftHandRegionText = value;
+                RaisePropertyChanged("LeftHandRegionText");
+            }
+        }
+
+        private void SetRegionText(Body body)
+        {
+            List<Region> left = JointType.HandLeft.GetRegions(body);
+            List<Region> right = JointType.HandRight.GetRegions(body);
+            LeftHandRegionText = $"LEFT : {string.Join(", ", left)}";
+            RightHandRegionText = $"RIGHT : {string.Join(", ", right)}";
         }
 
         private void SetRightJointsDebugText(Body body, Dictionary<JointType, (Point joint, bool tracked, float depth)> pointDict)
@@ -242,7 +278,7 @@ namespace KinectDissertationProject.ViewModel
         {
             SetUpKinect();
 
-            Create_Menu_Task_Window();
+            //Create_Menu_Task_Window();
 
         }
 
@@ -312,6 +348,7 @@ namespace KinectDissertationProject.ViewModel
             {
                 Dictionary<JointType, (Point joint, bool tracked, float depth)> pointDict = body.GetPointDictFromJoints(kinectReader.CoordinateMapper);
                 //SetRightJointsDebugText(body, pointDict);
+                SetRegionText(body);
 
                 RaiseJointPositionEventOccurred(pointDict);
 

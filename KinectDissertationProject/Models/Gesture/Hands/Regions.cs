@@ -66,6 +66,59 @@ namespace KinectDissertationProject.Models.Gesture.Hands
             return IdleHand.InRegion(body, Region.LEFT_LEG_CLOSE);
         }
 
+        public static List<Region> GetRegions(this JointType Hand, Body body)
+        {
+            List<Region> regions = new List<Region>();
+            if (Hand.InHeadSection(body))
+            {
+                if (Hand.InLeftSection(body))
+                {
+                    regions.Add(Region.LEFT_HEAD_CLOSE);
+                } else if (Hand.InMidSection(body))
+                {
+                    regions.Add(Region.HEAD_MIDDLE);
+                } else
+                {
+                    regions.Add(Region.RIGHT_HEAD_CLOSE);
+                }
+            }
+            if (Hand.InTorsoSection(body))
+            {
+                if (Hand.InLeftSection(body))
+                {
+                    regions.Add(Region.LEFT_TORSO_CLOSE);
+                }
+                else if (Hand.InMidSection(body))
+                {
+                    regions.Add(Region.TORSO_MIDDLE);
+                }
+                else
+                {
+                    regions.Add(Region.RIGHT_TORSO_CLOSE);
+                }
+            } 
+            if (Hand.InLegSection(body))
+            {
+                if (Hand.InLeftSection(body))
+                {
+                    regions.Add(Region.LEFT_LEG_CLOSE);
+                }
+                else if (Hand.InMidSection(body))
+                {
+                    regions.Add(Region.LEG_MIDDLE);
+                }
+                else
+                {
+                    regions.Add(Region.RIGHT_LEG_CLOSE);
+                }
+            }
+            if (Hand.InElbowSection(body))
+            {
+                regions.Add(Region.ELBOW);
+            }
+            return regions;
+        }
+
         /// <summary>
         /// Checks if the hand is in the given region. 
         /// </summary>
@@ -333,7 +386,10 @@ namespace KinectDissertationProject.Models.Gesture.Hands
         #region Sections
 
         #region Elbows
-
+        private static bool InElbowSection(this JointType hand, Body body)
+        {
+            return hand.InVerticalElbowSection(body) && hand.InHorizontalElbowSection(body);
+        }
         private static bool InVerticalElbowSection(this JointType hand, Body body)
         {
             return !hand.AboveElbowSection(body) && !hand.BelowElbowSection(body);
