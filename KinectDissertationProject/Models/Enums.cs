@@ -47,4 +47,17 @@ namespace KinectDissertationProject.Models
         LOST_TRACK,
         PAUSED
     }
+
+    public static class EnumExtensions
+    {
+        /// <summary>
+        /// Returns true if the result is either SUCEEDED or PAUSED
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static bool IsSuceeding(this GestureResult result)
+        {
+            return result == GestureResult.SUCEEDED || result == GestureResult.PAUSED ? true : false;
+        }
+    }
 }

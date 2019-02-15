@@ -10,14 +10,24 @@ namespace KinectDissertationProject.Models.Gesture
 {
     public class TwoHandGesture : Gesture
     {
-        public TwoHandGesture(GestureType type, RelativeGestureSegment[] gestureSegments) : base(type, gestureSegments)
+        public TwoHandGesture(GestureType type, TwoHandGestureSegment[] gestureSegments) : base(type, gestureSegments)
         {
         }
 
+        protected override int FailedPausedFrameCount()
+        {
+            return 5;
+        }
 
+        protected override int SuccessfulPausedFrameCount()
+        {
+            return 5;
+        }
     }
     public abstract class TwoHandGestureSegment : RelativeGestureSegment
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         protected readonly JointType RightHand = JointType.HandRight;
         protected readonly JointType LeftHand = JointType.HandLeft;
         
@@ -42,7 +52,9 @@ namespace KinectDissertationProject.Models.Gesture
 
         public override GestureResult CheckGesture(Body body)
         {
-            return CompareGestures(LeftPosition(body), RightPosition(body));
+            GestureResult gestureResult = CompareGestures(LeftPosition(body), RightPosition(body));
+            //logger.Debug($"Compared Result : {gestureResult}");
+            return gestureResult;
         }
 
         protected abstract GestureResult LeftPosition(Body body);

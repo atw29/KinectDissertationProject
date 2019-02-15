@@ -75,23 +75,24 @@ namespace KinectDissertationProject.Models.Gesture
                 frameCount++;
             }
 
-            GestureResult result = gestureSegments[currentGestureSegment].CheckGesture(body);
+            RelativeGestureSegment relativeGestureSegment = gestureSegments[currentGestureSegment];
+            GestureResult result = relativeGestureSegment.CheckGesture(body);
             if (result == GestureResult.SUCEEDED)
             {
+                if (relativeGestureSegment is TwoHandGestureSegment) {
+                    logger.Debug($"Two Hand gesture segment {currentGestureSegment} succeeded");
+                }
                 if (currentGestureSegment + 1 < gestureSegments.Length)
                 {
                     currentGestureSegment++;
                     frameCount = 0;
-                    pausedFrameCount = 10;
+                    pausedFrameCount = SuccessfulPausedFrameCount();
                     paused = true;
                 }
                 else
                 {
-                    if (GestureRecognised != null)
-                    {
-                        RaiseGestureRecognised();
-                        Reset();
-                    }
+                    RaiseGestureRecognised();
+                    Reset();
                 } 
             }
             else if (result == GestureResult.FAILED || frameCount == MAX_FRAME_COUNT)
@@ -101,15 +102,19 @@ namespace KinectDissertationProject.Models.Gesture
             else
             {
                 frameCount++;
-                pausedFrameCount = 5;
+                pausedFrameCount = FailedPausedFrameCount();
                 paused = true;
             }
         }
 
+        protected abstract int SuccessfulPausedFrameCount();
+
+        protected abstract int FailedPausedFrameCount();
+
         private void RaiseGestureRecognised()
         {
             logger.Debug("{0} Recognised", Type);
-            GestureRecognised.Invoke(this, new GestureEventArgs { GestureType = Type });
+            GestureRecognised?.Invoke(this, new GestureEventArgs { GestureType = Type });
         }
 
         public void Reset()

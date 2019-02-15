@@ -15,6 +15,16 @@ namespace KinectDissertationProject.Models.Gesture
             CheckHandValid(DominantHand);
         }
 
+        protected override int FailedPausedFrameCount()
+        {
+            return 5;
+        }
+
+        protected override int SuccessfulPausedFrameCount()
+        {
+            return 10;
+        }
+
         private void CheckHandValid(JointType hand)
         {
             if (hand != JointType.HandLeft && hand != JointType.HandRight)
