@@ -15,6 +15,11 @@ namespace KinectDissertationProject.Models.Gesture
             CheckHandValid(DominantHand);
         }
 
+        protected override bool CheckPause()
+        {
+            return false;
+        }
+
         protected override int FailedPausedFrameCount()
         {
             return 5;

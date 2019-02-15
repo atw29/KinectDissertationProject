@@ -36,7 +36,7 @@ namespace KinectDissertationProject.Models.Gesture
         /// <summary>
         /// the number of frames to pause for when a pause is initiated
         /// </summary>
-        private int pausedFrameCount = 10;
+        private int pausedFrameCount;
 
         /// <summary>
         /// The current frame that we are on
@@ -59,31 +59,22 @@ namespace KinectDissertationProject.Models.Gesture
         {
             Type = type;
             this.gestureSegments = gestureSegments;
+            pausedFrameCount = SuccessfulPausedFrameCount();
         }
 
         public event EventHandler<GestureEventArgs> GestureRecognised;
 
-        public void UpdateGesture(Body body)
+        private void PerformCheck(Body body)
         {
-            if (paused)
-            {
-                if (frameCount == pausedFrameCount)
-                {
-                    paused = false;
-                }
-
-                frameCount++;
-            }
-
             RelativeGestureSegment relativeGestureSegment = gestureSegments[currentGestureSegment];
+            if (relativeGestureSegment is TwoHandGestureSegment && currentGestureSegment != 0) logger.Trace("Resuming");
             GestureResult result = relativeGestureSegment.CheckGesture(body);
             if (result == GestureResult.SUCEEDED)
             {
-                if (relativeGestureSegment is TwoHandGestureSegment) {
-                    logger.Debug($"Two Hand gesture segment {currentGestureSegment} succeeded");
-                }
+                if (relativeGestureSegment is TwoHandGestureSegment) logger.Trace($"{Type} Succeeded at Step {currentGestureSegment + 1}");
                 if (currentGestureSegment + 1 < gestureSegments.Length)
                 {
+                    if (relativeGestureSegment is TwoHandGestureSegment) logger.Trace("PAUSING");
                     currentGestureSegment++;
                     frameCount = 0;
                     pausedFrameCount = SuccessfulPausedFrameCount();
@@ -93,10 +84,22 @@ namespace KinectDissertationProject.Models.Gesture
                 {
                     RaiseGestureRecognised();
                     Reset();
-                } 
+                }
             }
             else if (result == GestureResult.FAILED || frameCount == MAX_FRAME_COUNT)
             {
+                if (currentGestureSegment > 0)
+                {
+                    if (result == GestureResult.FAILED)
+                    {
+                        logger.Trace($"{Type} Failed at Step {currentGestureSegment + 1} : FAILED");
+                    }
+                    else
+                    {
+                        logger.Trace($"{Type} Failed at Step {currentGestureSegment + 1} : MAX_FRAME_COUNT hit");
+
+                    }
+                }
                 Reset();
             }
             else
@@ -104,6 +107,24 @@ namespace KinectDissertationProject.Models.Gesture
                 frameCount++;
                 pausedFrameCount = FailedPausedFrameCount();
                 paused = true;
+            }
+        }
+
+        protected abstract bool CheckPause();
+
+        public void UpdateGesture(Body body)
+        {
+            if (CheckPause() && paused)
+            {
+                if (frameCount == pausedFrameCount)
+                {
+                    paused = false;
+                }
+
+                frameCount++;
+            } else
+            {
+                PerformCheck(body);
             }
         }
 

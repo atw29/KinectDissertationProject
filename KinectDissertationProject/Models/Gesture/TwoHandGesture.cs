@@ -14,6 +14,11 @@ namespace KinectDissertationProject.Models.Gesture
         {
         }
 
+        protected override bool CheckPause()
+        {
+            return true;
+        }
+
         protected override int FailedPausedFrameCount()
         {
             return 5;
@@ -21,7 +26,7 @@ namespace KinectDissertationProject.Models.Gesture
 
         protected override int SuccessfulPausedFrameCount()
         {
-            return 5;
+            return 10;
         }
     }
     public abstract class TwoHandGestureSegment : RelativeGestureSegment
