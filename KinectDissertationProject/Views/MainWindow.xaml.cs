@@ -43,19 +43,7 @@ namespace KinectDissertationProject
 
             Win_Num = KinectViewModel.Add_Window(this);
 
-            KinectViewModel.ApplicationOperationOccurred += KinectViewModel_ApplicationOperationOccurred;
-
             KinectViewModel.JointPositionEventOccurred += DrawSkeleton;
-        }
-
-        private void KinectViewModel_ApplicationOperationOccurred(object sender, ApplicationOperationEventArgs e)
-        {
-            switch (e.Operation)
-            {
-                case ApplicationOperation.SWITCH_WINDOW:
-                    //textblock.Text = e.Operation.ToString();
-                    break;
-            }
         }
 
         private void DrawSkeleton(object sender, JointPositionEventArgs e)

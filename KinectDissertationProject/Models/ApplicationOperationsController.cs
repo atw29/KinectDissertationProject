@@ -12,17 +12,37 @@ namespace KinectDissertationProject.Models
 {
     class ApplicationOperationsController
     {
-        private KinectViewModel KinectViewModel;
+        private Window lastMinimised;
+        private WindowState minimisedWindowState;
 
         private IList<Window> Windows;
 
         public ApplicationOperationsController()
         {
-            KinectViewModel = KinectViewModel.Instance;
 
-            KinectViewModel.ApplicationOperationOccurred += KinectViewModel_ApplicationOperationOccurred;
-
+            KinectViewModel.Instance.WindowOperationOccurred += WindowOperationOccurred;
             Windows = new List<Window>();
+        }
+
+        private void WindowOperationOccurred(object sender, WindowOperationEventArgs e)
+        {
+            switch (e.Gesture)
+            {
+                case GestureType.LARGE_SWIPE_DOWN:
+                    if (!(e.Window is MainWindow))
+                    {
+                        minimisedWindowState = e.Window.WindowState;
+                        e.Window.WindowState = WindowState.Minimized;
+                        lastMinimised = e.Window;
+                    }
+                    break;
+                case GestureType.LARGE_SWIPE_UP:
+                    if (lastMinimised != null)
+                    {
+                        lastMinimised.WindowState = minimisedWindowState;
+                    }
+                    break;
+            }
         }
 
         public int Add_Window(Window w)
@@ -85,7 +105,10 @@ namespace KinectDissertationProject.Models
 
         private void KinectViewModel_ApplicationOperationOccurred(object sender, ApplicationOperationEventArgs e)
         {
-            throw new NotImplementedException();
+            switch (e.Operation)
+            {
+                
+            }
         }
     }
 }

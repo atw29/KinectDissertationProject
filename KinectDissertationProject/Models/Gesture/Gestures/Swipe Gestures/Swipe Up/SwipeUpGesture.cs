@@ -14,6 +14,19 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
             return new OneHandGesture(DominantHand, GetType(DominantHand), GetSegments(DominantHand));
         }
 
+        public static TwoHandGesture UsingTwoHands()
+        {
+            return new TwoHandGesture(GestureType.LARGE_SWIPE_UP, GetTwoHandGestureSegments());
+        }
+
+        private static TwoHandGestureSegment[] GetTwoHandGestureSegments()
+        {
+            TwoHandGestureSegment[] gestureSegments = new TwoHandGestureSegment[2];
+            gestureSegments[0] = SwipeUpGestureSegment1.UsingTwoHands();
+            gestureSegments[1] = SwipeUpGestureSegment2.UsingTwoHands();
+            return gestureSegments;
+        }
+
         private static OneHandGestureSegment[] GetSegments(JointType dominantHand)
         {
             OneHandGestureSegment[] relativeGestureSegments = new OneHandGestureSegment[2];

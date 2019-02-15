@@ -173,7 +173,6 @@ namespace KinectDissertationProject.ViewModel
         public event EventHandler<ColourEventArgs> ColourEventOccurred;
 
         public event EventHandler<WindowOperationEventArgs> WindowOperationOccurred;
-        public event EventHandler<ApplicationOperationEventArgs> ApplicationOperationOccurred;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(string propName)
@@ -199,11 +198,6 @@ namespace KinectDissertationProject.ViewModel
             WindowOperationOccurred?.Invoke(this, new WindowOperationEventArgs(window, gesture, data));
         }
 
-        protected void RaiseApplicationOperation(Window window, ApplicationOperation operation)
-        {
-            ApplicationOperationOccurred?.Invoke(this, new ApplicationOperationEventArgs(window, operation));
-        }
-
         #endregion
 
         #region Initialisers
@@ -218,6 +212,7 @@ namespace KinectDissertationProject.ViewModel
         public void Start()
         {
             ApplicationOperationsController = new ApplicationOperationsController();
+
             GestureController.GestureRecognised += GestureController_GestureRecognised;
             
             TextBoxText = "Kinect Dissertation Project";
@@ -323,15 +318,8 @@ namespace KinectDissertationProject.ViewModel
         {
             Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
             if (debug) TextBoxText = e.GestureType.ToString();
-            switch (e.GestureType)
-            {
-                case GestureType.LARGE_SWIPE_DOWN:
-                    RaiseApplicationOperation(activeWindow, ApplicationOperation.MINIMISE);
-                    break;
-                default:
-                    RaiseWindowOperation(activeWindow, e.GestureType, new Dictionary<string, object>());
-                    break;
-            }
+
+            RaiseWindowOperation(activeWindow, e.GestureType, new Dictionary<string, object>());
         }
 
         private void Kinect_ColourTracked(object sender, ColourEventArgs e)
