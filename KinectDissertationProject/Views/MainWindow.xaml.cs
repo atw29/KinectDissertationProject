@@ -39,9 +39,9 @@ namespace KinectDissertationProject
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Win_Num = KinectViewModel.Add_Window(this);
-
             KinectViewModel.Start();
+
+            Win_Num = KinectViewModel.Add_Window(this);
 
             KinectViewModel.ApplicationOperationOccurred += KinectViewModel_ApplicationOperationOccurred;
 

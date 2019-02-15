@@ -110,6 +110,10 @@ namespace KinectDissertationProject.Models.Gesture
             }
         }
 
+        /// <summary>
+        /// Do we want to pause between segments?
+        /// </summary>
+        /// <returns></returns>
         protected abstract bool CheckPause();
 
         public void UpdateGesture(Body body)

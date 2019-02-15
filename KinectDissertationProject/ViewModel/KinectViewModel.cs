@@ -39,8 +39,8 @@ namespace KinectDissertationProject.ViewModel
         private KinectReader kinectReader;
         private GestureController GestureController;
 
-        private IList<Window> windows;
-        private CoordinateMapper CoordinateMapper { get
+        private CoordinateMapper CoordinateMapper {
+            get
             {
                 return kinectReader.CoordinateMapper;
             }
@@ -61,6 +61,8 @@ namespace KinectDissertationProject.ViewModel
                 RaisePropertyChanged("TextBoxText");
             }
         }
+
+        private ApplicationOperationsController ApplicationOperationsController;
         private string rightHandPositionText;
         public string RightHandPositionText
         {
@@ -165,61 +167,6 @@ namespace KinectDissertationProject.ViewModel
 
         #endregion
 
-        #region Create Windows
-
-        public int Add_Window(Window w)
-        {
-            int loc = windows.Count();
-            windows.Add(w);
-            return loc;
-        }
-
-        public void Remove_Window(Window w)
-        {
-            windows.Remove(w);
-        }
-
-        private void Create_Window(Window w)
-        {
-            w.DataContext = this;
-            Add_Window(w);
-            w.Show();
-
-            w.Closed += Window_ClosedEvent;
-        }
-
-        internal void Create_MockUp_Window()
-        {
-            Create_Window(new MockUp());
-        }
-
-        internal void Create_Camera_Window()
-        {
-            Create_Window(new Camera());
-        }
-
-        internal void Create_Menu_Task_Window()
-        {
-            Create_Window(new Menu_Task());
-        }
-
-        internal void Create_Lighting_Window()
-        {
-            Create_Window(new LightingControl());
-        }
-
-        internal void Create_X_Ray_Window()
-        {
-            Create_Window(new X_Rays());
-        }
-
-        private void Window_ClosedEvent(object sender, EventArgs e)
-        {
-            Remove_Window( (Window) sender);
-        }
-
-        #endregion
-
         #region Event Handlers
 
         public event EventHandler<JointPositionEventArgs> JointPositionEventOccurred;
@@ -264,21 +211,20 @@ namespace KinectDissertationProject.ViewModel
         {
             logger.Debug("Kinect View Model Loaded");
 
-            windows = new List<Window>();
             GestureController = new GestureController();
-
-            GestureController.GestureRecognised += GestureController_GestureRecognised;
-            
-            TextBoxText = "Kinect Dissertation Project";
-
 
         }
 
         public void Start()
         {
+            ApplicationOperationsController = new ApplicationOperationsController();
+            GestureController.GestureRecognised += GestureController_GestureRecognised;
+            
+            TextBoxText = "Kinect Dissertation Project";
+
             SetUpKinect();
 
-            //Create_Menu_Task_Window();
+            ApplicationOperationsController.Create_Menu_Task_Window();
 
         }
 
@@ -311,24 +257,37 @@ namespace KinectDissertationProject.ViewModel
             kinectReader?.Close();
         }
 
+        #region Windows
+        internal int Add_Window(MainWindow window)
+        {
+            return ApplicationOperationsController.Add_Window(window);
+        }
+        internal void Create_MockUp_Window()
+        {
+            ApplicationOperationsController.Create_MockUp_Window();
+        }
+
+        internal void Create_Camera_Window()
+        {
+            ApplicationOperationsController.Create_Camera_Window();
+        }
+
+        internal void Create_Menu_Task_Window()
+        {
+            ApplicationOperationsController.Create_Menu_Task_Window();
+        }
+
+        internal void Create_Lighting_Window()
+        {
+            ApplicationOperationsController.Create_Lighting_Window();
+        }
+
+        internal void Create_X_Ray_Window()
+        {
+            ApplicationOperationsController.Create_X_Ray_Window();
+        }
+
         #endregion
-
-        #region Tasks
-
-        public void Create_Task_One()
-        {
-            Create_Menu_Task_Window();
-        }
-
-        public void Create_Task_Two()
-        {
-            Create_Menu_Task_Window();
-        }
-
-        public void Create_Task_Three()
-        {
-
-        }
 
         #endregion
 
@@ -402,11 +361,6 @@ namespace KinectDissertationProject.ViewModel
         private void Kinect_LostTracking(object sender, EventArgs e)
         {
             logger.Info("Lost Tracking");
-        }
-
-        public void Switch_Window(int index)
-        {
-            windows[index].Show();
         }
 
     }
