@@ -28,7 +28,6 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
         {
             TwoHandGestureSegment[] gestureSegments = new TwoHandGestureSegment[2];
             gestureSegments[0] = SwipeDownGestureSegment1.UsingTwoHands();
-            //gestureSegments[1] = SwipeDownGestureSegment3.UsingTwoHands();
             gestureSegments[1] = SwipeDownGestureSegment2.UsingTwoHands();
 
             return gestureSegments;

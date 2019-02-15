@@ -31,19 +31,19 @@
         <Rectangle x:Name="TOP_Region" Grid.Row="0" Grid.ColumnSpan="3" Opacity="0"/>
         <Rectangle x:Name="BOT_Region" Grid.Row="2" Grid.ColumnSpan="3" Opacity="0"/>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <TextBlock x:Name="textblock" FontSize="60" 
-                       Text="{Binding TextBoxText}" />
+                       Text="{Binding TextBoxText}" TextAlignment="Center"/>
             <TextBlock x:Name="rightHandPosition" FontSize="60" 
-                       Text="{Binding RightHandPositionText}"/>
+                       Text="{Binding RightHandPositionText}" TextAlignment="Center"/>
             <TextBlock x:Name="rightElbowPosition" FontSize="60" 
-                       Text="{Binding RightElbowPositionText}"/>
+                       Text="{Binding RightElbowPositionText}" TextAlignment="Center"/>
             <TextBlock x:Name="rightJointsPosition" FontSize="60" 
-                       Text="{Binding RightJointsPositionText}"/>
+                       Text="{Binding RightJointsPositionText}" TextAlignment="Center"/>
             <TextBlock x:Name="leftHandRegion" FontSize="40"
-                       Text="{Binding LeftHandRegionText}" />
+                       Text="{Binding LeftHandRegionText}" TextAlignment="Center"/>
             <TextBlock x:Name="rightHandRegion" FontSize="40"
-                       Text="{Binding RightHandRegionText}" />
+                       Text="{Binding RightHandRegionText}" TextAlignment="Center"/>
         </StackPanel>
 
         <Grid x:Name="LHS_Grid" Grid.Column="0" Grid.RowSpan="3">

@@ -141,8 +141,8 @@ namespace KinectDissertationProject.ViewModel
         {
             List<Region> left = JointType.HandLeft.GetRegions(body);
             List<Region> right = JointType.HandRight.GetRegions(body);
-            LeftHandRegionText = $"LEFT : {string.Join(", ", left)}";
-            RightHandRegionText = $"RIGHT : {string.Join(", ", right)}";
+            LeftHandRegionText = $"LEFT :\n {string.Join(", ", left)}";
+            RightHandRegionText = $"RIGHT :\n {string.Join(", ", right)}";
         }
 
         private void SetRightJointsDebugText(Body body, Dictionary<JointType, (Point joint, bool tracked, float depth)> pointDict)
