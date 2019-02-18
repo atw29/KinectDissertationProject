@@ -66,20 +66,20 @@ namespace KinectDissertationProject.Models.Gesture
 
         private void PerformCheck(Body body)
         {
+            //if (relativeGestureSegment is TwoHandGestureSegment && currentGestureSegment != 0) logger.Trace("Resuming");
+
             RelativeGestureSegment relativeGestureSegment = gestureSegments[currentGestureSegment];
-            if (relativeGestureSegment is TwoHandGestureSegment && currentGestureSegment != 0) logger.Trace("Resuming");
             GestureResult result = relativeGestureSegment.CheckGesture(body);
-            if ((Type == GestureType.EXPLOSION_IN || Type == GestureType.EXPLOSION_OUT) && (currentGestureSegment != 0))
+            if ((Type == GestureType.EXPLOSION_IN || Type == GestureType.EXPLOSION_OUT) && (currentGestureSegment != 0 || result == GestureResult.SUCEEDED))
             {
-                logger.Debug("Checking " + Type + " at segment " + currentGestureSegment);
-                logger.Debug($"{result} for {Type}");
+                logger.Debug($"{Type} : {currentGestureSegment} : {result}");
             }
             if (result == GestureResult.SUCEEDED)
             {
-                if (relativeGestureSegment is TwoHandGestureSegment) logger.Debug($"{Type} Succeeded at Step {currentGestureSegment + 1}");
+                //if (relativeGestureSegment is TwoHandGestureSegment) logger.Debug($"{Type} Succeeded at Step {currentGestureSegment + 1}");
                 if (currentGestureSegment + 1 < gestureSegments.Length)
                 {
-                    if (relativeGestureSegment is TwoHandGestureSegment) logger.Trace("PAUSING");
+                    //if (relativeGestureSegment is TwoHandGestureSegment) logger.Trace("PAUSING");
                     currentGestureSegment++;
                     frameCount = 0;
                     pausedFrameCount = SuccessfulPausedFrameCount();
@@ -93,18 +93,18 @@ namespace KinectDissertationProject.Models.Gesture
             }
             else if (result == GestureResult.FAILED || frameCount == MAX_FRAME_COUNT)
             {
-                if (currentGestureSegment > 0)
-                {
-                    if (result == GestureResult.FAILED)
-                    {
-                        logger.Debug($"{Type} Failed at Step {currentGestureSegment + 1} : FAILED");
-                    }
-                    else
-                    {
-                        logger.Debug($"{Type} Failed at Step {currentGestureSegment + 1} : MAX_FRAME_COUNT hit");
+                //if (currentGestureSegment > 0)
+                //{
+                //    if (result == GestureResult.FAILED)
+                //    {
+                //        logger.Debug($"{Type} Failed at Step {currentGestureSegment + 1} : FAILED");
+                //    }
+                //    else
+                //    {
+                //        logger.Debug($"{Type} Failed at Step {currentGestureSegment + 1} : MAX_FRAME_COUNT hit");
 
-                    }
-                }
+                //    }
+                //}
                 Reset();
             }
             else

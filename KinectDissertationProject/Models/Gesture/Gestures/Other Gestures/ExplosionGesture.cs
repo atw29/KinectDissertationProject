@@ -37,7 +37,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Other_Gestures
 
         private static TwoHandGestureSegment Expanded()
         {
-            return new TwoHandGestureSegment(Region.LEFT_TORSO_CLOSE, Region.RIGHT_TORSO_CLOSE);
+            return new TwoHandGestureSegment(Region.LEFT_LEG_CLOSE, Region.RIGHT_HEAD_CLOSE);
         }
 
         private static TwoHandGestureSegment Closed()
