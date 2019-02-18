@@ -238,7 +238,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                //return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -250,10 +250,11 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                //return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
+        
         private static GestureResult InRTCRegion(this JointType hand, Body body)
         {
             if (hand.InTorsoSection(body))
@@ -262,7 +263,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                //return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }

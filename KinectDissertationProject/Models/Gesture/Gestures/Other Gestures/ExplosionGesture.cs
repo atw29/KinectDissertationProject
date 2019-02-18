@@ -22,18 +22,17 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Other_Gestures
         private static TwoHandGestureSegment[] OutGestureSegments()
         {
             TwoHandGestureSegment[] gestureSegments = new TwoHandGestureSegment[2];
-            gestureSegments[0] = Expanded();
-            gestureSegments[1] = Closed();
+            gestureSegments[0] = Closed();
+            gestureSegments[1] = Expanded();
             return gestureSegments;
         }
 
         private static TwoHandGestureSegment[] InGestureSegments()
         {
             TwoHandGestureSegment[] gestureSegments = new TwoHandGestureSegment[2];
-            gestureSegments[0] = Closed();
-            gestureSegments[1] = Expanded();
+            gestureSegments[0] = Expanded();
+            gestureSegments[1] = Closed();
             return gestureSegments;
-
         }
 
         private static TwoHandGestureSegment Expanded()
