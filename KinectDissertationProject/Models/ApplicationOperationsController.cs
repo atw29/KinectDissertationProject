@@ -42,6 +42,18 @@ namespace KinectDissertationProject.Models
                         lastMinimised.WindowState = minimisedWindowState;
                     }
                     break;
+                case GestureType.EXPLOSION_IN:
+                    if (e.Window.WindowState == WindowState.Maximized)
+                    {
+                        e.Window.WindowState = WindowState.Normal;
+                    }
+                    break;
+                case GestureType.EXPLOSION_OUT:
+                    if (e.Window.WindowState == WindowState.Normal)
+                    {
+                        e.Window.WindowState = WindowState.Maximized;
+                    }
+                    break;
             }
         }
 

@@ -70,10 +70,10 @@ namespace KinectDissertationProject.Models.Gesture
 
             RelativeGestureSegment relativeGestureSegment = gestureSegments[currentGestureSegment];
             GestureResult result = relativeGestureSegment.CheckGesture(body);
-            if ((Type == GestureType.EXPLOSION_IN || Type == GestureType.EXPLOSION_OUT) && (currentGestureSegment != 0 || result == GestureResult.SUCEEDED))
-            {
-                logger.Debug($"{Type} : {currentGestureSegment} : {result}");
-            }
+            //if ((Type == GestureType.EXPLOSION_IN || Type == GestureType.EXPLOSION_OUT) && (currentGestureSegment != 0 || result == GestureResult.SUCEEDED))
+            //{
+            //    logger.Debug($"{Type} : {currentGestureSegment} : {result}");
+            //}
             if (result == GestureResult.SUCEEDED)
             {
                 //if (relativeGestureSegment is TwoHandGestureSegment) logger.Debug($"{Type} Succeeded at Step {currentGestureSegment + 1}");
