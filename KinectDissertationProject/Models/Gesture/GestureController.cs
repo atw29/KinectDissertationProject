@@ -12,6 +12,7 @@ using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Rig
 using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Up;
 using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Left;
 using KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Down;
+using KinectDissertationProject.Models.Gesture.Gestures.Other_Gestures;
 
 namespace KinectDissertationProject.Models.Gesture
 {
@@ -39,6 +40,9 @@ namespace KinectDissertationProject.Models.Gesture
 
             AddGesture(SwipeDownGesture.UsingTwoHands());
             AddGesture(SwipeUpGesture.UsingTwoHands());
+
+            AddGesture(ExplosionGesture.In());
+            AddGesture(ExplosionGesture.Out());
         }
 
         /// <summary>

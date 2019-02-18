@@ -17,7 +17,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
 
         public static TwoHandGestureSegment UsingTwoHands()
         {
-            return new TwoHandSwipeGestureSegment(Region.LEFT_HEAD_CLOSE, Region.RIGHT_HEAD_CLOSE);
+            return new TwoHandGestureSegment(Region.LEFT_HEAD_CLOSE, Region.RIGHT_HEAD_CLOSE);
         }
 
     }
@@ -30,7 +30,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
 
         public static TwoHandGestureSegment UsingTwoHands()
         {
-            return new TwoHandSwipeGestureSegment(Region.LEFT_TORSO_CLOSE, Region.RIGHT_TORSO_CLOSE);
+            return new TwoHandGestureSegment(Region.LEFT_TORSO_CLOSE, Region.RIGHT_TORSO_CLOSE);
         }
     }
 }

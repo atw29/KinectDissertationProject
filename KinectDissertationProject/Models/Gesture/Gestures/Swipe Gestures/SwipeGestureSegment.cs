@@ -32,23 +32,19 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures
 
     public class TwoHandSwipeGestureSegment : TwoHandGestureSegment
     {
-        private readonly Region leftRegion;
-        private readonly Region rightRegion;
-
-        public TwoHandSwipeGestureSegment(Region LeftRegion, Region RightRegion)
+        
+        public TwoHandSwipeGestureSegment(Region LeftRegion, Region RightRegion) : base(LeftRegion, RightRegion)
         {
-            leftRegion = LeftRegion;
-            rightRegion = RightRegion;
         }
 
-        protected override GestureResult LeftPosition(Body body)
+        protected new GestureResult LeftPosition(Body body)
         {
-            return LeftHand.InRegion(body, leftRegion);
+            return LeftHand.InRegion(body, LeftRegion);
         }
 
-        protected override GestureResult RightPosition(Body body)
+        protected new GestureResult RightPosition(Body body)
         {
-            return RightHand.InRegion(body, rightRegion);
+            return RightHand.InRegion(body, RightRegion);
         }
     }
 }

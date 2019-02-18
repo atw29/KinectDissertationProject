@@ -29,13 +29,22 @@ namespace KinectDissertationProject.Models.Gesture
             return 10;
         }
     }
-    public abstract class TwoHandGestureSegment : RelativeGestureSegment
+    public class TwoHandGestureSegment : RelativeGestureSegment
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
         protected readonly JointType RightHand = JointType.HandRight;
         protected readonly JointType LeftHand = JointType.HandLeft;
-        
+
+        protected Region LeftRegion;
+        protected Region RightRegion;
+
+        public TwoHandGestureSegment(Region leftRegion, Region rightRegion)
+        {
+            LeftRegion = leftRegion;
+            RightRegion = rightRegion;
+        }
+
         /// <summary>
         /// Composes two Gesture Results. 
         /// </summary>
@@ -62,7 +71,13 @@ namespace KinectDissertationProject.Models.Gesture
             return gestureResult;
         }
 
-        protected abstract GestureResult LeftPosition(Body body);
-        protected abstract GestureResult RightPosition(Body body);
+        protected GestureResult LeftPosition(Body body)
+        {
+            return LeftHand.InRegion(body, LeftRegion);
+        }
+        protected GestureResult RightPosition(Body body)
+        {
+            return RightHand.InRegion(body, RightRegion);
+        }
     }
 }

@@ -37,7 +37,11 @@ namespace KinectDissertationProject.Models
         LARGE_SWIPE_UP,
 
         SMALL_SWIPE_DOWN,
-        SMALL_SWIPE_UP
+        SMALL_SWIPE_UP,
+
+        EXPLOSION_IN,
+        EXPLOSION_OUT,
+
     }
 
     public enum GestureResult

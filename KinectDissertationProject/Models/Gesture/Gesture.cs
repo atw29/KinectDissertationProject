@@ -71,7 +71,7 @@ namespace KinectDissertationProject.Models.Gesture
             GestureResult result = relativeGestureSegment.CheckGesture(body);
             if (result == GestureResult.SUCEEDED)
             {
-                if (relativeGestureSegment is TwoHandGestureSegment) logger.Trace($"{Type} Succeeded at Step {currentGestureSegment + 1}");
+                if (relativeGestureSegment is TwoHandGestureSegment) logger.Debug($"{Type} Succeeded at Step {currentGestureSegment + 1}");
                 if (currentGestureSegment + 1 < gestureSegments.Length)
                 {
                     if (relativeGestureSegment is TwoHandGestureSegment) logger.Trace("PAUSING");
@@ -92,11 +92,11 @@ namespace KinectDissertationProject.Models.Gesture
                 {
                     if (result == GestureResult.FAILED)
                     {
-                        logger.Trace($"{Type} Failed at Step {currentGestureSegment + 1} : FAILED");
+                        logger.Debug($"{Type} Failed at Step {currentGestureSegment + 1} : FAILED");
                     }
                     else
                     {
-                        logger.Trace($"{Type} Failed at Step {currentGestureSegment + 1} : MAX_FRAME_COUNT hit");
+                        logger.Debug($"{Type} Failed at Step {currentGestureSegment + 1} : MAX_FRAME_COUNT hit");
 
                     }
                 }
