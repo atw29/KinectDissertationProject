@@ -18,33 +18,30 @@ namespace KinectDissertationProject.Models.Gesture
 {
     class GestureController
     {
-        private readonly JointType RightHand = JointType.HandRight;
-        private readonly JointType LeftHand = JointType.HandLeft;
-
         public event EventHandler<GestureEventArgs> GestureRecognised;
 
         private IList<Gesture> gestures = new List<Gesture>();
         public GestureController()
         {
             AddGesture(SwipeLeftGesture.UsingOneHand());
-            AddGesture(SwipeLeftGesture.UsingTwoHands());
+            //AddGesture(SwipeLeftGesture.UsingTwoHands());
             
             AddGesture(SwipeRightGesture.UsingOneHand());
-            AddGesture(SwipeRightGesture.UsingTwoHands());
+            //AddGesture(SwipeRightGesture.UsingTwoHands());
             
             AddGesture(SwipeUpGesture.UsingOneHand());
-            AddGesture(SwipeUpGesture.UsingTwoHands());
+            //AddGesture(SwipeUpGesture.UsingTwoHands());
             AddGesture(SwipeUpGesture.WithOffHandRaised());
             
             AddGesture(SwipeDownGesture.UsingOneHand());
-            AddGesture(SwipeDownGesture.UsingTwoHands());
+            //AddGesture(SwipeDownGesture.UsingTwoHands());
             AddGesture(SwipeDownGesture.WithOffHandRaised());
 
 
-            AddGesture(ExplosionGesture.In());
-            AddGesture(ExplosionGesture.Out());
+            //AddGesture(ExplosionGesture.In());
+            //AddGesture(ExplosionGesture.Out());
 
-            AddGesture(CrossGesture.Use());
+            //AddGesture(CrossGesture.Use());
         }
 
         /// <summary>
