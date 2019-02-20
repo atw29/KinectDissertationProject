@@ -1,4 +1,5 @@
 ﻿using KinectDissertationProject.ViewModel;
+using KinectDissertationProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace KinectDissertationProject.Views
     {
         internal KinectViewModel KinectViewModel { get; }
 
+        private readonly int LinesToScroll = 5;
+
         public MockUp()
         {
             InitializeComponent();
@@ -29,12 +32,38 @@ namespace KinectDissertationProject.Views
             KinectViewModel = KinectViewModel.Instance;
             DataContext = KinectViewModel;
 
-            KinectViewModel.JointPositionEventOccurred += KinectViewModel_JointPositionEventOccurred;
+            KinectViewModel.GestureOccurred += KinectViewModel_GestureOccurred;
         }
 
-        private void KinectViewModel_JointPositionEventOccurred(object sender, Models.JointPositionEventArgs e)
+        private void KinectViewModel_GestureOccurred(object sender, WindowOperationEventArgs e)
         {
-            Console.Write(e.JointPosDict.ToString());
+            switch (e.Gesture)
+            {
+                case GestureType.RIGHT_SWIPE_DOWN_LEFT_HAND_RAISED:
+                    ScrollDown();
+                    break;
+                case GestureType.RIGHT_SWIPE_UP_LEFT_HAND_RAISED:
+                    ScrollUp();
+                    break;
+            }
+        }
+
+        private void ScrollDown()
+        {
+            RepeatAction(ScrollBar.LineDown);
+        }
+
+        private void ScrollUp()
+        {
+            RepeatAction(ScrollBar.LineUp);
+        }
+
+        private void RepeatAction(Action action)
+        {
+            for (int i=0; i<LinesToScroll; i++)
+            {
+                action();
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

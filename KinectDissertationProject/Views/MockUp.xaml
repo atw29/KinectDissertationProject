@@ -24,7 +24,7 @@
             </Setter>
         </Style>
     </FrameworkElement.Resources>
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" x:Name="ScrollBar">
         <StackPanel Margin="10,10,10,10">
             <Label Margin="0,0,10,0" Content="Patient Information" FontWeight="Medium" FontSize="20"/>
             <ItemsControl x:Name="FirstName" Style="{StaticResource GridItemsStyle}" Margin="10,10,10,10" >

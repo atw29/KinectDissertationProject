@@ -172,7 +172,7 @@ namespace KinectDissertationProject.ViewModel
         public event EventHandler<JointPositionEventArgs> JointPositionEventOccurred;
         public event EventHandler<ColourEventArgs> ColourEventOccurred;
 
-        public event EventHandler<WindowOperationEventArgs> WindowOperationOccurred;
+        public event EventHandler<WindowOperationEventArgs> GestureOccurred;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(string propName)
@@ -193,9 +193,9 @@ namespace KinectDissertationProject.ViewModel
             });
         }
 
-        protected void RaiseWindowOperation(Window window, GestureType gesture, IReadOnlyDictionary<string, object> data)
+        protected void RaiseGesture(Window window, GestureType gesture, IReadOnlyDictionary<string, object> data)
         {
-            WindowOperationOccurred?.Invoke(this, new WindowOperationEventArgs(window, gesture, data));
+            GestureOccurred?.Invoke(this, new WindowOperationEventArgs(window, gesture, data));
         }
 
         #endregion
@@ -329,7 +329,7 @@ namespace KinectDissertationProject.ViewModel
 
             }
 
-            RaiseWindowOperation(activeWindow, e.GestureType, new Dictionary<string, object>());
+            RaiseGesture(activeWindow, e.GestureType, new Dictionary<string, object>());
         }
 
         private void Kinect_ColourTracked(object sender, ColourEventArgs e)

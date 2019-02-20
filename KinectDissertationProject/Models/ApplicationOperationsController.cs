@@ -22,7 +22,7 @@ namespace KinectDissertationProject.Models
         public ApplicationOperationsController()
         {
 
-            KinectViewModel.Instance.WindowOperationOccurred += WindowOperationOccurred;
+            KinectViewModel.Instance.GestureOccurred += WindowOperationOccurred;
             Windows = new List<Window>();
             SnappedLeft = new List<WindowInfo>();
             SnappedRight = new List<WindowInfo>();
