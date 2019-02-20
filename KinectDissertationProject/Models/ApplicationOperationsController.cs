@@ -16,16 +16,16 @@ namespace KinectDissertationProject.Models
         private WindowState minimisedWindowState;
 
         private IList<Window> Windows;
-        private IList<(Window, WindowState)> SnappedLeft;
-        private IList<(Window, WindowState)> SnappedRight;
+        private IList<WindowInfo> SnappedLeft;
+        private IList<WindowInfo> SnappedRight;
 
         public ApplicationOperationsController()
         {
 
             KinectViewModel.Instance.WindowOperationOccurred += WindowOperationOccurred;
             Windows = new List<Window>();
-            SnappedLeft = new List<(Window, WindowState)>();
-            SnappedRight = new List<(Window, WindowState)>();
+            SnappedLeft = new List<WindowInfo>();
+            SnappedRight = new List<WindowInfo>();
         }
 
         private void WindowOperationOccurred(object sender, WindowOperationEventArgs e)
@@ -48,23 +48,10 @@ namespace KinectDissertationProject.Models
                     break;
 
                 case GestureType.LARGE_SWIPE_RIGHT:
-                    bool found = false;
-                    foreach ((Window, WindowState) win in SnappedLeft)
-                    {
-                        if (win.Item1.Equals(e.Window))
-                        {
-                            found = true;
-                            e.Window.WindowState = win.Item2;
-                            break;
-                        }
-                    }
-                    if (!found)
-                    {
-                        SnapRight(e.Window);
-                        SnappedRight.Add((e.Window, e.Window.WindowState));
-
-                    }
-                    
+                    PerformSnap(e.Window, true);
+                    break;
+                case GestureType.LARGE_SWIPE_LEFT:
+                    PerformSnap(e.Window, false);
                     break;
 
                 case GestureType.EXPLOSION_IN:
@@ -82,11 +69,97 @@ namespace KinectDissertationProject.Models
             }
         }
 
-        private void SnapRight(Window window)
+        private void PerformSnap(Window window, bool Right)
         {
+            if (!AlreadySnapped(window, Right))
+            {
+                Snap(window, Right);
+            }
+        }
+
+        /// <summary>
+        /// If the window is already snapped then snapping again in the same direction
+        /// does nothing and snapping in the previous direction returns to whatever
+        /// window state it had before (e.g. maximised or docked)
+        /// </summary>
+        /// <param name="window"></param>
+        /// <param name="Right"></param>
+        /// <returns></returns>
+        private bool AlreadySnapped(Window window, bool Right)
+        {
+            foreach (WindowInfo winInfo in SnappedRight)
+            {
+                if (winInfo.Window.Equals(window))
+                {
+                    if (!Right)
+                    {
+                        RestoreWindowInfo(window, winInfo);
+                        SnappedRight.Remove(winInfo);
+                    }
+                    return true;
+                }
+            }
+            foreach (WindowInfo winInfo in SnappedLeft)
+            {
+                if (winInfo.Window.Equals(window))
+                {
+                    if (Right)
+                    {
+                        RestoreWindowInfo(window, winInfo);
+                        SnappedLeft.Remove(winInfo);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void RestoreWindowInfo(Window window, WindowInfo winInfo)
+        {
+            window.WindowState = winInfo.State;
+            window.Top = winInfo.Top;
+            window.Left = winInfo.Left;
+            window.Height = winInfo.Height;
+            window.Width = winInfo.Width;
+        }
+
+        private void Snap(Window window, bool Right)
+        {
+            WindowInfo CurrentInfo = new WindowInfo(window.Top, window.Left, window.Height, window.Width, window.WindowState, window);
+
             window.Height = Properties.Settings.Default.ScreenHeight;
             window.Width = Properties.Settings.Default.ScreenWidth / 2;
             window.Top = 0;
+            window.Left = Right ? Properties.Settings.Default.ScreenWidth / 2 : 0;
+
+            if (Right)
+            {
+                SnappedRight.Add(CurrentInfo);
+            } else
+            {
+                SnappedLeft.Add(CurrentInfo);
+            }
+        }
+
+        private class WindowInfo
+        {
+            public readonly double Top;
+            public readonly double Left;
+            public readonly double Height;
+            public readonly double Width;
+
+            public readonly WindowState State;
+            public readonly Window Window;
+
+            public WindowInfo(double top, double left, double height, double width, WindowState state, Window window)
+            {
+                Top = top;
+                Left = left;
+                Height = height;
+                Width = width;
+                State = state;
+                Window = window;
+            }
         }
 
         public int Add_Window(Window w)
@@ -154,5 +227,8 @@ namespace KinectDissertationProject.Models
                 
             }
         }
+
     }
+
+
 }
