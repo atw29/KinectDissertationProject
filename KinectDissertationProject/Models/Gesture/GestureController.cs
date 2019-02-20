@@ -43,6 +43,9 @@ namespace KinectDissertationProject.Models.Gesture
 
             AddGesture(ExplosionGesture.In());
             AddGesture(ExplosionGesture.Out());
+
+            AddGesture(SwipeLeftGesture.UsingTwoHands());
+            AddGesture(SwipeRightGesture.UsingTwoHands());
         }
 
         /// <summary>

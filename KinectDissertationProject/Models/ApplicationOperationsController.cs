@@ -16,12 +16,16 @@ namespace KinectDissertationProject.Models
         private WindowState minimisedWindowState;
 
         private IList<Window> Windows;
+        private IList<(Window, WindowState)> SnappedLeft;
+        private IList<(Window, WindowState)> SnappedRight;
 
         public ApplicationOperationsController()
         {
 
             KinectViewModel.Instance.WindowOperationOccurred += WindowOperationOccurred;
             Windows = new List<Window>();
+            SnappedLeft = new List<(Window, WindowState)>();
+            SnappedRight = new List<(Window, WindowState)>();
         }
 
         private void WindowOperationOccurred(object sender, WindowOperationEventArgs e)
@@ -42,6 +46,27 @@ namespace KinectDissertationProject.Models
                         lastMinimised.WindowState = minimisedWindowState;
                     }
                     break;
+
+                case GestureType.LARGE_SWIPE_RIGHT:
+                    bool found = false;
+                    foreach ((Window, WindowState) win in SnappedLeft)
+                    {
+                        if (win.Item1.Equals(e.Window))
+                        {
+                            found = true;
+                            e.Window.WindowState = win.Item2;
+                            break;
+                        }
+                    }
+                    if (!found)
+                    {
+                        SnapRight(e.Window);
+                        SnappedRight.Add((e.Window, e.Window.WindowState));
+
+                    }
+                    
+                    break;
+
                 case GestureType.EXPLOSION_IN:
                     if (e.Window.WindowState == WindowState.Maximized)
                     {
@@ -55,6 +80,13 @@ namespace KinectDissertationProject.Models
                     }
                     break;
             }
+        }
+
+        private void SnapRight(Window window)
+        {
+            window.Height = Properties.Settings.Default.ScreenHeight;
+            window.Width = Properties.Settings.Default.ScreenWidth / 2;
+            window.Top = 0;
         }
 
         public int Add_Window(Window w)

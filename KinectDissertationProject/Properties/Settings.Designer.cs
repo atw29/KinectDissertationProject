@@ -23,39 +23,30 @@ namespace KinectDissertationProject.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1920")]
         public int ScreenWidth {
             get {
                 return ((int)(this["ScreenWidth"]));
             }
-            set {
-                this["ScreenWidth"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1080")]
         public int ScreenHeight {
             get {
                 return ((int)(this["ScreenHeight"]));
             }
-            set {
-                this["ScreenHeight"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int RegionRatio {
             get {
                 return ((int)(this["RegionRatio"]));
-            }
-            set {
-                this["RegionRatio"] = value;
             }
         }
         
