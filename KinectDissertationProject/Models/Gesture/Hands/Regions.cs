@@ -35,8 +35,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
         ELBOW_ABOVE,
         ELBOW_RIGHT,
         ELBOW_BELOW,
-
-        CROSSED
+        
     }
 
     /// <summary>
