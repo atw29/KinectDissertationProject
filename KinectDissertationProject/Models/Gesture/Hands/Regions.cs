@@ -35,6 +35,8 @@ namespace KinectDissertationProject.Models.Gesture.Hands
         ELBOW_ABOVE,
         ELBOW_RIGHT,
         ELBOW_BELOW,
+
+        CROSSED
     }
 
     /// <summary>
@@ -169,7 +171,6 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                     return hand.ElbowRightRegion(body);
                 case Region.ELBOW_BELOW:
                     return hand.ElbowBelowRegion(body);
-
 
                 // Should Never Reach
                 default:

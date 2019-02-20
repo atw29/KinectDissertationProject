@@ -44,6 +44,8 @@ namespace KinectDissertationProject.Models
         EXPLOSION_IN,
         EXPLOSION_OUT,
 
+        CROSS_ARMS,
+
     }
 
     public enum GestureResult

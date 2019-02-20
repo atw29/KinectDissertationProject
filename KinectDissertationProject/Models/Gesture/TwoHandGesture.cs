@@ -51,7 +51,7 @@ namespace KinectDissertationProject.Models.Gesture
         /// <param name="one"></param>
         /// <param name="two"></param>
         /// <returns></returns>
-        private GestureResult CompareGestures(GestureResult one, GestureResult two)
+        protected GestureResult CompareGestures(GestureResult one, GestureResult two)
         {
             if (one == two) return one;
 

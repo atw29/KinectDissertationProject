@@ -33,39 +33,101 @@ namespace KinectDissertationProject.Models
             switch (e.Gesture)
             {
                 case GestureType.LARGE_SWIPE_DOWN:
-                    if (!(e.Window is MainWindow))
-                    {
-                        minimisedWindowState = e.Window.WindowState;
-                        e.Window.WindowState = WindowState.Minimized;
-                        lastMinimised = e.Window;
-                    }
+                    Minimise(e);
                     break;
                 case GestureType.LARGE_SWIPE_UP:
-                    if (lastMinimised != null)
-                    {
-                        lastMinimised.WindowState = minimisedWindowState;
-                    }
+                    Restore();
                     break;
 
                 case GestureType.LARGE_SWIPE_RIGHT:
-                    PerformSnap(e.Window, true);
+                    SnapRight(e);
                     break;
                 case GestureType.LARGE_SWIPE_LEFT:
-                    PerformSnap(e.Window, false);
+                    SnapLeft(e);
                     break;
 
                 case GestureType.EXPLOSION_IN:
-                    if (e.Window.WindowState == WindowState.Maximized)
-                    {
-                        e.Window.WindowState = WindowState.Normal;
-                    }
+                    Dock(e);
                     break;
                 case GestureType.EXPLOSION_OUT:
-                    if (e.Window.WindowState == WindowState.Normal)
-                    {
-                        e.Window.WindowState = WindowState.Maximized;
-                    }
+                    Maximise(e);
                     break;
+
+                case GestureType.CROSS_ARMS:
+                    Close(e);
+                    break;
+            }
+        }
+
+        private void Close(WindowOperationEventArgs e)
+        {
+            e.Window.Close();
+            RemoveInfo(e.Window);
+        }
+
+        private void RemoveInfo(Window window)
+        {
+            foreach (WindowInfo info in SnappedRight)
+            {
+                if (info.Window.Equals(window))
+                {
+                    SnappedRight.Remove(info);
+                }
+            }
+            foreach (WindowInfo info in SnappedLeft)
+            {
+                if (info.Window.Equals(window))
+                {
+                    SnappedLeft.Remove(info);
+                }
+            }
+            if (lastMinimised != null && lastMinimised.Equals(window))
+            {
+                lastMinimised = null;
+            }
+        }
+
+        private static void Maximise(WindowOperationEventArgs e)
+        {
+            if (e.Window.WindowState == WindowState.Normal)
+            {
+                e.Window.WindowState = WindowState.Maximized;
+            }
+        }
+
+        private static void Dock(WindowOperationEventArgs e)
+        {
+            if (e.Window.WindowState == WindowState.Maximized)
+            {
+                e.Window.WindowState = WindowState.Normal;
+            }
+        }
+
+        private void SnapLeft(WindowOperationEventArgs e)
+        {
+            PerformSnap(e.Window, false);
+        }
+
+        private void SnapRight(WindowOperationEventArgs e)
+        {
+            PerformSnap(e.Window, true);
+        }
+
+        private void Restore()
+        {
+            if (lastMinimised != null)
+            {
+                lastMinimised.WindowState = minimisedWindowState;
+            }
+        }
+
+        private void Minimise(WindowOperationEventArgs e)
+        {
+            if (!(e.Window is MainWindow))
+            {
+                minimisedWindowState = e.Window.WindowState;
+                e.Window.WindowState = WindowState.Minimized;
+                lastMinimised = e.Window;
             }
         }
 
