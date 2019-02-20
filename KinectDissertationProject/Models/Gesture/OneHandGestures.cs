@@ -60,7 +60,7 @@ namespace KinectDissertationProject.Models.Gesture
                 }
             }
         }
-        protected JointType IdleHand
+        protected JointType OffHand
         {
             get
             {
@@ -82,17 +82,19 @@ namespace KinectDissertationProject.Models.Gesture
             DominantHand = dominantHand;
         }
 
+        protected abstract GestureResult OffHandCheck(Body body);
+
         /// <summary>
         /// Checks that non-dominant hand is in the IDLE state then calls PerformDominantCheck
         /// </summary>
         public override GestureResult CheckGesture(Body body)
         {
-            GestureResult idleResult = IdleHand.IsIdle(body);
-            if (idleResult == GestureResult.SUCEEDED)
+            GestureResult offHandResult = OffHandCheck(body);
+            if (offHandResult == GestureResult.SUCEEDED)
             {
                 return PerformDominantCheck(body);
             }
-            return idleResult; // Can be PAUSED
+            return offHandResult; // Can be PAUSED
         }
 
         protected abstract GestureResult PerformDominantCheck(Body body);

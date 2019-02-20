@@ -15,7 +15,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures
             Region = region;
         }
 
-        protected Region Region { get; private set; }
+        protected readonly Region Region;
 
         /// <summary>
         /// Checks that the hand is in front of the respective elbow then checks it's in the correct Region
@@ -28,23 +28,26 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures
             }
             return GestureResult.FAILED;
         }
+
+        protected override GestureResult OffHandCheck(Body body)
+        {
+            return OffHand.IsIdle(body);
+        }
     }
 
-    public class TwoHandSwipeGestureSegment : TwoHandGestureSegment
+    public class OffHandNonIdleGestureSegment : SwipeGestureSegment
     {
-        
-        public TwoHandSwipeGestureSegment(Region LeftRegion, Region RightRegion) : base(LeftRegion, RightRegion)
+        private readonly Region OffHandRegion;
+        public OffHandNonIdleGestureSegment(JointType dominantHand, Region dominantHandRegion, Region offHandRegion) : base(dominantHand, dominantHandRegion)
         {
+            OffHandRegion = offHandRegion;
         }
 
-        protected new GestureResult LeftPosition(Body body)
+        protected override GestureResult OffHandCheck(Body body)
         {
-            return LeftHand.InRegion(body, LeftRegion);
+            return OffHand.InRegion(body, OffHandRegion);
         }
 
-        protected new GestureResult RightPosition(Body body)
-        {
-            return RightHand.InRegion(body, RightRegion);
-        }
     }
+
 }

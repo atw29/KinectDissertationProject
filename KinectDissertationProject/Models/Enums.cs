@@ -46,6 +46,12 @@ namespace KinectDissertationProject.Models
 
         CROSS_ARMS,
 
+        RIGHT_SWIPE_DOWN_LEFT_HAND_RAISED,
+        LEFT_SWIPE_DOWN_RIGHT_HAND_RAISED,
+
+        RIGHT_SWIPE_UP_LEFT_HAND_RAISED,
+        LEFT_SWIPE_UP_RIGHT_HAND_RAISED,
+
     }
 
     public enum GestureResult

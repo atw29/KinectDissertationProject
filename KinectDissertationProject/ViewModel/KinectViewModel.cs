@@ -317,7 +317,17 @@ namespace KinectDissertationProject.ViewModel
         private void GestureController_GestureRecognised(object sender, GestureEventArgs e)
         {
             Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            if (debug) TextBoxText = e.GestureType.ToString();
+            if (debug)
+            {
+                if (TextBoxText.Contains(e.GestureType.ToString()))
+                {
+                    TextBoxText += "I";
+                } else
+                {
+                    TextBoxText = e.GestureType.ToString();
+                }
+
+            }
 
             RaiseWindowOperation(activeWindow, e.GestureType, new Dictionary<string, object>());
         }

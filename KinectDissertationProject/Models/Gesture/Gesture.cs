@@ -70,7 +70,7 @@ namespace KinectDissertationProject.Models.Gesture
 
             RelativeGestureSegment relativeGestureSegment = gestureSegments[currentGestureSegment];
             GestureResult result = relativeGestureSegment.CheckGesture(body);
-            //if ((Type == GestureType.EXPLOSION_IN || Type == GestureType.EXPLOSION_OUT) && (currentGestureSegment != 0 || result == GestureResult.SUCEEDED))
+            //if ((Type == GestureType.RIGHT_SWIPE_DOWN_LEFT_HAND_RAISED) && (currentGestureSegment != 0 || result == GestureResult.SUCEEDED))
             //{
             //    logger.Debug($"{Type} : {currentGestureSegment} : {result}");
             //}

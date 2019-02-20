@@ -11,7 +11,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
 
     public static class SwipeRightGesture
     {
-        public static OneHandGesture UsingOneHand(JointType DominantHand)
+        public static OneHandGesture UsingOneHand(JointType DominantHand = JointType.HandRight)
         {
             return new OneHandGesture(DominantHand, GetGestureType(DominantHand), GetSegments(DominantHand));
         }

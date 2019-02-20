@@ -1,4 +1,5 @@
-﻿using KinectDissertationProject.Models.Gesture.Hands;
+﻿using System;
+using KinectDissertationProject.Models.Gesture.Hands;
 using Microsoft.Kinect;
 
 namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Down
@@ -6,7 +7,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
 
     public static class SwipeDownGesture
     {
-        public static OneHandGesture UsingOneHand(JointType dominantHand)
+        public static OneHandGesture UsingOneHand(JointType dominantHand = JointType.HandRight)
         {
             return new OneHandGesture(dominantHand, GetType(dominantHand), GetOneHandSegments(dominantHand));
         }
@@ -14,6 +15,19 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
         public static TwoHandGesture UsingTwoHands()
         {
             return new TwoHandGesture(GestureType.LARGE_SWIPE_DOWN, GetTwoHandGestureSegments());
+        }
+
+        public static OneHandGesture WithOffHandRaised(JointType dominantHand = JointType.HandRight)
+        {
+            return new OneHandGesture(dominantHand, GetOffHandRaisedType(dominantHand), GetOffHandRaisedSegments(dominantHand));
+        }
+
+        private static OneHandGestureSegment[] GetOffHandRaisedSegments(JointType dominantHand)
+        {
+            OneHandGestureSegment[] gestureSegments = new OffHandNonIdleGestureSegment[2];
+            gestureSegments[0] = SwipeDownGestureSegment1.WithOffHandRaised(dominantHand);
+            gestureSegments[1] = SwipeDownGestureSegment2.WithOffHandRaised(dominantHand);
+            return gestureSegments;
         }
 
         private static OneHandGestureSegment[] GetOneHandSegments(JointType dominantHand)
@@ -36,6 +50,11 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
         private static GestureType GetType(JointType dominantHand)
         {
             return dominantHand.IsRight() ? GestureType.RIGHT_HAND_SWIPE_DOWN : GestureType.LEFT_HAND_SWIPE_DOWN;
+        }
+
+        private static GestureType GetOffHandRaisedType(JointType dominantHand)
+        {
+            return dominantHand.IsRight() ? GestureType.RIGHT_SWIPE_DOWN_LEFT_HAND_RAISED : GestureType.LEFT_SWIPE_DOWN_RIGHT_HAND_RAISED;
         }
     }
 

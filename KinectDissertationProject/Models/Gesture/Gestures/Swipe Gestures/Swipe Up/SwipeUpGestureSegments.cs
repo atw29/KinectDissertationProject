@@ -15,10 +15,14 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
             return new SwipeGestureSegment(dominantHand, Region.ELBOW);
         }
 
-        public static TwoHandSwipeGestureSegment UsingTwoHands()
+        public static TwoHandGestureSegment UsingTwoHands()
         {
-            return new TwoHandSwipeGestureSegment(Region.LEFT_LEG_CLOSE, Region.RIGHT_LEG_CLOSE);
+            return new TwoHandGestureSegment(Region.LEFT_LEG_CLOSE, Region.RIGHT_LEG_CLOSE);
+        }
 
+        public static OffHandNonIdleGestureSegment WithOffHandRaised(JointType dominantHand)
+        {
+            return new OffHandNonIdleGestureSegment(dominantHand, Region.ELBOW, Region.ELBOW);
         }
     }
     public static class SwipeUpGestureSegment2
@@ -27,9 +31,14 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
         {
             return new SwipeGestureSegment(dominantHand, Region.ELBOW_ABOVE);
         }
-        public static TwoHandSwipeGestureSegment UsingTwoHands()
+        public static TwoHandGestureSegment UsingTwoHands()
         {
-            return new TwoHandSwipeGestureSegment(Region.LEFT_TORSO_CLOSE, Region.RIGHT_TORSO_CLOSE);
+            return new TwoHandGestureSegment(Region.LEFT_TORSO_CLOSE, Region.RIGHT_TORSO_CLOSE);
+        }
+
+        public static OffHandNonIdleGestureSegment WithOffHandRaised(JointType dominantHand)
+        {
+            return new OffHandNonIdleGestureSegment(dominantHand, Region.ELBOW_ABOVE, Region.ELBOW);
         }
     }
 

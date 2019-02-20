@@ -282,14 +282,6 @@ namespace KinectDissertationProject.Models
             Remove_Window((Window)sender);
         }
 
-        private void KinectViewModel_ApplicationOperationOccurred(object sender, ApplicationOperationEventArgs e)
-        {
-            switch (e.Operation)
-            {
-                
-            }
-        }
-
     }
 
 

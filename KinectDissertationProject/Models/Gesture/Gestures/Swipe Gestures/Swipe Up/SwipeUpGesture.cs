@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KinectDissertationProject.Models.Gesture.Hands;
 using Microsoft.Kinect;
 
 namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe_Up
 {
     public static class SwipeUpGesture
     {
-        public static OneHandGesture UsingOneHand(JointType DominantHand)
+        public static OneHandGesture UsingOneHand(JointType DominantHand = JointType.HandRight)
         {
             return new OneHandGesture(DominantHand, GetType(DominantHand), GetSegments(DominantHand));
         }
@@ -17,6 +18,24 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
         public static TwoHandGesture UsingTwoHands()
         {
             return new TwoHandGesture(GestureType.LARGE_SWIPE_UP, GetTwoHandGestureSegments());
+        }
+
+        public static OneHandGesture WithOffHandRaised(JointType dominantHand = JointType.HandRight)
+        {
+            return new OneHandGesture(dominantHand, GetOffHandRaisedType(dominantHand), GetOffHandSegments(dominantHand));
+        }
+
+        private static OneHandGestureSegment[] GetOffHandSegments(JointType dominantHand)
+        {
+            OneHandGestureSegment[] gestureSegments = new OffHandNonIdleGestureSegment[2];
+            gestureSegments[0] = SwipeUpGestureSegment1.WithOffHandRaised(dominantHand);
+            gestureSegments[1] = SwipeUpGestureSegment2.WithOffHandRaised(dominantHand);
+            return gestureSegments;
+        }
+
+        private static GestureType GetOffHandRaisedType(JointType dominantHand)
+        {
+            return dominantHand.IsRight() ? GestureType.RIGHT_SWIPE_UP_LEFT_HAND_RAISED : GestureType.LEFT_SWIPE_UP_RIGHT_HAND_RAISED;
         }
 
         private static TwoHandGestureSegment[] GetTwoHandGestureSegments()

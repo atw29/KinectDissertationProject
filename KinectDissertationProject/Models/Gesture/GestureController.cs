@@ -26,26 +26,23 @@ namespace KinectDissertationProject.Models.Gesture
         private IList<Gesture> gestures = new List<Gesture>();
         public GestureController()
         {
-            AddGesture(SwipeLeftGesture.UsingOneHand(RightHand));
-            AddGesture(SwipeLeftGesture.UsingOneHand(LeftHand));
-
-            AddGesture(SwipeRightGesture.UsingOneHand(RightHand));
-            AddGesture(SwipeRightGesture.UsingOneHand(LeftHand));
-
-            AddGesture(SwipeUpGesture.UsingOneHand(RightHand));
-            AddGesture(SwipeUpGesture.UsingOneHand(LeftHand));
-
-            AddGesture(SwipeDownGesture.UsingOneHand(RightHand));
-            AddGesture(SwipeDownGesture.UsingOneHand(LeftHand));
-
-            AddGesture(SwipeDownGesture.UsingTwoHands());
+            AddGesture(SwipeLeftGesture.UsingOneHand());
+            AddGesture(SwipeLeftGesture.UsingTwoHands());
+            
+            AddGesture(SwipeRightGesture.UsingOneHand());
+            AddGesture(SwipeRightGesture.UsingTwoHands());
+            
+            AddGesture(SwipeUpGesture.UsingOneHand());
             AddGesture(SwipeUpGesture.UsingTwoHands());
+            AddGesture(SwipeUpGesture.WithOffHandRaised());
+            
+            AddGesture(SwipeDownGesture.UsingOneHand());
+            AddGesture(SwipeDownGesture.UsingTwoHands());
+            AddGesture(SwipeDownGesture.WithOffHandRaised());
+
 
             AddGesture(ExplosionGesture.In());
             AddGesture(ExplosionGesture.Out());
-
-            AddGesture(SwipeLeftGesture.UsingTwoHands());
-            AddGesture(SwipeRightGesture.UsingTwoHands());
 
             AddGesture(CrossGesture.Use());
         }
