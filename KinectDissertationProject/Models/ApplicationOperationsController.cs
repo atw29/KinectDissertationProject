@@ -56,11 +56,29 @@ namespace KinectDissertationProject.Models
                         Maximise(e);
                         break;
 
+                    case GestureType.LEFT_SWIPE_RIGHT_RIGHT_HAND_RAISED:
+                        Tab(e);
+                        break;
+
                     case GestureType.CROSS_ARMS:
                         Close(e);
                         break;
                 }
             }
+        }
+
+        private void Tab(WindowOperationEventArgs e)
+        {
+            int currentLoc = Windows.IndexOf(e.Window);
+            Window ToMoveToFront = Windows[currentLoc + 1 >= Windows.Count ? 0 : currentLoc + 1];
+
+            //ToMoveToFront.WindowState = WindowState.Minimized;
+            //ToMoveToFront.Show();
+            //ToMoveToFront.WindowState = WindowState.Normal;
+
+            ToMoveToFront.Activate();
+            ToMoveToFront.Focus();
+            
         }
 
         private void Close(WindowOperationEventArgs e)
@@ -206,11 +224,9 @@ namespace KinectDissertationProject.Models
             }
         }
 
-        public int Add_Window(Window w)
+        public void Add_Window(Window w)
         {
-            int loc = Windows.Count();
             Windows.Add(w);
-            return loc;
         }
 
         public void Remove_Window(Window w)
@@ -220,7 +236,7 @@ namespace KinectDissertationProject.Models
 
         private void Create_Window(Window w)
         {
-            w.DataContext = this;
+            w.DataContext = KinectViewModel.Instance;
             Add_Window(w);
             w.Show();
 

@@ -36,7 +36,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
 
         private static GestureType GetOffHandRaisedType(JointType dominantHand)
         {
-            return dominantHand.IsRight() ? GestureType.RIGHT_SWIPE_LEFT_LEFT_HAND_RAISED : throw new NotImplementedException();
+            return dominantHand.IsRight() ? GestureType.RIGHT_SWIPE_LEFT_LEFT_HAND_RAISED : GestureType.LEFT_SWIPE_LEFT_RIGHT_HAND_RAISED;
         }
 
         private static TwoHandGestureSegment[] GetTwoHandsSegments()

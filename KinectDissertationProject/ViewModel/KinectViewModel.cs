@@ -256,9 +256,9 @@ namespace KinectDissertationProject.ViewModel
         }
 
         #region Windows
-        internal int Add_Window(MainWindow window)
+        internal void Add_Window(MainWindow window)
         {
-            return ApplicationOperationsController.Add_Window(window);
+            //ApplicationOperationsController.Add_Window(window);
         }
         internal void Create_MockUp_Window()
         {

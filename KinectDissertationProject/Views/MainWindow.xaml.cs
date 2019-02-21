@@ -24,8 +24,6 @@ namespace KinectDissertationProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int Win_Num { get; set; }
-
         private KinectViewModel KinectViewModel;
 
         public MainWindow()
@@ -35,15 +33,24 @@ namespace KinectDissertationProject
             InitializeComponent();
 
             DataContext = KinectViewModel;
+
+            GotFocus += MainWindow_GotFocus;
+            GotKeyboardFocus += MainWindow_GotFocus;
+        }
+
+        private void MainWindow_GotFocus(object sender, RoutedEventArgs e)
+        {
+            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             KinectViewModel.Start();
 
-            Win_Num = KinectViewModel.Add_Window(this);
+            KinectViewModel.Add_Window(this);
 
             KinectViewModel.JointPositionEventOccurred += DrawSkeleton;
+
         }
 
         private void Add_Debug()

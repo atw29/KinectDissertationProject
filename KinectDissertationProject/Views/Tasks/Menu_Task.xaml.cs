@@ -34,7 +34,7 @@ namespace KinectDissertationProject.Views.Tasks
             InitializeComponent();
 
             Loaded += Menu_Task_Loaded;
-
+            
             ViewModel.GestureOccurred += Menu_Task_GestureEventOccurred;
 
         }

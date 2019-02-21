@@ -53,7 +53,10 @@ namespace KinectDissertationProject.Models
         LEFT_SWIPE_UP_RIGHT_HAND_RAISED,
 
         RIGHT_SWIPE_LEFT_LEFT_HAND_RAISED,
+        LEFT_SWIPE_LEFT_RIGHT_HAND_RAISED,
+        
         RIGHT_SWIPE_RIGHT_LEFT_HAND_RAISED,
+        LEFT_SWIPE_RIGHT_RIGHT_HAND_RAISED,
 
     }
 

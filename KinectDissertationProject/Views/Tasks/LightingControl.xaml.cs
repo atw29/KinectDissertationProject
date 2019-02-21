@@ -32,21 +32,24 @@ namespace KinectDissertationProject.Views.Tasks
 
         private void ViewModel_GestureOccurred(object sender, WindowOperationEventArgs e)
         {
-            switch (e.Gesture)
+            if (e.Window == this)
             {
-                case GestureType.RIGHT_SWIPE_LEFT_LEFT_HAND_RAISED:
-                    DecreaseSlider();
-                    break;
-                case GestureType.RIGHT_SWIPE_RIGHT_LEFT_HAND_RAISED:
-                    IncreaseSlider();
-                    break;
-                case GestureType.RIGHT_HAND_SWIPE_DOWN:
-                    ChangeSelection();
-                    break;
-                case GestureType.RIGHT_HAND_SWIPE_UP:
-                    ChangeSelection();
-                    break;
+                switch (e.Gesture)
+                {
+                    case GestureType.RIGHT_SWIPE_LEFT_LEFT_HAND_RAISED:
+                        DecreaseSlider();
+                        break;
+                    case GestureType.RIGHT_SWIPE_RIGHT_LEFT_HAND_RAISED:
+                        IncreaseSlider();
+                        break;
+                    case GestureType.RIGHT_HAND_SWIPE_DOWN:
+                        ChangeSelection();
+                        break;
+                    case GestureType.RIGHT_HAND_SWIPE_UP:
+                        ChangeSelection();
+                        break;
                     
+                }
             }
         }
 

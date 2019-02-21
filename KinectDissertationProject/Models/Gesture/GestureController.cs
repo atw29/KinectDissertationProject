@@ -26,10 +26,12 @@ namespace KinectDissertationProject.Models.Gesture
             AddGesture(SwipeLeftGesture.UsingOneHand());
             AddGesture(SwipeLeftGesture.UsingTwoHands());
             AddGesture(SwipeLeftGesture.WithOffHandRaised());
+            AddGesture(SwipeLeftGesture.WithOffHandRaised(JointType.HandLeft));
             
             AddGesture(SwipeRightGesture.UsingOneHand());
             AddGesture(SwipeRightGesture.UsingTwoHands());
             AddGesture(SwipeRightGesture.WithOffHandRaised());
+            AddGesture(SwipeRightGesture.WithOffHandRaised(JointType.HandLeft));
             
             AddGesture(SwipeUpGesture.UsingOneHand());
             AddGesture(SwipeUpGesture.UsingTwoHands());
