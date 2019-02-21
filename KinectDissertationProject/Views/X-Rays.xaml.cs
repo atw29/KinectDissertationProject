@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KinectDissertationProject.Models;
+using KinectDissertationProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,46 @@ namespace KinectDissertationProject.Views
     /// </summary>
     public partial class X_Rays : Window
     {
+        private KinectViewModel kinectViewModel;
         public X_Rays()
         {
             InitializeComponent();
+            kinectViewModel = KinectViewModel.Instance;
+
+            kinectViewModel.GestureOccurred += KinectViewModel_GestureOccurred;
+        }
+
+        private void KinectViewModel_GestureOccurred(object sender, WindowOperationEventArgs e)
+        {
+            if (e.Window == this)
+            {
+                switch (e.Gesture)
+                {
+                    case GestureType.RIGHT_HAND_SWIPE_UP:
+                        Pan(Direction.UP);
+                        break;
+                    case GestureType.RIGHT_HAND_SWIPE_DOWN:
+                        Pan(Direction.DOWN);
+                        break;
+                    case GestureType.RIGHT_HAND_SWIPE_LEFT:
+                        Pan(Direction.LEFT);
+                        break;
+                    case GestureType.RIGHT_HAND_SWIPE_RIGHT:
+                        Pan(Direction.RIGHT);
+                        break;
+                    case GestureType.RIGHT_SWIPE_UP_LEFT_HAND_RAISED:
+                        Picture.ZoomCentre(true);
+                        break;
+                    case GestureType.RIGHT_SWIPE_DOWN_LEFT_HAND_RAISED:
+                        Picture.ZoomCentre(false);
+                        break;
+                }
+            }
+        }
+
+        private void Pan(Direction direction)
+        {
+            Picture.Pan(direction);
         }
 
         private void Zoom_In(object sender, RoutedEventArgs e)

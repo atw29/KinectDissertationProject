@@ -142,14 +142,38 @@ namespace KinectDissertationProject.Views
             Reset();
         }
 
+        public void Pan(Direction direction, int increment = 10)
+        {
+            if (child != null)
+            {
+                var tt = GetTranslateTransform(child);
+                origin = new Point(tt.X, tt.Y);
+                switch (direction)
+                {
+                    case Direction.UP:
+                        tt.Y = origin.Y - increment;   
+                        break;
+                    case Direction.DOWN:
+                        tt.Y = origin.Y + increment;   
+                        break;
+                    case Direction.LEFT:
+                        tt.X = origin.X - increment;
+                        break;
+                    case Direction.RIGHT:
+                        tt.X = origin.X + increment;
+                        break;
+                }
+            }
+        }
+
         private void Child_MouseMove(object sender, MouseEventArgs e)
         {
             if (child != null)
             {
                 if (child.IsMouseCaptured)
                 {
-                    var tt = GetTranslateTransform(child);
                     Vector v = start - e.GetPosition(this);
+                    var tt = GetTranslateTransform(child);
                     tt.X = origin.X - v.X;
                     tt.Y = origin.Y - v.Y;
                 }
@@ -157,5 +181,10 @@ namespace KinectDissertationProject.Views
         }
 
         #endregion
+    }
+
+    public enum Direction
+    {
+        UP, DOWN, LEFT, RIGHT
     }
 }
