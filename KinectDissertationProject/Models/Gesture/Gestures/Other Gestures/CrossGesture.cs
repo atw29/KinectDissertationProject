@@ -43,7 +43,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Other_Gestures
 
             protected new GestureResult LeftPosition(Body body)
             {
-                return CompareGestures(LeftHand.InRegion(body, LeftRegion, false), HandsCrossed(body));
+                return ANDGestures(LeftHand.InRegion(body, LeftRegion, false), HandsCrossed(body));
             }
 
             private GestureResult HandsCrossed(Body body)
@@ -57,7 +57,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Other_Gestures
 
             protected new GestureResult RightPosition(Body body)
             {
-                return CompareGestures(RightHand.InRegion(body, RightRegion, false), HandsCrossed(body));
+                return ANDGestures(RightHand.InRegion(body, RightRegion, false), HandsCrossed(body));
             }
 
         }

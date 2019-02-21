@@ -37,7 +37,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Other_Gestures
 
             protected override int SuccessfulPausedFrameCount()
             {
-                return base.SuccessfulPausedFrameCount() + 5;
+                return 20;
             }
         }
 
@@ -60,12 +60,31 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Other_Gestures
 
         private static TwoHandGestureSegment Expanded()
         {
-            return new TwoHandGestureSegment(Region.LEFT_LEG_CLOSE, Region.RIGHT_HEAD_CLOSE);
+            return new ExplosionGestureSegment(Region.LEFT_LEG_CLOSE, Region.LEFT_TORSO_CLOSE, Region.RIGHT_HEAD_CLOSE);
         }
 
         private static TwoHandGestureSegment Closed()
         {
             return new TwoHandGestureSegment(Region.TORSO_MIDDLE, Region.TORSO_MIDDLE);
+        }
+
+        private class ExplosionGestureSegment : TwoHandGestureSegment
+        {
+            private readonly Region LeftRegionAlt;
+            public ExplosionGestureSegment(Region leftRegion, Region leftRegionAlt, Region rightRegion) : base(leftRegion, rightRegion)
+            {
+                LeftRegionAlt = leftRegionAlt;
+            }
+
+            public override GestureResult CheckGesture(Body body)
+            {
+                return ANDGestures(LeftPositionAlt(body), RightPosition(body));
+            }
+
+            protected GestureResult LeftPositionAlt(Body body)
+            {
+                return ORGestures(LeftHand.InRegion(body, LeftRegion, false), LeftHand.InRegion(body, LeftRegionAlt, false));
+            }
         }
 
     }

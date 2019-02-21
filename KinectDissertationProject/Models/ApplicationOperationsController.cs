@@ -31,32 +31,35 @@ namespace KinectDissertationProject.Models
 
         private void WindowOperationOccurred(object sender, WindowOperationEventArgs e)
         {
-            switch (e.Gesture)
+            if (!(e.Window is MainWindow) || e.Gesture == GestureType.LARGE_SWIPE_UP) // Don't want any operations that might close the background window
             {
-                case GestureType.LARGE_SWIPE_DOWN:
-                    Minimise(e);
-                    break;
-                case GestureType.LARGE_SWIPE_UP:
-                    Restore();
-                    break;
+                switch (e.Gesture)
+                {
+                    case GestureType.LARGE_SWIPE_DOWN:
+                        Minimise(e);
+                        break;
+                    case GestureType.LARGE_SWIPE_UP:
+                        Restore();
+                        break;
 
-                case GestureType.LARGE_SWIPE_RIGHT:
-                    SnapRight(e);
-                    break;
-                case GestureType.LARGE_SWIPE_LEFT:
-                    SnapLeft(e);
-                    break;
+                    case GestureType.LARGE_SWIPE_RIGHT:
+                        SnapRight(e);
+                        break;
+                    case GestureType.LARGE_SWIPE_LEFT:
+                        SnapLeft(e);
+                        break;
 
-                case GestureType.EXPLOSION_IN:
-                    Dock(e);
-                    break;
-                case GestureType.EXPLOSION_OUT:
-                    Maximise(e);
-                    break;
+                    case GestureType.EXPLOSION_IN:
+                        Dock(e);
+                        break;
+                    case GestureType.EXPLOSION_OUT:
+                        Maximise(e);
+                        break;
 
-                case GestureType.CROSS_ARMS:
-                    Close(e);
-                    break;
+                    case GestureType.CROSS_ARMS:
+                        Close(e);
+                        break;
+                }
             }
         }
 
@@ -112,12 +115,9 @@ namespace KinectDissertationProject.Models
 
         private void Minimise(WindowOperationEventArgs e)
         {
-            if (!(e.Window is MainWindow))
-            {
-                minimisedWindowState = e.Window.WindowState;
-                e.Window.WindowState = WindowState.Minimized;
-                lastMinimised = e.Window;
-            }
+            minimisedWindowState = e.Window.WindowState;
+            e.Window.WindowState = WindowState.Minimized;
+            lastMinimised = e.Window;
         }
 
         private void PerformSnap(Window window, bool Right)

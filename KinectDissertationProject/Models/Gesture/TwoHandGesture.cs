@@ -51,22 +51,37 @@ namespace KinectDissertationProject.Models.Gesture
         /// <param name="one"></param>
         /// <param name="two"></param>
         /// <returns></returns>
-        protected GestureResult CompareGestures(GestureResult one, GestureResult two)
+        protected GestureResult ANDGestures(GestureResult one, GestureResult two)
         {
-            if (one == two) return one;
+            if (one == two)
+                return one;
 
-            if (one == GestureResult.FAILED || two == GestureResult.FAILED) return GestureResult.FAILED;
+            if (one == GestureResult.FAILED || two == GestureResult.FAILED)
+                return GestureResult.FAILED;
             
-            if (one == GestureResult.PAUSED || two == GestureResult.PAUSED) return GestureResult.PAUSED;
+            if (one == GestureResult.PAUSED || two == GestureResult.PAUSED)
+                return GestureResult.PAUSED;
 
-            if (one == GestureResult.LOST_TRACK || two == GestureResult.LOST_TRACK) return GestureResult.LOST_TRACK;
+            if (one == GestureResult.LOST_TRACK || two == GestureResult.LOST_TRACK)
+                return GestureResult.LOST_TRACK;
 
             throw new ArgumentException($"Unknown Composition of GestureResults {one} and {two}");
         }
 
+        protected GestureResult ORGestures(GestureResult one, GestureResult two)
+        {
+            
+            if (one == GestureResult.SUCEEDED || two == GestureResult.SUCEEDED) 
+                return GestureResult.SUCEEDED;
+            if (one == GestureResult.PAUSED || two == GestureResult.PAUSED)
+                return GestureResult.PAUSED;
+            return GestureResult.FAILED;
+
+        }
+
         public override GestureResult CheckGesture(Body body)
         {
-            GestureResult gestureResult = CompareGestures(LeftPosition(body), RightPosition(body));
+            GestureResult gestureResult = ANDGestures(LeftPosition(body), RightPosition(body));
             //logger.Debug($"Compared Result : {gestureResult}");
             return gestureResult;
         }
