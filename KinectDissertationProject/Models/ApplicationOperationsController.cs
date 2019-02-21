@@ -71,11 +71,7 @@ namespace KinectDissertationProject.Models
         {
             int currentLoc = Windows.IndexOf(e.Window);
             Window ToMoveToFront = Windows[currentLoc + 1 >= Windows.Count ? 0 : currentLoc + 1];
-
-            //ToMoveToFront.WindowState = WindowState.Minimized;
-            //ToMoveToFront.Show();
-            //ToMoveToFront.WindowState = WindowState.Normal;
-
+            
             ToMoveToFront.Activate();
             ToMoveToFront.Focus();
             

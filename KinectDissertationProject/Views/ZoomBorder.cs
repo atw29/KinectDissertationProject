@@ -32,15 +32,15 @@ namespace KinectDissertationProject.Views
             get { return base.Child; }
             set
             {
-                if (value != null && value != this.Child)
-                    this.Initialize(value);
+                if (value != null && value != Child)
+                    Initialize(value);
                 base.Child = value;
             }
         }
 
         public void Initialize(UIElement element)
         {
-            this.child = element;
+            child = element;
             if (child != null)
             {
                 TransformGroup group = new TransformGroup();
@@ -50,11 +50,11 @@ namespace KinectDissertationProject.Views
                 group.Children.Add(tt);
                 child.RenderTransform = group;
                 child.RenderTransformOrigin = new Point(0.0, 0.0);
-                this.MouseWheel += child_MouseWheel;
-                this.MouseLeftButtonDown += child_MouseLeftButtonDown;
-                this.MouseLeftButtonUp += child_MouseLeftButtonUp;
-                this.MouseMove += child_MouseMove;
-                this.PreviewMouseRightButtonDown += new MouseButtonEventHandler(
+                MouseWheel += child_MouseWheel;
+                MouseLeftButtonDown += Child_MouseLeftButtonDown;
+                MouseLeftButtonUp += Child_MouseLeftButtonUp;
+                MouseMove += child_MouseMove;
+                PreviewMouseRightButtonDown += new MouseButtonEventHandler(
                   child_PreviewMouseRightButtonDown);
             }
         }
@@ -103,30 +103,30 @@ namespace KinectDissertationProject.Views
             }
         }
 
-        private void child_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Child_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (child != null)
             {
                 var tt = GetTranslateTransform(child);
                 start = e.GetPosition(this);
                 origin = new Point(tt.X, tt.Y);
-                this.Cursor = Cursors.Hand;
+                Cursor = Cursors.Hand;
                 child.CaptureMouse();
             }
         }
 
-        private void child_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void Child_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (child != null)
             {
                 child.ReleaseMouseCapture();
-                this.Cursor = Cursors.Arrow;
+                Cursor = Cursors.Arrow;
             }
         }
 
         void child_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Reset();
+            Reset();
         }
 
         private void child_MouseMove(object sender, MouseEventArgs e)
