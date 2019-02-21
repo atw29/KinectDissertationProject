@@ -24,8 +24,11 @@ namespace KinectDissertationProject.ViewModel
         public bool IsMI = false;
 
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        
         #if DEBUG
-        bool debug = true;
+            bool debug = true;
+        #else
+            bool debug = false;
         #endif
 
         public static KinectViewModel Instance { get; private set; }
