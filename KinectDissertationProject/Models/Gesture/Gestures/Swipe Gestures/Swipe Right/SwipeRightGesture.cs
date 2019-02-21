@@ -26,6 +26,24 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
             return new OneHandGesture(dominantHand, GetOffHandRaisedType(dominantHand), GetOffHandRaisedSegments(dominantHand));
         }
 
+        public static OneHandGesture WithOffHandRaisedLeft(JointType dominantHand = JointType.HandRight)
+        {
+            return new OneHandGesture(dominantHand, GetOffHandRaisedLeftType(dominantHand), GetOffHandRaisedLeftSegments(dominantHand));
+        }
+
+        private static OneHandGestureSegment[] GetOffHandRaisedLeftSegments(JointType dominantHand)
+        {
+            OneHandGestureSegment[] gestureSegments = new OffHandNonIdleGestureSegment[2];
+            gestureSegments[0] = SwipeRightGestureSegment1.WithOffHandRaisedLeft(dominantHand);
+            gestureSegments[1] = SwipeRightGestureSegment2.WithOffHandRaisedLeft(dominantHand);
+            return gestureSegments;
+        }
+
+        private static GestureType GetOffHandRaisedLeftType(JointType dominantHand)
+        {
+            return dominantHand.IsRight() ? GestureType.RIGHT_SWIPE_RIGHT_LEFT_HAND_RAISED_LEFT : throw new NotImplementedException();
+        }
+
         private static OneHandGestureSegment[] GetOffHandRaisedSegments(JointType dominantHand)
         {
             OneHandGestureSegment[] gestureSegments = new OffHandNonIdleGestureSegment[2];

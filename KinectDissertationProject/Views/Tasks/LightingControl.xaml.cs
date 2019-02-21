@@ -37,11 +37,19 @@ namespace KinectDissertationProject.Views.Tasks
                 switch (e.Gesture)
                 {
                     case GestureType.RIGHT_SWIPE_LEFT_LEFT_HAND_RAISED:
-                        DecreaseSlider();
+                        DecreaseSlider(5);
                         break;
+                    case GestureType.RIGHT_SWIPE_LEFT_LEFT_HAND_RAISED_LEFT:
+                        DecreaseSlider(1);
+                        break;
+
                     case GestureType.RIGHT_SWIPE_RIGHT_LEFT_HAND_RAISED:
-                        IncreaseSlider();
+                        IncreaseSlider(5);
                         break;
+                    case GestureType.RIGHT_SWIPE_RIGHT_LEFT_HAND_RAISED_LEFT:
+                        IncreaseSlider(1);
+                        break;
+                        
                     case GestureType.RIGHT_HAND_SWIPE_DOWN:
                         ChangeSelection();
                         break;
@@ -53,14 +61,14 @@ namespace KinectDissertationProject.Views.Tasks
             }
         }
 
-        private void DecreaseSlider()
+        private void DecreaseSlider(int change)
         {
-            slider.Value = slider.Value - 5 % 100;
+            slider.Value = slider.Value - change % 100;
         }
 
-        private void IncreaseSlider()
+        private void IncreaseSlider(int change)
         {
-            slider.Value = slider.Value + 5 % 100;
+            slider.Value = slider.Value + change % 100;
         }
 
         private void ChangeSelection()

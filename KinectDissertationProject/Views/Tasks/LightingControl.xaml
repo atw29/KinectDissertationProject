@@ -20,8 +20,8 @@
     <Grid>
         <StackPanel>
             <Label x:Name="label" Content="Lighting Control" Margin="10,0,10,10" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Center" />
-            <Slider x:Name="slider" Margin="10" VerticalAlignment="Center" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" Value="20" IsSnapToTickEnabled="True"/>
-            <Label Content="{Binding ElementName=slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+            <Slider x:Name="slider" Margin="10" VerticalAlignment="Center" Maximum="100" TickPlacement="BottomRight" TickFrequency="1" Value="20" IsSnapToTickEnabled="True"/>
+            <Label Content="{Binding ElementName=slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" />
             <Button x:Name="Apply" Margin="10,10,10,10" Content="Apply" Width="250" Height="25" Click="Apply_Click"/>
             <Button x:Name="Exit" Margin="10,10,10,10" Content="Exit Without Saving" Width="250" Height="25" Click="Apply_Click"/>
         </StackPanel>
