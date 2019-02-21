@@ -6,6 +6,17 @@
         xmlns:local="clr-namespace:KinectDissertationProject.Views.Tasks"
         mc:Ignorable="d"
         Title="LightingControl" Height="250" Width="500">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="true">
+                    <Setter Property="Background" Value="LightBlue"/>
+                    <!--<Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Medium"/>-->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <StackPanel>
             <Label x:Name="label" Content="Lighting Control" Margin="10,0,10,10" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Center" />
