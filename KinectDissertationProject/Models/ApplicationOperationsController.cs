@@ -81,6 +81,7 @@ namespace KinectDissertationProject.Models
                     SnappedLeft.Remove(info);
                 }
             }
+            //SnappedLeft.Remove(window);
             if (lastMinimised != null && lastMinimised.Equals(window))
             {
                 lastMinimised = null;

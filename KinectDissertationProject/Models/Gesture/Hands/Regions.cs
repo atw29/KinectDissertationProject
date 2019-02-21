@@ -62,9 +62,9 @@ namespace KinectDissertationProject.Models.Gesture.Hands
         {
             if (IdleHand == JointType.HandRight)
             {
-                return IdleHand.InRegion(body, Region.RIGHT_LEG_CLOSE);
+                return IdleHand.InRegion(body, Region.RIGHT_LEG_CLOSE, true);
             }
-            return IdleHand.InRegion(body, Region.LEFT_LEG_CLOSE);
+            return IdleHand.InRegion(body, Region.LEFT_LEG_CLOSE, true);
         }
 
         public static List<Region> GetRegions(this JointType Hand, Body body)
@@ -127,7 +127,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
         /// <param name="body">Body data</param>
         /// <param name="region">Region to check</param>
         /// <returns>SUCCEEDED if true, PAUSED if waiting or FAILED if false</returns>
-        public static GestureResult InRegion(this JointType hand, Body body, Region region)
+        public static GestureResult InRegion(this JointType hand, Body body, Region region, bool OneHand/* = true*/)
         {
             if (hand != JointType.HandRight && hand != JointType.HandLeft)
             {
@@ -137,31 +137,31 @@ namespace KinectDissertationProject.Models.Gesture.Hands
             {
                 // Head
                 case Region.RIGHT_HEAD_CLOSE:
-                    return hand.InRHCRegion(body);
+                    return hand.InRHCRegion(body, OneHand);
                 case Region.HEAD_MIDDLE:
-                    return hand.InHMRegion(body);
+                    return hand.InHMRegion(body, OneHand);
                 case Region.LEFT_HEAD_CLOSE:
-                    return hand.InLHCRegion(body);
+                    return hand.InLHCRegion(body, OneHand);
 
                 // Torso
                 case Region.RIGHT_TORSO_CLOSE:
-                    return hand.InRTCRegion(body);
+                    return hand.InRTCRegion(body, OneHand);
                 case Region.TORSO_MIDDLE:
-                    return hand.InTMRegion(body);
+                    return hand.InTMRegion(body, OneHand);
                 case Region.LEFT_TORSO_CLOSE:
-                    return hand.InLTCRegion(body);
+                    return hand.InLTCRegion(body, OneHand);
 
                 // Leg
                 case Region.RIGHT_LEG_CLOSE:
-                    return hand.InRLCRegion(body);
+                    return hand.InRLCRegion(body, OneHand);
                 case Region.LEFT_LEG_CLOSE:
-                    return hand.InLLCRegion(body);
+                    return hand.InLLCRegion(body, OneHand);
                 case Region.LEG_MIDDLE:
-                    return hand.InLMRegion(body);
+                    return hand.InLMRegion(body, OneHand);
 
                 //Elbow
                 case Region.ELBOW:
-                    return hand.InElbowRegion(body);
+                    return hand.InElbowRegion(body, OneHand);
                 case Region.ELBOW_LEFT:
                     return hand.ElbowLeftRegion(body);
                 case Region.ELBOW_ABOVE:
@@ -189,7 +189,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
 
         #region Head Regions
 
-        private static GestureResult InLHCRegion(this JointType hand, Body body)
+        private static GestureResult InLHCRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InHeadSection(body))
             {
@@ -197,11 +197,11 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
-        private static GestureResult InHMRegion(this JointType hand, Body body)
+        private static GestureResult InHMRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InHeadSection(body))
             {
@@ -209,11 +209,11 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
-        private static GestureResult InRHCRegion(this JointType hand, Body body)
+        private static GestureResult InRHCRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InHeadSection(body))
             { 
@@ -221,7 +221,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -230,7 +230,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
 
         #region Torso Regions
 
-        private static GestureResult InLTCRegion(this JointType hand, Body body)
+        private static GestureResult InLTCRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InTorsoSection(body))
             {
@@ -238,11 +238,11 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
-        private static GestureResult InTMRegion(this JointType hand, Body body)
+        private static GestureResult InTMRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InTorsoSection(body))
             {
@@ -250,12 +250,12 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
         
-        private static GestureResult InRTCRegion(this JointType hand, Body body)
+        private static GestureResult InRTCRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InTorsoSection(body))
             {
@@ -263,7 +263,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -271,7 +271,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
         #endregion
 
         #region Leg Regions
-        private static GestureResult InLLCRegion(this JointType hand, Body body)
+        private static GestureResult InLLCRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InLegSection(body))
             {
@@ -279,11 +279,11 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
-        private static GestureResult InLMRegion(this JointType hand, Body body )
+        private static GestureResult InLMRegion(this JointType hand, Body body, bool OneHand = true )
         {
             if (hand.InLegSection(body))
             {
@@ -291,11 +291,11 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
-        private static GestureResult InRLCRegion(this JointType hand, Body body)
+        private static GestureResult InRLCRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InLegSection(body))
             {
@@ -303,7 +303,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -312,7 +312,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
 
         #region Elbow Regions
 
-        private static GestureResult InElbowRegion(this JointType hand, Body body)
+        private static GestureResult InElbowRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InVerticalElbowSection(body))
             {
@@ -320,18 +320,18 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             } else if (hand.InHorizontalElbowSection(body))
             {
                 if (hand.InVerticalElbowSection(body))
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
-        private static GestureResult ElbowLeftRegion(this JointType hand, Body body)
+        private static GestureResult ElbowLeftRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InVerticalElbowSection(body))
             {
@@ -339,11 +339,11 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
-        private static GestureResult ElbowRightRegion(this JointType hand, Body body)
+        private static GestureResult ElbowRightRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InVerticalElbowSection(body))
             {
@@ -351,11 +351,11 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
-        private static GestureResult ElbowAboveRegion(this JointType hand, Body body)
+        private static GestureResult ElbowAboveRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InHorizontalElbowSection(body))
             {
@@ -363,11 +363,11 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
-        private static GestureResult ElbowBelowRegion(this JointType hand, Body body)
+        private static GestureResult ElbowBelowRegion(this JointType hand, Body body, bool OneHand = true)
         {
             if (hand.InHorizontalElbowSection(body))
             {
@@ -375,7 +375,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                return GestureResult.PAUSED;
+                if (OneHand) return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }

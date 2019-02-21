@@ -73,11 +73,11 @@ namespace KinectDissertationProject.Models.Gesture
 
         protected GestureResult LeftPosition(Body body)
         {
-            return LeftHand.InRegion(body, LeftRegion);
+            return LeftHand.InRegion(body, LeftRegion, false);
         }
         protected GestureResult RightPosition(Body body)
         {
-            return RightHand.InRegion(body, RightRegion);
+            return RightHand.InRegion(body, RightRegion, false);
         }
     }
 }

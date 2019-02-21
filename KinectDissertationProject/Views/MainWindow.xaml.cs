@@ -46,6 +46,11 @@ namespace KinectDissertationProject
             KinectViewModel.JointPositionEventOccurred += DrawSkeleton;
         }
 
+        private void Add_Debug()
+        {
+            
+        }
+
         private void DrawSkeleton(object sender, JointPositionEventArgs e)
         {
             canvas.Children.Clear();

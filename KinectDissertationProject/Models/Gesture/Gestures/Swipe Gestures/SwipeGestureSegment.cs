@@ -24,7 +24,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures
         {
             if (DominantHand.InFrontOf(DominantHand.Elbow(), body))
             {
-                return DominantHand.InRegion(body, Region);
+                return DominantHand.InRegion(body, Region, true);
             }
             return GestureResult.FAILED;
         }
@@ -45,7 +45,7 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures
 
         protected override GestureResult OffHandCheck(Body body)
         {
-            return OffHand.InRegion(body, OffHandRegion);
+            return OffHand.InRegion(body, OffHandRegion, true);
         }
 
     }
