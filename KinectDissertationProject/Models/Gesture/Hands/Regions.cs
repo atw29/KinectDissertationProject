@@ -197,7 +197,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -209,7 +209,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -221,7 +221,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -238,7 +238,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -250,7 +250,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -263,7 +263,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -279,7 +279,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -291,7 +291,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -303,7 +303,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -320,14 +320,14 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             } else if (hand.InHorizontalElbowSection(body))
             {
                 if (hand.InVerticalElbowSection(body))
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -339,7 +339,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -351,7 +351,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -363,7 +363,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }
@@ -375,7 +375,7 @@ namespace KinectDissertationProject.Models.Gesture.Hands
                 {
                     return GestureResult.SUCEEDED;
                 }
-                // return GestureResult.Paused;
+                return GestureResult.PAUSED;
             }
             return GestureResult.FAILED;
         }

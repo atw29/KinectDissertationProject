@@ -24,26 +24,26 @@ namespace KinectDissertationProject.Models.Gesture
         public GestureController()
         {
             AddGesture(SwipeLeftGesture.UsingOneHand());
-            //AddGesture(SwipeLeftGesture.UsingTwoHands());
+            AddGesture(SwipeLeftGesture.UsingTwoHands());
             AddGesture(SwipeLeftGesture.WithOffHandRaised());
             
             AddGesture(SwipeRightGesture.UsingOneHand());
-            //AddGesture(SwipeRightGesture.UsingTwoHands());
+            AddGesture(SwipeRightGesture.UsingTwoHands());
             AddGesture(SwipeRightGesture.WithOffHandRaised());
             
             AddGesture(SwipeUpGesture.UsingOneHand());
-            //AddGesture(SwipeUpGesture.UsingTwoHands());
+            AddGesture(SwipeUpGesture.UsingTwoHands());
             AddGesture(SwipeUpGesture.WithOffHandRaised());
             
             AddGesture(SwipeDownGesture.UsingOneHand());
-            //AddGesture(SwipeDownGesture.UsingTwoHands());
+            AddGesture(SwipeDownGesture.UsingTwoHands());
             AddGesture(SwipeDownGesture.WithOffHandRaised());
 
 
-            //AddGesture(ExplosionGesture.In());
-            //AddGesture(ExplosionGesture.Out());
+            AddGesture(ExplosionGesture.In());
+            AddGesture(ExplosionGesture.Out());
 
-            //AddGesture(CrossGesture.Use());
+            AddGesture(CrossGesture.Use());
         }
 
         /// <summary>

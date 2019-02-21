@@ -74,6 +74,10 @@ namespace KinectDissertationProject.Models.Gesture
             //{
             //    logger.Debug($"{Type} : {currentGestureSegment} : {result}");
             //}
+            if (result == GestureResult.PAUSED && relativeGestureSegment is TwoHandGestureSegment && currentGestureSegment != 0 )
+            {
+                logger.Debug($"{Type} : {currentGestureSegment} : {result}");
+            }
             if (result == GestureResult.SUCEEDED)
             {
                 //if (relativeGestureSegment is TwoHandGestureSegment) logger.Debug($"{Type} Succeeded at Step {currentGestureSegment + 1}");
