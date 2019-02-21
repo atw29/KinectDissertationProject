@@ -24,5 +24,13 @@ namespace KinectDissertationProject.Views
             InitializeComponent();
         }
 
+        private void Zoom_In(object sender, RoutedEventArgs e)
+        {
+            Picture.ZoomCentre(true);
+        }
+        private void Zoom_Out(object sender, RoutedEventArgs e)
+        {
+            Picture.ZoomCentre(false);
+        }
     }
 }

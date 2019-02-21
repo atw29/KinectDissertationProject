@@ -50,12 +50,12 @@ namespace KinectDissertationProject.Views
                 group.Children.Add(tt);
                 child.RenderTransform = group;
                 child.RenderTransformOrigin = new Point(0.0, 0.0);
-                MouseWheel += child_MouseWheel;
+                MouseWheel += Child_MouseWheel;
                 MouseLeftButtonDown += Child_MouseLeftButtonDown;
                 MouseLeftButtonUp += Child_MouseLeftButtonUp;
-                MouseMove += child_MouseMove;
+                MouseMove += Child_MouseMove;
                 PreviewMouseRightButtonDown += new MouseButtonEventHandler(
-                  child_PreviewMouseRightButtonDown);
+                  Child_PreviewMouseRightButtonDown);
             }
         }
 
@@ -75,31 +75,44 @@ namespace KinectDissertationProject.Views
             }
         }
 
+        public void ZoomCentre(bool In)
+        {
+            if (child != null && child is Image image)
+            {
+                Zoom(In ? 1 : 0, new Point(image.ActualWidth/2, image.ActualHeight/2));
+            }
+        }
+
+        public void Zoom(int MouseWheelDelta, Point point)
+        {
+            var st = GetScaleTransform(child);
+            var tt = GetTranslateTransform(child);
+
+            double zoom = MouseWheelDelta > 0 ? .2 : -.2;
+            if (!(MouseWheelDelta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
+                return;
+
+            double abosuluteX;
+            double abosuluteY;
+
+            abosuluteX = point.X * st.ScaleX + tt.X;
+            abosuluteY = point.Y * st.ScaleY + tt.Y;
+
+            st.ScaleX += zoom;
+            st.ScaleY += zoom;
+
+            tt.X = abosuluteX - point.X * st.ScaleX;
+            tt.Y = abosuluteY - point.Y * st.ScaleY;
+            
+        }
+
         #region Child Events
 
-        private void child_MouseWheel(object sender, MouseWheelEventArgs e)
+        private void Child_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (child != null)
             {
-                var st = GetScaleTransform(child);
-                var tt = GetTranslateTransform(child);
-
-                double zoom = e.Delta > 0 ? .2 : -.2;
-                if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
-                    return;
-
-                Point relative = e.GetPosition(child);
-                double abosuluteX;
-                double abosuluteY;
-
-                abosuluteX = relative.X * st.ScaleX + tt.X;
-                abosuluteY = relative.Y * st.ScaleY + tt.Y;
-
-                st.ScaleX += zoom;
-                st.ScaleY += zoom;
-
-                tt.X = abosuluteX - relative.X * st.ScaleX;
-                tt.Y = abosuluteY - relative.Y * st.ScaleY;
+                Zoom(e.Delta, e.GetPosition(child));
             }
         }
 
@@ -124,12 +137,12 @@ namespace KinectDissertationProject.Views
             }
         }
 
-        void child_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        void Child_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             Reset();
         }
 
-        private void child_MouseMove(object sender, MouseEventArgs e)
+        private void Child_MouseMove(object sender, MouseEventArgs e)
         {
             if (child != null)
             {
