@@ -12,12 +12,35 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Other_Gestures
     {
         public static TwoHandGesture Out()
         {
-            return new TwoHandGesture(GestureType.EXPLOSION_OUT, OutGestureSegments());
+            return new ExplosionGestureClass(GestureType.EXPLOSION_OUT, OutGestureSegments());
         }
         public static TwoHandGesture In()
         {
-            return new TwoHandGesture(GestureType.EXPLOSION_IN, InGestureSegments());
+            return new ExplosionGestureClass(GestureType.EXPLOSION_IN, InGestureSegments());
         }
+
+        private class ExplosionGestureClass : TwoHandGesture
+        {
+            public ExplosionGestureClass(GestureType type, TwoHandGestureSegment[] gestureSegments) : base(type, gestureSegments)
+            {
+            }
+
+            protected override bool CheckPause()
+            {
+                return base.CheckPause();
+            }
+
+            protected override int FailedPausedFrameCount()
+            {
+                return base.FailedPausedFrameCount();
+            }
+
+            protected override int SuccessfulPausedFrameCount()
+            {
+                return base.SuccessfulPausedFrameCount() + 5;
+            }
+        }
+
 
         private static TwoHandGestureSegment[] OutGestureSegments()
         {

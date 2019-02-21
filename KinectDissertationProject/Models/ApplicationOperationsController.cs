@@ -3,6 +3,7 @@ using KinectDissertationProject.Views;
 using KinectDissertationProject.Views.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,18 +15,18 @@ namespace KinectDissertationProject.Models
     {
         private Window lastMinimised;
         private WindowState minimisedWindowState;
-
+        
         private IList<Window> Windows;
-        private IList<WindowInfo> SnappedLeft;
-        private IList<WindowInfo> SnappedRight;
+        private IDictionary<Window, WindowInfo> SnappedLeft;
+        private IDictionary<Window, WindowInfo> SnappedRight;
 
         public ApplicationOperationsController()
         {
 
             KinectViewModel.Instance.GestureOccurred += WindowOperationOccurred;
             Windows = new List<Window>();
-            SnappedLeft = new List<WindowInfo>();
-            SnappedRight = new List<WindowInfo>();
+            SnappedLeft = new Dictionary<Window, WindowInfo>();
+            SnappedRight = new Dictionary<Window, WindowInfo>();
         }
 
         private void WindowOperationOccurred(object sender, WindowOperationEventArgs e)
@@ -67,21 +68,8 @@ namespace KinectDissertationProject.Models
 
         private void RemoveInfo(Window window)
         {
-            foreach (WindowInfo info in SnappedRight)
-            {
-                if (info.Window.Equals(window))
-                {
-                    SnappedRight.Remove(info);
-                }
-            }
-            foreach (WindowInfo info in SnappedLeft)
-            {
-                if (info.Window.Equals(window))
-                {
-                    SnappedLeft.Remove(info);
-                }
-            }
-            //SnappedLeft.Remove(window);
+            SnappedRight.Remove(window);
+            SnappedLeft.Remove(window);
             if (lastMinimised != null && lastMinimised.Equals(window))
             {
                 lastMinimised = null;
@@ -150,29 +138,23 @@ namespace KinectDissertationProject.Models
         /// <returns></returns>
         private bool AlreadySnapped(Window window, bool Right)
         {
-            foreach (WindowInfo winInfo in SnappedRight)
+            if (SnappedRight.Keys.Contains(window))
             {
-                if (winInfo.Window.Equals(window))
+                if (!Right)
                 {
-                    if (!Right)
-                    {
-                        RestoreWindowInfo(window, winInfo);
-                        SnappedRight.Remove(winInfo);
-                    }
-                    return true;
+                    RestoreWindowInfo(window, SnappedRight[window]);
+                    SnappedRight.Remove(window);
                 }
+                return true;
             }
-            foreach (WindowInfo winInfo in SnappedLeft)
+            if (SnappedLeft.Keys.Contains(window))
             {
-                if (winInfo.Window.Equals(window))
+                if (Right)
                 {
-                    if (Right)
-                    {
-                        RestoreWindowInfo(window, winInfo);
-                        SnappedLeft.Remove(winInfo);
-                    }
-                    return true;
+                    RestoreWindowInfo(window, SnappedLeft[window]);
+                    SnappedLeft.Remove(window);
                 }
+                return true;
             }
             return false;
         }
@@ -188,8 +170,9 @@ namespace KinectDissertationProject.Models
 
         private void Snap(Window window, bool Right)
         {
-            WindowInfo CurrentInfo = new WindowInfo(window.Top, window.Left, window.Height, window.Width, window.WindowState, window);
+            WindowInfo CurrentInfo = new WindowInfo(window.Top, window.Left, window.Height, window.Width, window.WindowState);
 
+            window.WindowState = WindowState.Normal;
             window.Height = Properties.Settings.Default.ScreenHeight;
             window.Width = Properties.Settings.Default.ScreenWidth / 2;
             window.Top = 0;
@@ -197,10 +180,10 @@ namespace KinectDissertationProject.Models
 
             if (Right)
             {
-                SnappedRight.Add(CurrentInfo);
+                SnappedRight.Add(window, CurrentInfo);
             } else
             {
-                SnappedLeft.Add(CurrentInfo);
+                SnappedLeft.Add(window, CurrentInfo);
             }
         }
 
@@ -211,17 +194,15 @@ namespace KinectDissertationProject.Models
             public readonly double Height;
             public readonly double Width;
 
-            public readonly WindowState State;
-            public readonly Window Window;
+            public WindowState State;
 
-            public WindowInfo(double top, double left, double height, double width, WindowState state, Window window)
+            public WindowInfo(double top, double left, double height, double width, WindowState state)
             {
                 Top = top;
                 Left = left;
                 Height = height;
                 Width = width;
                 State = state;
-                Window = window;
             }
         }
 

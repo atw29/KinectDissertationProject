@@ -119,7 +119,7 @@ namespace KinectDissertationProject.Views
             }
             else
             {
-                visible[loc + 1].Focus();
+                visible[loc + 1 == visible.Count ? visible.Count - 1 : loc + 1].Focus();
             }
         }
 
