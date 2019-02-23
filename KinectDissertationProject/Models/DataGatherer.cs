@@ -13,10 +13,11 @@ namespace KinectDissertationProject.Models
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
-        private Process process;
-        private IList<(string Gesture, string Time, string parasite)> gestureList;
         private readonly DateTime opened;
         private StreamWriter writer;
+
+        private const string folder = "C:\\Users\\Alex\\Google Drive\\University Drive\\Bath Drive\\Third Year\\Diss\\Other\\data\\";
+        private readonly string path;
 
         public DataGatherer(KinectViewModel viewModel)
         {
@@ -24,18 +25,21 @@ namespace KinectDissertationProject.Models
 
             SetUpShutdownHook();
 
-            gestureList = new List<(string, string, string)>();
-
             opened = DateTime.Now;
 
-            AddInitialData(opened);
+            path = $"{folder}{opened.ToString("yyyy.MM.dd HH.mm.ss")}.csv";
+
+            CreateFile(opened);
 
         }
 
-        private void AddInitialData(DateTime opened)
+        private void CreateFile(DateTime opened)
         {
-            gestureList.Add(("GESTURE", "TIME","PARASITE"));
-            gestureList.Add(("start", opened.ToString("HH:mm:ss"), ""));
+            using (writer = File.CreateText(path))
+            {
+                writer.WriteLine($"GESTURE, TIME, PARASITE");
+                writer.WriteLine($"start, {opened.ToString("HH:mm:ss")},");
+            }
         }
 
         private void SetUpShutdownHook()
@@ -48,25 +52,29 @@ namespace KinectDissertationProject.Models
 
         private void ViewModel_GestureOccurred(object sender, WindowOperationEventArgs e)
         {
-            Add_Row(e.Gesture);
+            WriteString($"{e.Gesture.ToString()},{DateTime.Now.PrintTime()},");
         }
 
-        private void Add_Row(GestureType gesture, string parasite = "")
+        private void WriteString(string toWrite)
         {
-            gestureList.Add((gesture.ToString(), DateTime.Now.ToString("HH:mm:ss"), parasite));
+            using (var writer = new StreamWriter(path, true))
+            {
+                writer.WriteLine(toWrite);
+            }
         }
 
         private void Process_Exited(object sender, EventArgs e)
         {
-            logger.Debug("Writing Output Data");
-            using (writer = File.CreateText($"C:\\Users\\Alex\\prog\\data\\{opened.ToString("yyyy.MM.dd HH.mm.ss")}.csv"))
-            {
-                foreach ((string gesture, string time, string parasite) line in gestureList)
-                {
-                    writer.WriteLine($"{line.gesture},{line.time},{line.parasite}");
-                    writer.Flush();
-                }
-            }
+            WriteString($"end,{DateTime.Now.PrintTime()},");
         }
     }
+
+    public static class DateTimeHelper
+    {
+        public static string PrintTime(this DateTime dateTime)
+        {
+            return dateTime.ToString("HH:mm:ss");
+        }
+    }
+
 }
