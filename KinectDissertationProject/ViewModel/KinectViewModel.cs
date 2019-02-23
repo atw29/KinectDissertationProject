@@ -8,6 +8,7 @@ using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,8 @@ namespace KinectDissertationProject.ViewModel
         #region UI Components
 
         private string textBoxText;
+        private Process procress;
+
         public string TextBoxText
         {
             get
@@ -66,6 +69,7 @@ namespace KinectDissertationProject.ViewModel
         }
 
         private ApplicationOperationsController ApplicationOperationsController;
+        private DataGatherer DataGatherer;
         private string rightHandPositionText;
         public string RightHandPositionText
         {
@@ -215,6 +219,7 @@ namespace KinectDissertationProject.ViewModel
         public void Start()
         {
             ApplicationOperationsController = new ApplicationOperationsController();
+            DataGatherer = new DataGatherer(this);
 
             GestureController.GestureRecognised += GestureController_GestureRecognised;
             
@@ -325,7 +330,8 @@ namespace KinectDissertationProject.ViewModel
                 if (TextBoxText.Contains(e.GestureType.ToString()))
                 {
                     TextBoxText += "I";
-                } else
+                }
+                else
                 {
                     TextBoxText = e.GestureType.ToString();
                 }
