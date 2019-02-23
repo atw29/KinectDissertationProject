@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace KinectDissertationProject
 {
@@ -32,15 +33,17 @@ namespace KinectDissertationProject
 
             InitializeComponent();
 
+            DispatcherTimer timer = new DispatcherTimer(
+                new TimeSpan(0, 0, 1),
+                DispatcherPriority.Normal,
+                delegate
+                {
+                    time.Text = DateTime.Now.PrintTime();
+                },
+                Dispatcher
+            );
+
             DataContext = KinectViewModel;
-
-            GotFocus += MainWindow_GotFocus;
-            GotKeyboardFocus += MainWindow_GotFocus;
-        }
-
-        private void MainWindow_GotFocus(object sender, RoutedEventArgs e)
-        {
-            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -51,11 +54,6 @@ namespace KinectDissertationProject
 
             KinectViewModel.JointPositionEventOccurred += DrawSkeleton;
 
-        }
-
-        private void Add_Debug()
-        {
-            
         }
 
         private void DrawSkeleton(object sender, JointPositionEventArgs e)
