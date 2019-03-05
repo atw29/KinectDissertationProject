@@ -216,16 +216,22 @@ namespace KinectDissertationProject.ViewModel
         #region Initialisers
         public KinectViewModel()
         {
-            logger.Debug("Kinect View Model Loaded");
+            try
+            {
+                logger.Debug("Kinect View Model Loaded");
 
-            GestureController = new GestureController();
+                GestureController = new GestureController();
 
-            ApplicationOperationsController = new ApplicationOperationsController();
+            } catch(Exception e)
+            {
+                throw e;
+            }
 
         }
 
         public void Start()
         {
+            ApplicationOperationsController = new ApplicationOperationsController();
             //DataGatherer = new DataGatherer(this);
 
             ApplicationOperationsController.Create_Task(TASK_NUM);
