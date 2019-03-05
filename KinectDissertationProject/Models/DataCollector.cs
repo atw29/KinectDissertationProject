@@ -79,14 +79,6 @@ namespace KinectDissertationProject.Models
             Queue.Add(DataCollectorFactory.PoisonData);
         }
 
-        private void CreateDataFile()
-        {
-            using (var writer = File.CreateText(DataPath))
-            {
-                writer.WriteLine($"CLICK_STATE,X_POS,Y_POS,TIME,PARASITE");
-            }
-        }
-
         private void CreateInfoFile()
         {
             using (var writer = File.CreateText(InfoPath))
@@ -182,6 +174,14 @@ namespace KinectDissertationProject.Models
             CollectData(b.ToDataObject(g));
         }
 
+        private void CreateDataFile()
+        {
+            using (var writer = File.CreateText(DataPath))
+            {
+                writer.WriteLine($"GESTURE,LH_X,LH_Y,RH_X,RH_Y,LE_X,LE_Y,RE_X,RE_Y,TIME,PARASITE");
+            }
+        }
+
     }
 
     public static class DataHelper
@@ -206,10 +206,9 @@ namespace KinectDissertationProject.Models
         }
     }
 
-
     public class Data
     {
-
+        #region Params
         private readonly double LeftHandX;
         private readonly double LeftHandY;
 
@@ -223,6 +222,8 @@ namespace KinectDissertationProject.Models
         private readonly double RightElbowY;
 
         private readonly GestureType GestureType;
+
+        #endregion
 
         public Data(double leftHandX, double leftHandY, double rightHandX, double rightHandY, double leftElbowX, double leftElbowY, double rightElbowX, double rightElbowY, GestureType gestureType)
         {
@@ -239,7 +240,7 @@ namespace KinectDissertationProject.Models
 
         public override string ToString()
         {
-            return $"{GestureType},{XPos},{YPos},{DateTime.Now.PrintTime()},";
+            return $"{GestureType},{LeftHandX},{LeftHandY},{RightHandX},{RightHandY},{LeftElbowX},{LeftElbowY},{RightElbowX},{RightElbowY},{DateTime.Now.PrintTime()},";
         }
     }
 }
