@@ -20,6 +20,11 @@ namespace KinectDissertationProject.ViewModel
     class KinectViewModel : INotifyPropertyChanged
     {
 
+        // PUT USER'S NAME HERE
+        const string USER = "ALEX_TEST";
+        // CHANGE THE TASK NUM
+        const int TASK_NUM = 1;
+
         #region Params
 
         public bool IsMI = false;
@@ -28,9 +33,9 @@ namespace KinectDissertationProject.ViewModel
         
         #if DEBUG
             bool debug = true;
-        #else
+#else
             bool debug = false;
-        #endif
+#endif
 
         public static KinectViewModel Instance { get; private set; }
 
@@ -69,6 +74,7 @@ namespace KinectDissertationProject.ViewModel
         }
 
         private ApplicationOperationsController ApplicationOperationsController;
+        private DataCollector DataCollector;
         private DataGatherer DataGatherer;
         private string rightHandPositionText;
         public string RightHandPositionText
@@ -214,20 +220,23 @@ namespace KinectDissertationProject.ViewModel
 
             GestureController = new GestureController();
 
+            ApplicationOperationsController = new ApplicationOperationsController();
+
         }
 
         public void Start()
         {
-            ApplicationOperationsController = new ApplicationOperationsController();
-            DataGatherer = new DataGatherer(this);
+            //DataGatherer = new DataGatherer(this);
+
+            ApplicationOperationsController.Create_Task(TASK_NUM);
+
+            DataCollector = DataCollectorFactory.Start(USER, TASK_NUM);
 
             GestureController.GestureRecognised += GestureController_GestureRecognised;
             
             TextBoxText = "Kinect Dissertation Project";
 
             SetUpKinect();
-
-            ApplicationOperationsController.Create_Menu_Task_Window();
 
         }
 
@@ -253,6 +262,12 @@ namespace KinectDissertationProject.ViewModel
         internal void Open_Kinect()
         {
             kinectReader.Open();
+        }
+
+        internal void Close()
+        {
+            Close_Kinect();
+            DataCollector.Stop();
         }
 
         internal void Close_Kinect()
@@ -293,7 +308,6 @@ namespace KinectDissertationProject.ViewModel
         #endregion
 
         #endregion
-
         /// <summary>
         /// Triggers whenever the kinect gets ANY body data back.
         /// Used to draw skeleton and give the Gesture Controller the body data. No actual gesture processing should occur here
@@ -305,6 +319,8 @@ namespace KinectDissertationProject.ViewModel
             Body body = e.BodyData;
 
             GestureController.CheckGestures(body);
+
+            DataCollector.CollectData(body);
 
             if (debug)
             {

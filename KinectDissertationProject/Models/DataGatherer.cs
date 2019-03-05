@@ -14,7 +14,6 @@ namespace KinectDissertationProject.Models
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
         private readonly DateTime opened;
-        private StreamWriter writer;
 
         private const string folder = "C:\\Users\\Alex\\Google Drive\\University Drive\\Bath Drive\\Third Year\\Diss\\Other\\data\\";
         private readonly string path;
@@ -35,7 +34,7 @@ namespace KinectDissertationProject.Models
 
         private void CreateFile(DateTime opened)
         {
-            using (writer = File.CreateText(path))
+            using (var writer = File.CreateText(path))
             {
                 writer.WriteLine($"GESTURE, TIME, PARASITE");
                 writer.WriteLine($"start, {opened.ToString("HH:mm:ss")},");
@@ -66,14 +65,6 @@ namespace KinectDissertationProject.Models
         private void Process_Exited(object sender, EventArgs e)
         {
             WriteString($"end,{DateTime.Now.PrintTime()},");
-        }
-    }
-
-    public static class DateTimeHelper
-    {
-        public static string PrintTime(this DateTime dateTime)
-        {
-            return dateTime.ToString("HH:mm:ss");
         }
     }
 

@@ -29,6 +29,42 @@ namespace KinectDissertationProject.Models
             SnappedRight = new Dictionary<Window, WindowInfo>();
         }
 
+        
+        internal void Create_Task(int TASK_NUM)
+        {
+            Create_Menu_Task_Window();
+
+            switch(TASK_NUM)
+            {
+                case 2: // Switching
+                    Create_MockUp_Window();
+                    Create_X_Ray_Window();
+                    Create_X_Ray_Window();
+                    break;
+
+                case 3:
+                    Create_X_Ray_Window();
+                    break;
+
+                case 4:
+                    Create_MockUp_Window();
+                    break;
+
+                case 5:
+                    Create_Lighting_Window();
+                    break;
+
+                case 6:
+                    Create_MockUp_Window();
+                    break;
+
+                case 7:
+                    Create_X_Ray_Window();
+                    break;
+
+            }
+        }
+
         private void WindowOperationOccurred(object sender, WindowOperationEventArgs e)
         {
             if (!(e.Window is MainWindow) || e.Gesture == GestureType.LARGE_SWIPE_UP) // Don't want any operations that might close the background window

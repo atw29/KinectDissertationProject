@@ -64,7 +64,7 @@ namespace KinectDissertationProject
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            KinectViewModel.Close_Kinect();
+            KinectViewModel.Close();
         }
 
         private void DrawSkeleton(IReadOnlyDictionary<JointType, (Point point, bool tracked, float depth)> pointDict)
