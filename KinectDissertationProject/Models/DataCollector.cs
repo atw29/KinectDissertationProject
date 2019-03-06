@@ -17,7 +17,7 @@ namespace KinectDissertationProject.Models
         public static readonly Data PoisonData = new Data(-0, 0,0,0,0,0,0,0, GestureType.NONE);
         public static DataCollector Start(string USER, int TASK_NUM)
         {
-            string dir = Path.Combine("C:\\Users", "Alex", "Google Drive", "University Drive", "Bath Drive", "Third Year", "Diss", "Other", "Data", USER, "MI", TASK_NUM.ToString());
+            string dir = Path.Combine("C:\\Users", "Alex", "Google Drive", "University Drive", "Bath Drive", "Third Year", "Diss", "Other", "Data", USER, "EG", TASK_NUM.ToString());
 
             Directory.CreateDirectory(dir);
             logger.Debug($"Data Writing To : {dir}");
@@ -149,7 +149,7 @@ namespace KinectDissertationProject.Models
 
         private void AddRegionInfo(Body b)
         {
-            using (var writer = new StreamWriter(InfoPath, true))
+            using (var writer = new StreamWriter(JointInfoPath, true))
             {
                 writer.WriteLine($"SpineShoulder,{b.Joints[JointType.SpineShoulder].Position.X},{b.Joints[JointType.SpineShoulder].Position.Y}");
                 writer.WriteLine($"SpineBase,{b.Joints[JointType.SpineBase].Position.X},{b.Joints[JointType.SpineBase].Position.Y}");

@@ -113,6 +113,7 @@ namespace KinectDissertationProject.ViewModel
         private string rightJointsPositionText;
         private string rightHandRegionText;
         private string leftHandRegionText;
+        private GestureType CurrentGesture;
 
         public string RightJointsPositionText
         {
@@ -324,9 +325,10 @@ namespace KinectDissertationProject.ViewModel
         {
             Body body = e.BodyData;
 
+            CurrentGesture = GestureType.NONE;
             GestureController.CheckGestures(body);
 
-            DataCollector.CollectData(body);
+            DataCollector.CollectData(body, CurrentGesture);
 
             if (debug)
             {
@@ -346,6 +348,7 @@ namespace KinectDissertationProject.ViewModel
         /// <param name="e"></param>
         private void GestureController_GestureRecognised(object sender, GestureEventArgs e)
         {
+            CurrentGesture = e.GestureType;
             Window activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
             if (debug)
             {
