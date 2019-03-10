@@ -154,7 +154,7 @@ namespace KinectDissertationProject.Models
                 writer.WriteLine($"SpineShoulder,{b.Joints[JointType.SpineShoulder].Position.X},{b.Joints[JointType.SpineShoulder].Position.Y}");
                 writer.WriteLine($"SpineBase,{b.Joints[JointType.SpineBase].Position.X},{b.Joints[JointType.SpineBase].Position.Y}");
                 writer.WriteLine($"ShoulderLeft,{b.Joints[JointType.ShoulderLeft].Position.X},{b.Joints[JointType.ShoulderLeft].Position.Y}");
-                writer.WriteLine($"ShoulderLeft,{b.Joints[JointType.ShoulderRight].Position.X},{b.Joints[JointType.ShoulderRight].Position.Y}");
+                writer.WriteLine($"ShoulderRight,{b.Joints[JointType.ShoulderRight].Position.X},{b.Joints[JointType.ShoulderRight].Position.Y}");
 
             }
         }
