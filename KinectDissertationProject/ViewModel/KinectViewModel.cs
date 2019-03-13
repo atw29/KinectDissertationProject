@@ -23,7 +23,7 @@ namespace KinectDissertationProject.ViewModel
         // PUT USER'S NAME HERE
         const string USER = "ALEX_TEST";
         // CHANGE THE TASK NUM
-        const int TASK_NUM = 3;
+        const int TASK_NUM = 7;
 
         #region Params
 

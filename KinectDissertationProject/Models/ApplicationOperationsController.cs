@@ -36,10 +36,12 @@ namespace KinectDissertationProject.Models
 
             switch(TASK_NUM)
             {
+                case 1:
+                    break;
                 case 2: // Switching
-                    Create_MockUp_Window();
-                    Create_X_Ray_Window();
-                    Create_X_Ray_Window();
+                    Create_MockUp_Window(true);
+                    Create_X_Ray_Window(true);
+                    Create_X_Ray_Window(true);
                     break;
 
                 case 3:
@@ -61,6 +63,9 @@ namespace KinectDissertationProject.Models
                 case 7:
                     Create_X_Ray_Window();
                     break;
+
+                default:
+                    throw new Exception("No Task for number " + TASK_NUM);
 
             }
         }
@@ -256,9 +261,11 @@ namespace KinectDissertationProject.Models
             }
         }
 
-        public void Add_Window(Window w)
+        public int Add_Window(Window w)
         {
+            int pos = Windows.Count();
             Windows.Add(w);
+            return pos;
         }
 
         public void Remove_Window(Window w)
@@ -266,10 +273,12 @@ namespace KinectDissertationProject.Models
             Windows.Remove(w);
         }
 
-        private void Create_Window(Window w)
+        private void Create_Window(Window w, bool maximised)
         {
             w.DataContext = KinectViewModel.Instance;
-            Add_Window(w);
+            int pos = Add_Window(w);
+            w.Title = w.Title + " " + pos;
+            if (maximised) w.WindowState = WindowState.Maximized;
             w.Show();
 
             w.Closed += Window_ClosedEvent;
@@ -281,29 +290,29 @@ namespace KinectDissertationProject.Models
         }
 
         #region Window Creation
-        internal void Create_MockUp_Window()
+        internal void Create_MockUp_Window(bool maximised = false)
         {
-            Create_Window(new MockUp());
+            Create_Window(new MockUp(), maximised);
         }
 
-        internal void Create_Camera_Window()
+        internal void Create_Camera_Window(bool maximised = false)
         {
-            Create_Window(new Camera());
+            Create_Window(new Camera(), maximised);
         }
 
-        internal void Create_Menu_Task_Window()
+        internal void Create_Menu_Task_Window(bool maximised = false)
         {
-            Create_Window(new Menu_Task());
+            Create_Window(new Menu_Task(), maximised);
         }
 
-        internal void Create_Lighting_Window()
+        internal void Create_Lighting_Window(bool maximised = false)
         {
-            Create_Window(new LightingControl());
+            Create_Window(new LightingControl(), maximised);
         }
 
-        internal void Create_X_Ray_Window()
+        internal void Create_X_Ray_Window(bool maximised = false)
         {
-            Create_Window(new X_Rays());
+            Create_Window(new X_Rays(), maximised);
         }
         #endregion
 
