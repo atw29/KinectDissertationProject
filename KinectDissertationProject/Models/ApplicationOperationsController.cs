@@ -36,6 +36,8 @@ namespace KinectDissertationProject.Models
 
             switch(TASK_NUM)
             {
+                case 0: // Testing
+                    break;
                 case 1:
                     break;
                 case 2: // Switching

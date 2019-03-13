@@ -23,7 +23,7 @@ namespace KinectDissertationProject.ViewModel
         // PUT USER'S NAME HERE
         const string USER = "ALEX_TEST";
         // CHANGE THE TASK NUM
-        const int TASK_NUM = 7;
+        const int TASK_NUM = 2;
 
         #region Params
 
@@ -328,7 +328,7 @@ namespace KinectDissertationProject.ViewModel
             CurrentGesture = GestureType.NONE;
             GestureController.CheckGestures(body);
 
-            DataCollector.CollectData(body, CurrentGesture);
+            if (TASK_NUM != 0) DataCollector.CollectData(body, CurrentGesture);
 
             if (debug)
             {

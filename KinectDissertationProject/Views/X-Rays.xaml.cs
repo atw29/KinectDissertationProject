@@ -21,6 +21,7 @@ namespace KinectDissertationProject.Views
     /// </summary>
     public partial class X_Rays : Window
     {
+        private const int Big_Increment = 40;
         private KinectViewModel kinectViewModel;
         public X_Rays()
         {
@@ -48,19 +49,39 @@ namespace KinectDissertationProject.Views
                     case GestureType.RIGHT_HAND_SWIPE_RIGHT:
                         Pan(Direction.RIGHT);
                         break;
+
+                    case GestureType.RIGHT_SWIPE_UP_LEFT_HAND_RAISED_LEFT:
+                        LargePan(Direction.UP);
+                        break;
+                    case GestureType.RIGHT_SWIPE_DOWN_LEFT_HAND_RAISED_LEFT:
+                        LargePan(Direction.DOWN);
+                        break;
+                    case GestureType.RIGHT_SWIPE_LEFT_LEFT_HAND_RAISED_LEFT:
+                        LargePan(Direction.LEFT);
+                        break;
+                    case GestureType.RIGHT_SWIPE_RIGHT_LEFT_HAND_RAISED_LEFT:
+                        LargePan(Direction.RIGHT);
+                        break;
+
                     case GestureType.RIGHT_SWIPE_UP_LEFT_HAND_RAISED:
                         Picture.ZoomCentre(true);
                         break;
                     case GestureType.RIGHT_SWIPE_DOWN_LEFT_HAND_RAISED:
                         Picture.ZoomCentre(false);
                         break;
+
                 }
             }
         }
 
-        private void Pan(Direction direction)
+        private void LargePan(Direction direction)
         {
-            Picture.Pan(direction);
+            Pan(direction, Big_Increment);
+        }
+
+        private void Pan(Direction direction, int increment = 10)
+        {
+            Picture.Pan(direction, increment);
         }
 
         private void Zoom_In(object sender, RoutedEventArgs e)

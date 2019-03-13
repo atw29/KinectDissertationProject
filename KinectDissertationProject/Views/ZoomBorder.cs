@@ -88,7 +88,7 @@ namespace KinectDissertationProject.Views
             var st = GetScaleTransform(child);
             var tt = GetTranslateTransform(child);
 
-            double zoom = MouseWheelDelta > 0 ? .2 : -.2;
+            double zoom = MouseWheelDelta > 0 ? .2 : -.2 ;
             if (!(MouseWheelDelta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
                 return;
 
