@@ -25,6 +25,11 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
             return new OffHandNonIdleGestureSegment(dominantHand, Region.ELBOW, Region.ELBOW);
         }
 
+        public static OffHandNonIdleGestureSegment WithOffHandRaisedLeft(JointType dominantHand)
+        {
+            return new OffHandNonIdleGestureSegment(dominantHand, Region.ELBOW, Region.ELBOW_LEFT);
+        }
+
     }
     public static class SwipeDownGestureSegment2
     {
@@ -41,6 +46,11 @@ namespace KinectDissertationProject.Models.Gesture.Gestures.Swipe_Gestures.Swipe
         public static OffHandNonIdleGestureSegment WithOffHandRaised(JointType dominantHand)
         {
             return new OffHandNonIdleGestureSegment(dominantHand, Region.ELBOW_BELOW, Region.ELBOW);
+        }
+
+        public static OffHandNonIdleGestureSegment WithOffHandRaisedLeft(JointType dominantHand)
+        {
+            return new OffHandNonIdleGestureSegment(dominantHand, Region.ELBOW_BELOW, Region.ELBOW_LEFT);
         }
     }
 }

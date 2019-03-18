@@ -23,7 +23,7 @@ namespace KinectDissertationProject.ViewModel
         // PUT USER'S NAME HERE
         const string USER = "ALEX_TEST";
         // CHANGE THE TASK NUM
-        const int TASK_NUM = 2;
+        const int TASK_NUM = 3;
 
         #region Params
 
@@ -75,7 +75,7 @@ namespace KinectDissertationProject.ViewModel
 
         private ApplicationOperationsController ApplicationOperationsController;
         private DataCollector DataCollector;
-        private DataGatherer DataGatherer;
+        
         private string rightHandPositionText;
         public string RightHandPositionText
         {
@@ -233,7 +233,6 @@ namespace KinectDissertationProject.ViewModel
         public void Start()
         {
             ApplicationOperationsController = new ApplicationOperationsController();
-            //DataGatherer = new DataGatherer(this);
 
             ApplicationOperationsController.Create_Task(TASK_NUM);
 

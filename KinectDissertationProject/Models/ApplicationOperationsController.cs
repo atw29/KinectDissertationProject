@@ -112,7 +112,7 @@ namespace KinectDissertationProject.Models
 
         private void Tab(WindowOperationEventArgs e)
         {
-            int currentLoc = Windows.IndexOf(e.Window);
+            int currentLoc = Windows.IndexOf(e.Window);            
             Window ToMoveToFront = Windows[currentLoc + 1 >= Windows.Count ? 0 : currentLoc + 1];
             
             ToMoveToFront.Activate();

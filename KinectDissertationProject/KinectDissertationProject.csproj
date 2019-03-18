@@ -73,7 +73,6 @@
     </ApplicationDefinition>
     <Compile Include="Models\ApplicationOperationsController.cs" />
     <Compile Include="Models\DataCollector.cs" />
-    <Compile Include="Models\DataGatherer.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Gesture\Gesture.cs" />
     <Compile Include="Models\Gesture\GestureController.cs" />

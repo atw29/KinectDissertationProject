@@ -14,7 +14,7 @@ namespace KinectDissertationProject.Models
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public static readonly Data PoisonData = new Data(-0, 0,0,0,0,0,0,0, GestureType.NONE);
+        public static readonly Data PoisonData = new Data(-0, 0,TrackingState.NotTracked, 0,0, TrackingState.NotTracked, 0,0,TrackingState.NotTracked,0, 0,TrackingState.NotTracked, GestureType.NONE);
         public static DataCollector Start(string USER, int TASK_NUM)
         {
             string dir = Path.Combine("C:\\Users", "Alex", "Google Drive", "University Drive", "Bath Drive", "Third Year", "Diss", "Other", "Data", USER, "EG", TASK_NUM.ToString());
@@ -178,7 +178,7 @@ namespace KinectDissertationProject.Models
         {
             using (var writer = File.CreateText(DataPath))
             {
-                writer.WriteLine($"GESTURE,LH_X,LH_Y,RH_X,RH_Y,LE_X,LE_Y,RE_X,RE_Y,TIME,PARASITE");
+                writer.WriteLine($"GESTURE,LH_X,LH_Y,LH_TS,RH_X,RH_Y,RH_TS,LE_X,LE_Y,LE_TS,RE_X,RE_Y,RE_TS,TIME,PARASITE");
             }
         }
 
@@ -189,18 +189,23 @@ namespace KinectDissertationProject.Models
         public static Data ToDataObject(this Body b, GestureType g)
         {
             return new Data(
+
                 b.Joints[JointType.HandLeft].Position.X,
                 b.Joints[JointType.HandLeft].Position.Y,
+                b.Joints[JointType.HandLeft].TrackingState,
 
                 b.Joints[JointType.HandRight].Position.X,
                 b.Joints[JointType.HandRight].Position.Y,
+                b.Joints[JointType.HandRight].TrackingState,
 
                 b.Joints[JointType.ElbowLeft].Position.X,
                 b.Joints[JointType.ElbowLeft].Position.Y,
+                b.Joints[JointType.ElbowLeft].TrackingState,
 
                 b.Joints[JointType.ElbowRight].Position.X,
                 b.Joints[JointType.ElbowRight].Position.Y,
-                
+                b.Joints[JointType.ElbowRight].TrackingState,
+
                 g
                 );
         }
@@ -211,36 +216,52 @@ namespace KinectDissertationProject.Models
         #region Params
         private readonly double LeftHandX;
         private readonly double LeftHandY;
+        private readonly TrackingState LHTS;
 
         private readonly double RightHandX;
         private readonly double RightHandY;
+        private readonly TrackingState RHTS;
 
         private readonly double LeftElbowX;
         private readonly double LeftElbowY;
+        private readonly TrackingState LETS;
 
         private readonly double RightElbowX;
         private readonly double RightElbowY;
+        private readonly TrackingState RETS;
 
         private readonly GestureType GestureType;
 
         #endregion
 
-        public Data(double leftHandX, double leftHandY, double rightHandX, double rightHandY, double leftElbowX, double leftElbowY, double rightElbowX, double rightElbowY, GestureType gestureType)
+        public Data(double leftHandX, double leftHandY, TrackingState lhTS,
+            double rightHandX, double rightHandY, TrackingState rhTS,
+            double leftElbowX, double leftElbowY, TrackingState leTS,
+            double rightElbowX, double rightElbowY, TrackingState reTS,            
+            GestureType gestureType)
         {
             LeftHandX = leftHandX;
             LeftHandY = leftHandY;
+            LHTS = lhTS;
+
             RightHandX = rightHandX;
             RightHandY = rightHandY;
+            RHTS = rhTS;
+
             LeftElbowX = leftElbowX;
             LeftElbowY = leftElbowY;
+            LETS = leTS;
+
             RightElbowX = rightElbowX;
             RightElbowY = rightElbowY;
+            RETS = reTS;
+
             GestureType = gestureType;
         }
 
         public override string ToString()
         {
-            return $"{GestureType},{LeftHandX},{LeftHandY},{RightHandX},{RightHandY},{LeftElbowX},{LeftElbowY},{RightElbowX},{RightElbowY},{DateTime.Now.PrintTime()},";
+            return $"{GestureType},{LeftHandX},{LeftHandY},{LHTS},{RightHandX},{RightHandY},{RHTS},{LeftElbowX},{LeftElbowY},{LETS},{RightElbowX},{RightElbowY},{RETS},{DateTime.Now.PrintTime()},";
         }
     }
 }
