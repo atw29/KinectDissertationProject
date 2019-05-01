@@ -61,20 +61,23 @@ namespace KinectDissertationProject.Views
 
         private void KinectViewModel_GestureOccurred(object sender, WindowOperationEventArgs e)
         {
-            switch (e.Gesture)
+            if (e.Window == this)
             {
-                case GestureType.RIGHT_SWIPE_DOWN_LEFT_HAND_RAISED:
-                    ScrollDown();
-                    break;
-                case GestureType.RIGHT_SWIPE_UP_LEFT_HAND_RAISED:
-                    ScrollUp();
-                    break;
-                case GestureType.RIGHT_HAND_SWIPE_DOWN:
-                    SelectDown();
-                    break;
-                case GestureType.RIGHT_HAND_SWIPE_UP:
-                    SelectUp();
-                    break;
+                switch (e.Gesture)
+                {
+                    case GestureType.RIGHT_SWIPE_DOWN_LEFT_HAND_RAISED:
+                        ScrollDown();
+                        break;
+                    case GestureType.RIGHT_SWIPE_UP_LEFT_HAND_RAISED:
+                        ScrollUp();
+                        break;
+                    case GestureType.RIGHT_HAND_SWIPE_DOWN:
+                        SelectDown();
+                        break;
+                    case GestureType.RIGHT_HAND_SWIPE_UP:
+                        SelectUp();
+                        break;
+                }
             }
         }
 

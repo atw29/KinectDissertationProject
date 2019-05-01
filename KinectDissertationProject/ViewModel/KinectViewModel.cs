@@ -21,9 +21,9 @@ namespace KinectDissertationProject.ViewModel
     {
 
         // PUT USER'S NAME HERE
-        const string USER = "ALEX_TEST";
+        const string USER = "PAZZLE";
         // CHANGE THE TASK NUM
-        const int TASK_NUM = 3;
+        public const int TASK_NUM = 7;
 
         #region Params
 
@@ -58,8 +58,7 @@ namespace KinectDissertationProject.ViewModel
         #region UI Components
 
         private string textBoxText;
-        private Process procress;
-
+        
         public string TextBoxText
         {
             get
@@ -333,7 +332,7 @@ namespace KinectDissertationProject.ViewModel
             {
                 Dictionary<JointType, (Point joint, bool tracked, float depth)> pointDict = body.GetPointDictFromJoints(kinectReader.CoordinateMapper);
                 //SetRightJointsDebugText(body, pointDict);
-                SetRegionText(body);
+                //SetRegionText(body);
 
                 RaiseJointPositionEventOccurred(pointDict);
 
